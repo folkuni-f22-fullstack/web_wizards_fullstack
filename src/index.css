@@ -13,6 +13,9 @@
 	--light-green-acc: #039E41;
 	--dark-green-acc: #1A492D;  
 	--menu-card-color: #D9D9D9; 
+	--opacity:70%;
+	--outer-radius:0.4em;
+	--inner-radius: 0.25em;
 	                  
 }
 
@@ -35,6 +38,7 @@ body{
 
 #root{
 	width: 100%;
+	height: 100%;
 }
 
 main{
@@ -47,7 +51,7 @@ main{
 }
 
 button{
-	border-radius: 0.25em;
+	border-radius: var(--inner-radius);
 	border:none;
 	padding:0.5em 1em;
 	color:var(--text-light);
@@ -62,6 +66,29 @@ p{
 	font-family: var(--bodytext-font-family);
 }
 
+a{
+	color: var(--light-green-acc);
+}
+
+input{
+	border-radius: var(--inner-radius);
+}
+
+.card-container{
+	width: 85% ;
+	border-radius: var(--outer-radius);
+	border: 1px solid var(--text-dark);
+	padding: 0.7em;
+	display: grid;
+	grid-template-columns:repeat(8, 1fr);
+	grid-template-rows: auto;
+	box-shadow: 0 0.1em 0.3em  rgb(168, 168, 168);
+}
+
+.hidden{
+	display: none;
+}
+
 
 /* tablet */
 @media screen and (min-width: 768px) and (max-width:991px){
@@ -70,12 +97,20 @@ p{
 
 /* desktop */
 @media screen and (min-width:992px) and (max-width:1023px){
-
+	.card-container{
+		max-width: 60%;
+	}
 }
 
 
 /* large desktop */
 @media screen and (min-width:1024px){
-
+main{
+	max-width: 1024px;
+	margin: 0 auto;
+}
+.card-container{
+	max-width: 60%;
+}
 }
 
