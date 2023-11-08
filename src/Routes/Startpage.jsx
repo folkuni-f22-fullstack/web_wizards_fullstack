@@ -2,7 +2,9 @@
 const Startpage = () => {
 	return (
 		<>
-		{/* <p>HEJ</p> */}
+		<h1>Burger Bliss</h1>
+		<p>HEJ</p>
+		<button>Klicka</button>
 		</>
 	)
 }

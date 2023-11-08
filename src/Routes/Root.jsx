@@ -5,7 +5,9 @@ const Root = () => {
 	return (
 		<>
 		<Navmeny />
+		<main>
 		<Outlet /> 
+		</main>
 		</>
 	)
 }
