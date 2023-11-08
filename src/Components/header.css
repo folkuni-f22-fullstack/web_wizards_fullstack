@@ -1,0 +1,23 @@
+.header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	background-color: var(--bg-dark);
+}
+
+.cart-button {
+	width: 35px;
+	height: 35px;
+	color: var(--light-green-acc);
+}
+
+.logo {
+	width: 70px;
+	height: 77px;
+}
+
+.hamburger-button {
+	width: 44px;
+	height: 35px;
+	color: var(--light-green-acc)
+}
