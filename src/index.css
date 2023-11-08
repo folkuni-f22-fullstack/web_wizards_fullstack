@@ -1,20 +1,21 @@
 @import url("https://fonts.googleapis.com/css2?family=Antonio&family=Barlow&display=swap");
 
-:root {
-	--heading-font-family: "Antonio", sans-serif;
-	--bodytext-font-family: "Barlow", sans-serif;
-	--bg-dark: #0e0e0e;
-	--bg-light: #f3f3f3;
-	--text-light: #efefef;
-	--text-dark: #1e1e1e;
-	--purple-acc: #5b039e;
-	--light-brown-acc: #9e6403;
-	--dark-brown-acc: #332a1b;
-	--light-green-acc: #039e41;
-	--dark-green-acc: #1a492d;
-	--menu-card-color: #d9d9d9;
-	--opacity: 70%;
-	--outer-radius: 0.4em;
+:root{
+	--heading-font-family:'Antonio', sans-serif;
+	--bodytext-font-family:'Barlow', sans-serif;
+	--bg-dark:#0E0E0E;
+	--bg-dark-opacity: rgba(14, 14, 14, 0.7);
+	--bg-light:#F3F3F3;
+	--text-light:#EFEFEF;
+	--text-dark:#1E1E1E;
+	--purple-acc:#5B039E;
+	--light-brown-acc:#9E6403;
+	--dark-brown-acc: #332A1B;
+	--light-green-acc: #039E41;
+	--dark-green-acc: #1A492D;  
+	--menu-card-color: #D9D9D9; 
+	--opacity:70%;
+	--outer-radius:0.4em;
 	--inner-radius: 0.25em;
 }
 
@@ -48,6 +49,8 @@ main {
 	flex-direction: column;
 	align-items: center;
 	border: 1px solid lime;
+	margin-top: 7em;
+	
 }
 
 button {
