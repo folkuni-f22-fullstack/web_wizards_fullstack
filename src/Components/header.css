@@ -6,7 +6,12 @@ header {
 	padding: 1em;
 	position: fixed;
 	width: 100%;
+	height: auto;
+}
 
+.scroll-opacity {
+	background-color: var(--bg-dark-opacity);
+	
 }
 
 .cart-button {

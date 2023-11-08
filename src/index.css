@@ -4,6 +4,7 @@
 	--heading-font-family:'Antonio', sans-serif;
 	--bodytext-font-family:'Barlow', sans-serif;
 	--bg-dark:#0E0E0E;
+	--bg-dark-opacity: rgba(14, 14, 14, 0.7);
 	--bg-light:#F3F3F3;
 	--text-light:#EFEFEF;
 	--text-dark:#1E1E1E;
@@ -48,6 +49,7 @@ main{
 	flex-direction: column;
 	align-items: center;
 	border: 1px solid lime;
+	margin-top: 7em;
 	
 }
 
@@ -108,7 +110,7 @@ input{
 @media screen and (min-width:1024px){
 main{
 	max-width: 1024px;
-	margin: 0 auto;
+	margin: 11.5em auto;
 }
 .card-container{
 	max-width: 60%;
