@@ -1,0 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Antonio&family=Barlow&display=swap');
+
+:root{
+	--heading-font-family:'Antonio', sans-serif;
+	--bodytext-font-family:'Barlow', sans-serif;
+	--bg-dark:#0E0E0E;
+	--bg-light:#F3F3F3;
+	--text-light:#EFEFEF;
+	--text-dark:#1E1E1E;
+	--purple-acc:#5B039E;
+	--light-brown-acc:#9E6403;
+	--dark-brown-acc: #332A1B;
+	--light-green-acc: #039E41;
+	--dark-green-acc: #1A492D;  
+	--menu-card-color: #D9D9D9;                     
+}
+
