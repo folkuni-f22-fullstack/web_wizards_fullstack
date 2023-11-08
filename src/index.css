@@ -23,6 +23,7 @@
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
+	font-family: var(--bodytext-font-family);
 }
 
 body {
@@ -33,7 +34,6 @@ body {
 	align-items: center;
 	position: relative;
 	background-color: var(--bg-light);
-	/* border: 1px solid lime; */
 }
 
 #root {
@@ -48,9 +48,7 @@ main {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	border: 1px solid lime;
-	margin-top: 7em;
-	
+	/* border: 1px solid lime; */
 }
 
 button {
@@ -69,11 +67,7 @@ h5 {
 	font-family: var(--heading-font-family);
 }
 
-p {
-	font-family: var(--bodytext-font-family);
-}
-
-a {
+a{
 	color: var(--light-green-acc);
 }
 
