@@ -1,9 +1,5 @@
 const Startpage = () => {
-	return (
-		<>
-		<p>HEJ</p>
-		</>
-	)
+	return <></>
 }
 
 export default Startpage
