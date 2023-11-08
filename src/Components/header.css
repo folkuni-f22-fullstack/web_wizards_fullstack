@@ -7,12 +7,17 @@ header {
 	position: fixed;
 	width: 100%;
 	height: auto;
+	transition: background-color 2s ease-in-out;
+	
 }
 
 .scroll-opacity {
 	background-color: var(--bg-dark-opacity);
+	transition: background-color 2s ease-in-out;
 	
 }
+
+
 
 .cart-button {
 	font-size: clamp(35px, 5vw, 50px);
