@@ -1,13 +1,22 @@
 
 .nav-meny-container {
-	width: 100vw; 
+	width: 100%; 
 	height: 100vh; 
 	background-color: var(--dark-brown-acc);
 }
 
-.nav-meny-container, .nav-li {
+.links-nav-meny {
+	padding: 1em; 
+	text-decoration: none;
+	list-style-type: none;
+}
+
+.links-nav-meny li {
+	padding: 2em; 
+	margin-top: 1em;  
+}
+
+.links-nav-meny li a {
 	color: var(--text-light);
 	text-decoration: none;
-	list-style-type: none; 
-	padding: 2em; 
 }
