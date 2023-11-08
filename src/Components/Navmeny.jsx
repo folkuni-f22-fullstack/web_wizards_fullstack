@@ -1,5 +1,7 @@
 import './navmeny.css'
 import { NavLink } from 'react-router-dom'
+import miniburger from '../Assets/image 20miniburger.svg'
+import {RxCross1} from 'react-icons/rx'
 
 const Navmeny = () => {
 
@@ -22,9 +24,16 @@ const Navmeny = () => {
 			</div>
 
 		</section>
-		<div className='icon-contatiner'> 
-		</div>
+		
 		<nav className="nav-meny-container">
+			<div className='icon-container'> 
+				<img
+						className="miniburger"
+						src={miniburger}
+						alt="Miniburger Logo"
+					/>
+					<RxCross1 className='cross-nav'/>
+			</div>
 			<ul className="links-nav-meny">
 				<li>
 					<NavLink to="/Startpage">
