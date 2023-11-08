@@ -1,3 +1,52 @@
 li {
 	list-style: none;
 }
+
+.footer {
+	background-color: var(--bg-dark);
+	min-height: 10em;
+	bottom: 0;
+	position: fixed;
+	width: 100%;
+	padding: 1em;
+	display: grid;
+	justify-content: space-between;
+	grid-template-columns: auto;
+}
+
+.footer-links,
+.socialmedia {
+	color: var(--light-green-acc);
+}
+
+ul {
+	padding-bottom: 0.5em;
+}
+
+.socialmedialogos {
+}
+
+.socialmedia {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+}
+
+.opening-hours,
+.contact {
+	color: var(--text-light);
+}
+
+/* @media screen and (min-width: 768px) and (max-width: 991px) {
+	.footer {
+		background-color: var(--bg-dark);
+		min-height: 10em;
+		bottom: 0;
+		position: fixed;
+		width: 100%;
+		padding: 1em;
+		display: grid;
+		justify-content: space-between;
+		grid-template-columns: auto auto;
+	}
+} */

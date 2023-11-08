@@ -3,6 +3,7 @@ import { GrInstagram } from "react-icons/gr"
 import { BsFacebook } from "react-icons/bs"
 import { FaPinterest } from "react-icons/fa"
 import "./footer.css"
+
 const Footer = () => {
 	return (
 		<div>
@@ -25,17 +26,15 @@ const Footer = () => {
 					</ul>
 				</div>
 				<div className="socialmedia">
-					<ul>
-						<li>
-							<GrInstagram />
-						</li>
-						<li>
-							<BsFacebook />
-						</li>
-						<li>
-							<FaPinterest />
-						</li>
-					</ul>
+					<div className="socialmedialogos">
+						<GrInstagram />
+					</div>
+					<div className="socialmedialogos">
+						<BsFacebook />
+					</div>
+					<div className="socialmedialogos">
+						<FaPinterest />
+					</div>
 				</div>
 				<div className="contact">
 					<ul>
