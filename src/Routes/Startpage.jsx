@@ -1,7 +1,8 @@
+
 const Startpage = () => {
 	return (
 		<>
-		<p>HEJ</p>
+		{/* <p>HEJ</p> */}
 		</>
 	)
 }
