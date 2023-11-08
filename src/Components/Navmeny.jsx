@@ -5,7 +5,8 @@ const Navmeny = () => {
 
 	return (
 		<>
-		<section className='restaurang-info'>
+		<section className='restaurang-info'
+				hidden>
 			<div className='opening hours-contatiner'>
 				<h1>ÖPPETTIDER</h1>
 				<h1>MÅN-TORS 11-22</h1>
@@ -21,8 +22,7 @@ const Navmeny = () => {
 			</div>
 
 		</section>
-		<div className='icon-contatiner'>
-			
+		<div className='icon-contatiner'> 
 		</div>
 		<nav className="nav-meny-container">
 			<ul className="links-nav-meny">
