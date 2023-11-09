@@ -7,7 +7,7 @@ const Navmeny = () => {
 
 	return (
 		<>
-		<div className="nav-container">
+		<nav className="nav-container">
 			<section className='restaurang-info'>
 				<ul className='opening-hours-contatiner'>
 					<li>ÖPPETTIDER</li>
@@ -26,7 +26,7 @@ const Navmeny = () => {
 				</div>
 			</section>
 			
-			<nav className="nav-meny-container">
+			<div className="nav-meny-container">
 				<div className='icon-container'> 
 					<img
 							className="miniburger"
@@ -57,8 +57,8 @@ const Navmeny = () => {
 						</NavLink>
 					</li>
 				</ul>
-			</nav>
-		</div>
+			</div>
+		</nav>
 		</>
 		
 	)
