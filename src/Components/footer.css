@@ -6,7 +6,7 @@ li {
 	background-color: var(--bg-dark);
 	min-height: 10em;
 	bottom: 0;
-	/* position: fixed; */
+	position: fixed;
 	width: 100%;
 	padding: 1em;
 	display: grid;
@@ -52,11 +52,31 @@ ul {
 	color: var(--text-light);
 }
 
+.imagescontainer {
+	padding: 1em 0em 1em 0em;
+}
+
 .footer-links,
 .opening-hours,
 .socialmedia,
 .contact {
 	text-align: center;
+}
+
+.footer-links {
+	padding-top: 1em;
+}
+
+.footer-links li {
+	padding-bottom: 0.5em;
+}
+
+.opening-hours li {
+	padding-bottom: 0.5em;
+}
+
+.contact li {
+	padding-bottom: 0.5em;
 }
 
 @media screen and (min-width: 768px) {
@@ -79,5 +99,9 @@ ul {
 
 	.contact {
 		grid-column: 4 / 5;
+	}
+
+	.footer-links {
+		padding-top: 0em;
 	}
 }
