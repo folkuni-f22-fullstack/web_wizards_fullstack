@@ -1,3 +1,7 @@
+.restaurang-info {
+	display: none; 
+}
+
 .icon-container {
 	padding: 1.5em; 
 	display: flex;
@@ -33,5 +37,24 @@
 	color: var(--text-light);
 	text-decoration: none;
 	font-size: 25px;
+}
+
+/* large desktop */
+@media screen and (min-width: 1024px) {
+	.restaurang-info {
+		display: block; 
+		width: 100%;
+		height: 100vh;
+		display: flex; 
+		flex-direction: column;
+		justify-content: flex-start;
+		align-items: center;
+		text-align: center;
+		margin-top: 7em; 
+	}
+	.nav-container {
+		display: flex; 
+	}
+	
 }
 
