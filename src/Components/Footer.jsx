@@ -2,6 +2,7 @@ import { NavLink } from "react-router-dom"
 import { GrInstagram } from "react-icons/gr"
 import { BsFacebook } from "react-icons/bs"
 import { FaPinterest } from "react-icons/fa"
+import miniburger from "../Assets/miniburger.svg"
 import "./footer.css"
 
 const Footer = () => {
@@ -28,17 +29,27 @@ const Footer = () => {
 					<li>SÖN 12-20</li>
 				</ul>
 			</div>
-			<div className="socialmedia">
-				<div className="socialmedialogos">
-					<GrInstagram />
+			<div className="imagescontainer">
+				<div className="socialmedia">
+					<div className="socialmedialogos">
+						<GrInstagram />
+					</div>
+					<div className="socialmedialogos">
+						<BsFacebook />
+					</div>
+					<div className="socialmedialogos">
+						<FaPinterest />
+					</div>
 				</div>
-				<div className="socialmedialogos">
-					<BsFacebook />
-				</div>
-				<div className="socialmedialogos">
-					<FaPinterest />
+				<div className="logoburger">
+					<img
+						className="miniburger"
+						src={miniburger}
+						alt="Miniburger Logo"
+					/>
 				</div>
 			</div>
+
 			<div className="contact">
 				<ul>
 					<li>KONTAKTUPPGIFTER</li>
