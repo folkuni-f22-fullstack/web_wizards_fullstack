@@ -6,7 +6,7 @@ li {
 	background-color: var(--bg-dark);
 	min-height: 10em;
 	bottom: 0;
-	position: fixed;
+	position: static;
 	width: 100%;
 	padding: 1em;
 	display: grid;

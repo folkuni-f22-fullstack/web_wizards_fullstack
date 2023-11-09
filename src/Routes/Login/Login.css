@@ -1,12 +1,42 @@
-.Logincontainer {
-	border: solid 10px var(--text-dark);
+.login-container {
+	margin-top: 112px;
+	background-color: var(--menu-card-color);
 	padding: 2em;
-	height: 30em;
-	width: 40em;
+	height: 27em;
+	width: 85%;
+	max-width: 40em;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	border-radius: var(--outer-radius);
+	border: 1px solid var(--text-dark);
+}
+
+.login-header {
 	display: flex;
 	flex-direction: column;
 }
 
+.card-container > .login-container {
+	display: flex;
+}
+
+.login-form {
+	display: flex;
+	flex-direction: column;
+}
+
+.form-text {
+	margin-top: 0.5em;
+}
+
+.loginbutton {
+	margin-top: 1em;
+}
+
 .footer {
 	display: hidden;
+}
+@media screen and (min-width: 1024px) {
 }
