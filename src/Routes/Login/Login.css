@@ -1,0 +1,12 @@
+.Logincontainer {
+	border: solid 10px var(--text-dark);
+	padding: 2em;
+	height: 30em;
+	width: 40em;
+	display: flex;
+	flex-direction: column;
+}
+
+.footer {
+	display: hidden;
+}
