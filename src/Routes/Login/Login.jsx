@@ -10,7 +10,7 @@ const Login = () => {
 						<p className="form-text">Användarnamn</p>
 						<label htmlFor=""></label>
 						<input className="input-field" type="text" />
-						<p className="form-text">Lösenord</p>
+						<p className="form-text password">Lösenord</p>
 						<label htmlFor="">
 							<input className="input-field" type="text" />
 						</label>
