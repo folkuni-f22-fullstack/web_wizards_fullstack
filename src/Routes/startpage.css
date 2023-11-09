@@ -1,7 +1,73 @@
 .startingpage {
 	padding-bottom: 5em;
+	
 }
 
 .landingpage_text_container {
 	text-align: center;
+	margin-top: 15em;
+	margin-bottom: 2em;
+	background-color: var(--bg-dark);
+	color:var(--text-light);
+	padding: 1em;
+
+}
+
+.head_bliss {
+	color: var(--light-green-acc);
+	position: absolute;
+	top: 5em;
+	margin: 1em;
+}
+
+.hero-img-container {
+	position: absolute;
+	top: 2em;
+	left: 0;
+	right: 0;
+	
+}
+
+.text_padding {
+	padding: 1em 1.5em 1.5em 1.5em;
+}
+
+.floater-btn {
+	background-color: var(--purple-acc);
+	font-size: 1em;
+	padding: 0.8em 0.5em 0.8em 0.5em;
+	margin-bottom: 3em;
+}
+
+.order_icon {
+	font-size: 1.2em;
+}
+
+.strong {
+	font-family: var(--bodytext-font-family);
+}
+
+.about_us_container h2 {
+	text-align: center;
+	color: var(--light-brown-acc)
+
+}
+.about_us_container {
+	display: flex;
+	flex-direction: column;
+}
+
+.align_imgs {
+	align-self: center;
+}
+
+.about_us_container span {
+	color: var(--dark-green-acc)
+}
+
+.head_sustainability {
+	padding-top: 1em;
+	text-align: center;
+	color: var(--dark-green-acc);
+
 }
