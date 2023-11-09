@@ -1,6 +1,23 @@
 .restaurang-info {
 	display: none; 
 }
+.opening-hours-contatiner > li {
+	color: var(--text-dark);
+	font-size: 3em; 
+	padding: 0.2em; 
+}
+
+.contact-container {
+	margin-top: 4em; 
+}
+.contact-info li {
+	color: var(--text-dark);
+	font-size: 1.5em;
+	padding: 0.1em; 
+}
+.contact-container .contact-info li:nth-child(1) {
+	font-size: 2em;
+}
 
 .icon-container {
 	padding: 1.5em; 
@@ -38,7 +55,7 @@
 	text-decoration: none;
 	font-size: 25px;
 }
-
+ 
 /* large desktop */
 @media screen and (min-width: 1024px) {
 	.restaurang-info {
@@ -54,6 +71,16 @@
 	}
 	.nav-container {
 		display: flex; 
+	}
+
+	.nav-meny-container li {
+		text-align:center;  
+		font-size: 1.5em;
+		padding: 1em; 
+		margin-left: 1em; 
+	}
+	.links-nav-meny li {
+		padding: 1em; 
 	}
 	
 }

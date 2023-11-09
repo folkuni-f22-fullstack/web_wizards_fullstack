@@ -1,6 +1,6 @@
 import './navmeny.css'
 import { NavLink } from 'react-router-dom'
-import miniburger from '../Assets/image 20miniburger.svg'
+import miniburger from '../Assets/miniburger.svg'
 import {RxCross1} from 'react-icons/rx'
 
 const Navmeny = () => {
@@ -9,20 +9,21 @@ const Navmeny = () => {
 		<>
 		<div className="nav-container">
 			<section className='restaurang-info'>
-				<div className='opening hours-contatiner'>
-					<h1>ÖPPETTIDER</h1>
-					<h1>MÅN-TORS 11-22</h1>
-					<h1>FRE-LÖR 12-02</h1>
-					<h1>SÖN 12-20</h1>
-				</div>
+				<ul className='opening-hours-contatiner'>
+					<li>ÖPPETTIDER</li>
+					<li>MÅN-TORS 11-22</li>
+					<li>FRE-LÖR 12-02</li>
+					<li>SÖN 12-20</li>
+				</ul>
 				<div className='contact-container'>
-					<h3>KONTAKTUPPGIFTER</h3>
-					<h4>MAIL@MAIL.COM</h4>
-					<h4>123-45678901</h4>
-					<h4>ADRESSGATAN 1</h4>
-					<h4>STAD</h4>
+					<ul className='contact-info'>
+						<li>KONTAKTUPPGIFTER</li>
+						<li>MAIL@MAIL.COM</li>
+						<li>123-45678901</li>
+						<li>ADRESSGATAN 1</li>
+						<li>STAD</li>
+					</ul>
 				</div>
-
 			</section>
 			
 			<nav className="nav-meny-container">
