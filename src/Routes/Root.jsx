@@ -8,8 +8,9 @@ const Root = () => {
 		<Header />
 		<main>
 			<Outlet />
-			<Footer />
-		</main>
+		</main>	
+			{/* <Footer /> */}
+		
 		</>
 	)
 }
