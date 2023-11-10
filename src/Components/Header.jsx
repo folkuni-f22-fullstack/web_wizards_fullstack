@@ -4,6 +4,7 @@ import './header.css'
 import { useState } from 'react'
 import logo from '/src/Assets/Logo.svg'
 import Navmeny from './Navmeny'
+import { NavLink } from 'react-router-dom'
 
 const Header = () => {
 	const [colorChange, setColorChange ] = useState(false)
@@ -22,9 +23,9 @@ const Header = () => {
 	return (
 		<>
 		<header className={colorChange ? "scroll-opacity" : ''}>
-		<IoCartOutline className='cart-button' />
-		<img className="logo" src={logo} alt='logo'/>
-		<GiHamburger className='hamburger-button' />
+		<NavLink to='/shoppingcart'><IoCartOutline className='cart-button' aria-label='Gå till kundvagnen' /></NavLink>
+		<NavLink to='/'><img className="logo" src={logo} alt='logo'/></NavLink>
+		<GiHamburger className='hamburger-button' aria-label='Öppna navigeringsmeny'/>
 		</header>
 		<Navmeny />
 		</>
