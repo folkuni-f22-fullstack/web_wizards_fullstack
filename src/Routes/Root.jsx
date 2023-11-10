@@ -1,10 +1,16 @@
 import {  Outlet } from 'react-router-dom'
+import Footer from "../Components/Footer"
+import Header from "../Components/Header"
 
 const Root = () => {
 	return (
-		<main>
-		<Outlet /> 
-		</main>
+		<>
+			<Header />
+			<main>
+				<Outlet />
+			</main>
+			<Footer />
+		</>
 	)
 }
 
