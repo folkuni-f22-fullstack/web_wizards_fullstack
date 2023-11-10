@@ -2,6 +2,7 @@ import "./confirmation.css"
 
 const Confirmation = () => {
 	return (
+		<></>
 	)
 }
 

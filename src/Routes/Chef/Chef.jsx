@@ -2,6 +2,7 @@ import "./chef.css"
 
 const Chef = () => {
 	return (
+		<></>
 	)
 }
 

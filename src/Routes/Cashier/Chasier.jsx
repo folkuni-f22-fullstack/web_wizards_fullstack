@@ -2,6 +2,7 @@ import "./cashier.css"
 
 const Cashier = () => {
 	return (
+		<></>
 	)
 }
 

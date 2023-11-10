@@ -1,6 +1,6 @@
 import './FoodMenu.css'
-import FoodCard from '../Components/FoodCard'
-import { data, kidsData, drinksData, sidesData } from '../data/testdata'
+import FoodCard from '../../Components/FoodCard'
+import { data, kidsData, drinksData, sidesData } from '../../data/testdata'
 
 
 

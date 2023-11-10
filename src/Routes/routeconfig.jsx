@@ -1,12 +1,11 @@
 import { createBrowserRouter } from "react-router-dom";
 import  Root  from "./Root.jsx";
 import Startpage from "./Startpage.jsx";
-import FoodMenu from "./FoodMenu.jsx"
+import FoodMenu from "./FoodMenu/FoodMenu.jsx"
 import Login from "./Login/Login.jsx"
-import FoodMenu from "./Foodmenu/FoodMenu.jsx"
 import ShoppingCart from "./ShoppingCart/ShoppingCart.jsx"
 import Confirmation from "./Confirmation/Confirmation.jsx"
-import Cashier from "./Cashier/Cashier.jsx"
+import Cashier from "./Cashier/Chasier.jsx";
 import Chef from "./Chef/Chef.jsx"
 
 const router = createBrowserRouter([
@@ -23,11 +22,11 @@ const router = createBrowserRouter([
 				element: <Login />,
 				children: [
 					{
-						path: "/cashier",
+						path: "login/cashier",
 						element: <Cashier />,
 					},
 					{
-						path: "/chef",
+						path: "login/chef",
 						element: <Chef />,
 					},
 				],
@@ -37,11 +36,11 @@ const router = createBrowserRouter([
 				element: <FoodMenu />,
 			},
 			{
-				path: "/Shoppingcart",
+				path: "/shoppingcart",
 				element: <ShoppingCart />,
 				children: [
 					{
-						path: "/confirmation",
+						path: "/shoppingcart/confirmation",
 						element: <Confirmation />,
 					},
 				],
