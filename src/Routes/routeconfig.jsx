@@ -1,6 +1,7 @@
-import { createBrowserRouter } from "react-router-dom"
-import Root from "./Root.jsx"
-import Startpage from "./Startpage.jsx"
+import { createBrowserRouter } from "react-router-dom";
+import  Root  from "./Root.jsx";
+import Startpage from "./Startpage.jsx";
+import FoodMenu from "./FoodMenu.jsx"
 import Login from "./Login/Login.jsx"
 import FoodMenu from "./Foodmenu/FoodMenu.jsx"
 import ShoppingCart from "./ShoppingCart/ShoppingCart.jsx"
