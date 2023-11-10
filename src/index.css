@@ -16,6 +16,7 @@
 	--opacity:70%;
 	--outer-radius:0.4em;
 	--inner-radius: 0.25em;
+	--box-shadow: 0 0.1em 0.3em  rgb(168, 168, 168);
 	                  
 }
 
@@ -56,6 +57,7 @@ button{
 	border:none;
 	padding:0.5em 1em;
 	color:var(--text-light);
+	box-shadow: var(--box-shadow);
 	background-color: #039E41;
 }
 
