@@ -24,7 +24,7 @@ const Header = () => {
 		<>
 		<header className={colorChange ? "scroll-opacity" : ''}>
 		<NavLink to='/shoppingcart'><IoCartOutline className='cart-button' /></NavLink>
-		<img className="logo" src={logo} alt='logo'/>
+		<NavLink to='/'><img className="logo" src={logo} alt='logo'/></NavLink>
 		<GiHamburger className='hamburger-button' />
 		</header>
 		<Navmeny />
