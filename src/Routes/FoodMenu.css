@@ -1,11 +1,29 @@
+.food-menu{
+	text-align: center;
+}
+
 .food-menu h1{
 	color: var(--light-brown-acc);
+	margin-top: 0.8em;
+	margin-bottom: 0.2em;
+}
+
+.food-menu ul{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.food-menu li{
+	width: 80%;
 }
 
 .food-menu .menu-card{
 	grid-template-rows: repeat(8, 1fr);
 	height: 10em;
-	margin: 1em 0;
+	margin: 0.35em 0;
+	text-align: left;
 	background-color: var(--menu-card-color);
 }
 
@@ -44,4 +62,10 @@ color: var(--dark-green-acc);
 	display: flex;
 	align-items: center;
 	justify-content: center;
+}
+
+@media screen and (max-width:350px){
+	.price{
+		align-self:flex-end;
+	}
 }

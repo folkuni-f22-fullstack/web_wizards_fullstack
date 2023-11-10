@@ -45,6 +45,7 @@ export const kidsData =
 
 export const drinksData =[
 	{
+		"image": "src/assets/Bliss-orginal.jpg",
 		"name": "Soda",
 		"description": "Choice of cola, lemon-lime, or orange.",
 		"price": 1.99
