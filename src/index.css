@@ -83,6 +83,10 @@ a{
 	color: var(--light-green-acc);
 }
 
+a:hover{
+	color: var(--light-brown-acc);
+}
+
 input{
 	border-radius: var(--inner-radius);
 }

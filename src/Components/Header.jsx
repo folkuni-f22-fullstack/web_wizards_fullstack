@@ -23,9 +23,9 @@ const Header = () => {
 	return (
 		<>
 		<header className={colorChange ? "scroll-opacity" : ''}>
-		<NavLink to='/shoppingcart'><IoCartOutline className='cart-button' /></NavLink>
+		<NavLink to='/shoppingcart'><IoCartOutline className='cart-button' aria-label='Gå till kundvagnen' /></NavLink>
 		<NavLink to='/'><img className="logo" src={logo} alt='logo'/></NavLink>
-		<GiHamburger className='hamburger-button' />
+		<GiHamburger className='hamburger-button' aria-label='Öppna navigeringsmeny'/>
 		</header>
 		<Navmeny />
 		</>
