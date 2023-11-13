@@ -18,7 +18,7 @@ const Startpage = () => {
 				
 					
 
-				<div className='relative'>
+				<div className='order_here_container'>
 					<p className='text_padding'>
 						Klimatsmarta burgare för din skull. Beställ enkelt online och hämta på plats.
 					</p>

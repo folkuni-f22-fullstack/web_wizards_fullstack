@@ -17,8 +17,9 @@
 .head_bliss {
   color: var(--light-green-acc);
   position: absolute;
-	top: 10%;
-	left: 10%;
+	top: 15%;
+	left: 11%;
+  font-size: clamp(24px, 5vw, 42px);
 }
 
 .hero-img-container {
@@ -81,6 +82,19 @@
 
 /* large desktop */
 @media screen and (min-width: 992px) {
+
+  .order_here_container {
+    /* border: solid 2px green; */
+    position: absolute;
+    top: -12em;
+    left: 0em;
+    width: 18em;
+  }  
+
+  .landingpage_text_container {
+    position: relative;
+  }
+
   .about_us_container {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -127,7 +141,8 @@
     grid-column: 1;
     grid-row: 6;
     justify-self: center;
-    width: 350px;
+    width: 430px;
+    height: 250px;
   }
 
   .tomatoes_img img {
