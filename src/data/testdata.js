@@ -80,3 +80,10 @@ export const sidesData = [
 	  "price": 4.99
 	}
   ]
+
+  export const testUser = [{
+	"id":"1",
+	"name": "personal",
+	"password": "password"}
+
+  ]
