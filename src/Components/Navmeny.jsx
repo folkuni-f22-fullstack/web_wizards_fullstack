@@ -3,7 +3,10 @@ import { NavLink } from 'react-router-dom'
 import miniburger from '../Assets/miniburger.svg'
 import {RxCross1} from 'react-icons/rx'
 
-const Navmeny = () => {
+const Navmeny = ({ isMenuOpen, handleCloseMenu }) => {
+	if(!isMenuOpen) {
+		return null
+	}
 
 	return (
 		<>
@@ -33,7 +36,7 @@ const Navmeny = () => {
 							src={miniburger}
 							alt="Miniburger Logo"
 						/>
-						<RxCross1 className='cross-nav'/>
+						<RxCross1 onClick={handleCloseMenu} className='cross-nav'/>
 				</div>
 				<ul className="links-nav-meny">
 					<li>

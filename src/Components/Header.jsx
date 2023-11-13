@@ -8,6 +8,15 @@ import { NavLink } from 'react-router-dom'
 
 const Header = () => {
 	const [colorChange, setColorChange ] = useState(false)
+	const [isMenuOpen, setIsMenyOpen] = useState(false)
+
+	const handleMenuClick = () => {
+		setIsMenyOpen(!isMenuOpen); 
+	}
+
+	const handleCloseMenu = () => {
+		setIsMenyOpen(false)
+	}
 
 	function changeOpacityScroll() {
 		if (window.scrollY >= 100) {
@@ -25,9 +34,9 @@ const Header = () => {
 		<header className={colorChange ? "scroll-opacity" : ''}>
 		<NavLink to='/shoppingcart'><IoCartOutline className='cart-button' aria-label='Gå till kundvagnen' /></NavLink>
 		<NavLink to='/'><img className="logo" src={logo} alt='logo'/></NavLink>
-		<GiHamburger className='hamburger-button' aria-label='Öppna navigeringsmeny'/>
+		<GiHamburger className='hamburger-button' aria-label='Öppna navigeringsmeny' onClick={handleMenuClick}/>
 		</header>
-		<Navmeny />
+		<Navmeny isMenuOpen={isMenuOpen} handleCloseMenu={handleCloseMenu}/>
 		</>
 	)
 	
