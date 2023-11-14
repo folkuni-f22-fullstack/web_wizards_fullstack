@@ -1,69 +1,50 @@
 import "./login.css"
-import { testUser } from "../../data/testdata"
 import { useState } from "react"
+import { useRecoilState } from "recoil"
 import { Navigate } from "react-router-dom"
-
+import { NameInput, PassInput, IsMatching } from "./handleLogin"
+import { uNameAtom, uPassAtom } from "../../data/atom"
 
 
 
 const Login = () => {
-
-	const [uName, setUName] = useState('')
-	const [uPass, setUPass] = useState('')
-	const [shouldNavigate, setShouldNavigate] =useState(false)
-
+	const [uName, setUName] = useRecoilState(uNameAtom)
+	const [uPass, setUPass] = useRecoilState(uPassAtom)
+	const [shouldNavigate, setShouldNavigate] = useState(false)
+	const [formIsDirty, setFormIsDirty] = useState(false)
 	
+	const loginMatch = IsMatching()
 
-const HandleNameChange = () =>{
-	setUName(event.target.value)
-}
+	const loginErrorMessage = formIsDirty ? 'Vänligen kontrollera inloggningsuppgifter' : ''
+	
+	const handleSubmit = (event) => {
+		event.preventDefault()
+		
+		if(loginMatch) {
+			setShouldNavigate(true)
+			setUName('')
+			setUPass('')
+		}else{setFormIsDirty(true)}
+	}
 
-const HandlePassChange = () => {
-	setUPass(event.target.value)
-}
-
-const handleSubmit = (event) => {
-	event.preventDefault()
-	const match = testUser.find(user => user.name === uName && user.password === uPass)
-	if(match !== undefined) {
-		setShouldNavigate(true)
-	}else{console.log('fel inloggningsuppgifter');}
-}
-
-if (shouldNavigate) {
-	return <Navigate to='login/cashier'/>
-}
+	if (shouldNavigate) {
+		return <Navigate to='login/cashier'/>		
+	}
 
 	return (
 		<>
 			<div className=" login-container">
-				<div className="login">
-					<h2 className="login-header">Personalinloggning</h2>
+				<div className="login">				
 					<form className="login-form" action="">
-						<p className="form-text">Användarnamn</p>
-						<label htmlFor="username"></label>
-						<input 
-							className="input-field" 
-							type="text"
-							value={uName}
-							id= 'username'
-							onChange={HandleNameChange} 
-							required/>
-						<p className="form-text password">Lösenord</p>
-						<label htmlFor="password"></label>
-						<input 
-							className="input-field" 
-							type="text"
-							value={uPass}
-							id="password"
-							onChange={HandlePassChange} 
-							required/>
-							
+						<h2 className="login-header">Personalinloggning</h2>
+						<NameInput/>						
+						<PassInput/>							
 						<button 
-						className="loginbutton"
-						type="submit"
-						onClick={handleSubmit}
-						>Logga in</button>
+							className="loginbutton"
+							type="submit"
+							onClick={handleSubmit}
+							>Logga in</button>
+						<div className="error-message-container">{formIsDirty? loginErrorMessage : ''}</div>
 					</form>
 				</div>
 			</div>
@@ -73,17 +54,3 @@ if (shouldNavigate) {
 
 export default Login
 
-
-
-	/* function useIsValidName () {
-	  const [uName] =testUser
-
-	  const allowedUserName = testUser.find (user => user.name === uName)
-
-	  if(!allowedUserName) {
-		return [false,  'Vänligen skriv in giltigt användarnamn']
-	  }
-	  return  [true, '']
-
-	}
- */
