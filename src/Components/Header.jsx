@@ -8,14 +8,14 @@ import { NavLink } from 'react-router-dom'
 
 const Header = () => {
 	const [colorChange, setColorChange ] = useState(false)
-	const [isMenuOpen, setIsMenyOpen] = useState(false)
+	const [isMenuOpen, setIsMenuOpen] = useState(false)
 
 	const handleMenuClick = () => {
-		setIsMenyOpen(!isMenuOpen); 
+		setIsMenuOpen(!isMenuOpen); 
 	}
 
 	const handleCloseMenu = () => {
-		setIsMenyOpen(false)
+		setIsMenuOpen(false)
 	}
 
 	function changeOpacityScroll() {
@@ -32,11 +32,11 @@ const Header = () => {
 	return (
 		<>
 		<header className={colorChange ? "scroll-opacity" : ''}>
-		<NavLink to='/shoppingcart'><IoCartOutline className='cart-button' aria-label='Gå till kundvagnen' /></NavLink>
-		<NavLink to='/'><img className="logo" src={logo} alt='logo'/></NavLink>
-		<GiHamburger className='hamburger-button' aria-label='Öppna navigeringsmeny' onClick={handleMenuClick}/>
+			<NavLink to='/shoppingcart'><IoCartOutline className='cart-button' aria-label='Gå till kundvagnen' /></NavLink>
+			<NavLink to='/'><img className="logo" src={logo} alt='logo'/></NavLink>
+			<GiHamburger className='hamburger-button' aria-label='Öppna navigeringsmeny' onClick={handleMenuClick}/>
 		</header>
-		<Navmeny isMenuOpen={isMenuOpen} handleCloseMenu={handleCloseMenu}/>
+			 	<Navmeny className="nav" isMenuOpen={isMenuOpen} handleCloseMenu={handleCloseMenu}/>
 		</>
 	)
 	

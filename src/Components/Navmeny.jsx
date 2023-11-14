@@ -10,7 +10,7 @@ const Navmeny = ({ isMenuOpen, handleCloseMenu }) => {
 
 	return (
 		<>
-		<nav className="nav-container">
+		<nav className={`nav-container ${isMenuOpen ? 'menu-open' : 'start'}`}>
 			<section className='restaurang-info'>
 				<ul className='opening-hours-contatiner'>
 					<li>ÖPPETTIDER</li>
@@ -36,7 +36,7 @@ const Navmeny = ({ isMenuOpen, handleCloseMenu }) => {
 							src={miniburger}
 							alt="Miniburger Logo"
 						/>
-						<RxCross1 onClick={handleCloseMenu} className='cross-nav'/>
+					<RxCross1 onClick={handleCloseMenu} className='cross-nav'/>
 				</div>
 				<ul className="links-nav-meny">
 					<li>
