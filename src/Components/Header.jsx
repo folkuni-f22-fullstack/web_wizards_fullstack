@@ -27,7 +27,7 @@ const Header = () => {
 		<NavLink to='/'><img className="logo" src={logo} alt='logo'/></NavLink>
 		<GiHamburger className='hamburger-button' aria-label='Öppna navigeringsmeny'/>
 		</header>
-		<Navmeny />
+		{/* <Navmeny /> */}
 		</>
 	)
 	
