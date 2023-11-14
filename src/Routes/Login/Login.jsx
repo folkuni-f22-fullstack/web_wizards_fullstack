@@ -3,7 +3,7 @@ import { useState } from "react"
 import { useRecoilState } from "recoil"
 import { Navigate } from "react-router-dom"
 import { NameInput, PassInput, IsMatching } from "./handleLogin"
-import { uNameAtom, uPassAtom } from "../../data/atom"
+import { uNameAtom, uPassAtom, formIsDirtyAtom, isLoggedInAtom } from "../../data/atom"
 
 
 
@@ -11,12 +11,12 @@ const Login = () => {
 	const [uName, setUName] = useRecoilState(uNameAtom)
 	const [uPass, setUPass] = useRecoilState(uPassAtom)
 	const [shouldNavigate, setShouldNavigate] = useState(false)
-	const [formIsDirty, setFormIsDirty] = useState(false)
+	const [formIsDirty, setFormIsDirty] = useRecoilState(formIsDirtyAtom)
+	const [isLoggedIn, setIsLoggedIn] = useRecoilState(isLoggedInAtom)
 	
 	const loginMatch = IsMatching()
+	const loginErrorMessage = formIsDirty ? 'Vänligen kontrollera inloggningsuppgifterna' : ''
 
-	const loginErrorMessage = formIsDirty ? 'Vänligen kontrollera inloggningsuppgifter' : ''
-	
 	const handleSubmit = (event) => {
 		event.preventDefault()
 		
@@ -24,11 +24,13 @@ const Login = () => {
 			setShouldNavigate(true)
 			setUName('')
 			setUPass('')
+			setFormIsDirty(false)
+			setIsLoggedIn(true)
 		}else{setFormIsDirty(true)}
 	}
 
 	if (shouldNavigate) {
-		return <Navigate to='login/cashier'/>		
+		return <Navigate to='/cashier'/>		
 	}
 
 	return (
@@ -44,7 +46,7 @@ const Login = () => {
 							type="submit"
 							onClick={handleSubmit}
 							>Logga in</button>
-						<div className="error-message-container">{formIsDirty? loginErrorMessage : ''}</div>
+						<div className="error-message-container"> {loginErrorMessage}</div>
 					</form>
 				</div>
 			</div>

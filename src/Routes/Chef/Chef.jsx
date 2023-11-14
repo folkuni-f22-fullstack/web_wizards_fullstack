@@ -2,7 +2,8 @@ import "./chef.css"
 
 const Chef = () => {
 	return (
-		<></>
+		<>
+		{isLoggedIn ? <LogOut/> : null}</>
 	)
 }
 

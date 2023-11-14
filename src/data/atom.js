@@ -10,3 +10,13 @@ export const uPassAtom = atom ({
 	key: 'userPass',
 	default: '',
 })
+
+export const formIsDirtyAtom = atom ({
+	key: 'formIsDirty',
+	default: false,
+})
+
+export const isLoggedInAtom = atom ({
+	key: 'isLoggedIn',
+	default: false,
+})

@@ -5,7 +5,7 @@ import FoodMenu from "./FoodMenu/FoodMenu.jsx"
 import Login from "./Login/Login.jsx"
 import ShoppingCart from "./ShoppingCart/ShoppingCart.jsx"
 import Confirmation from "./Confirmation/Confirmation.jsx"
-import Cashier from "./Cashier/Chasier.jsx";
+import Cashier from "./Cashier/Cashier.jsx";
 import Chef from "./Chef/Chef.jsx"
 
 const router = createBrowserRouter([
@@ -21,15 +21,20 @@ const router = createBrowserRouter([
 				path: "/login",
 				element: <Login />,
 				children: [
-					{
-						path: "login/cashier",
+					/* {
+						path: "cashier",
 						element: <Cashier />,
-					},
-					{
-						path: "login/chef",
-						element: <Chef />,
-					},
+					}, */
+					
 				],
+			},
+			{
+				path: "/cashier",
+						element: <Cashier />,
+			},
+			{
+				path: "/chef",
+				element: <Chef />,
 			},
 			{
 				path: "/menu",
@@ -40,7 +45,7 @@ const router = createBrowserRouter([
 				element: <ShoppingCart />,
 				children: [
 					{
-						path: "/shoppingcart/confirmation",
+						path: "confirmation",
 						element: <Confirmation />,
 					},
 				],

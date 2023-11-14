@@ -1,8 +1,19 @@
-import { useRecoilState } from "recoil";
-import { uNameAtom, uPassAtom } from "../../data/atom";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { uNameAtom, uPassAtom, formIsDirtyAtom } from "../../data/atom";
 import { testUser } from "../../data/testdata";
 
 const users = [...testUser]
+
+
+const setErrorClass = () => {
+	const formIsDirty = useRecoilValue(formIsDirtyAtom)
+
+	const errorClass= formIsDirty ? 'dirty' : ''
+	return(
+		errorClass)
+	
+}
+
 
 export const NameInput = () => {
 	const [uName, setUName] = useRecoilState(uNameAtom)
@@ -15,7 +26,7 @@ export const NameInput = () => {
 		<div className="input-container">
 			<label htmlFor="username">Användarnamn</label>
 			<input 
-				className="input-field" 
+				className= {setErrorClass()} 
 				type="text"
 				value={uName}
 				id= 'username'
@@ -37,7 +48,7 @@ export const PassInput = () => {
 		<div className="input-container">
 			<label htmlFor="password">Lösenord</label>
 			<input 
-				className="input-field" 
+				className={setErrorClass()} 
 				type="text"
 				value={uPass}
 				id="password"
