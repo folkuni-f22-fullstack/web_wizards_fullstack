@@ -8,13 +8,16 @@ import { NavLink } from 'react-router-dom'
 
 const Header = () => {
 	const [colorChange, setColorChange ] = useState(false)
+	const [logoSize, setLogoSize] = useState(false)
 
 	function changeOpacityScroll() {
 		if (window.scrollY >= 100) {
 			setColorChange(true)
+			setLogoSize(true)
 			
 		} else {
 			setColorChange(false)
+			setLogoSize(false)
 		}
 	}
 
@@ -24,7 +27,7 @@ const Header = () => {
 		<>
 		<header className={colorChange ? "scroll-opacity" : ''}>
 		<NavLink to='/shoppingcart'><IoCartOutline className='cart-button' aria-label='Gå till kundvagnen' /></NavLink>
-		<NavLink to='/'><img className="logo" src={logo} alt='logo'/></NavLink>
+		<NavLink to='/'><img className={logoSize ? "scroll-size" : 'logo'} src={logo} alt='logo'/></NavLink>
 		<GiHamburger className='hamburger-button' aria-label='Öppna navigeringsmeny'/>
 		</header>
 		<Navmeny />
