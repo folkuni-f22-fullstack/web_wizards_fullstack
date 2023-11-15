@@ -4,12 +4,19 @@ import miniburger from "../Assets/miniburger.svg"
 import { RxCross1 } from "react-icons/rx"
 import { HashLink } from "react-router-hash-link"
 
+// when clicking on the KONTAKT Navlink it should scroll down to the footer on small screens and on desktop it should stay in the navmenu and make the  opening hours smaller and the contact info larger.
+
+function reSizeContacts() {}
+
 const Navmeny = () => {
+	const navMobile = "nav-mobile"
+	const navDesktop = "nav-desktop"
+
 	return (
 		<>
 			<nav className="nav-container">
-				<section className="restaurang-info">
-					<ul className="opening-hours-contatiner">
+				<section className="opening-hours-contatiner">
+					<ul className="restaurang-info">
 						<li>ÖPPETTIDER</li>
 						<li>MÅN-TORS 11-22</li>
 						<li>FRE-LÖR 12-02</li>
@@ -48,7 +55,16 @@ const Navmeny = () => {
 							</HashLink>
 						</li>
 						<li>
-							<NavLink to="/Kontakt">KONTAKT</NavLink>
+							<HashLink
+								className={navMobile}
+								smooth
+								to="/#footer"
+							>
+								KONTAKT
+							</HashLink>
+							<NavLink className={navDesktop} to="/Kontakt">
+								KONTAKT
+							</NavLink>
 						</li>
 					</ul>
 				</div>
