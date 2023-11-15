@@ -5,6 +5,8 @@ import { useState } from 'react'
 import logo from '/src/Assets/Logo.svg'
 import Navmeny from './Navmeny'
 import { NavLink } from 'react-router-dom'
+import { AnimatePresence, motion, easeInOut } from 'framer-motion';
+
 
 const Header = () => {
 	const [colorChange, setColorChange ] = useState(false)
@@ -36,10 +38,19 @@ const Header = () => {
 			<NavLink to='/'><img className="logo" src={logo} alt='logo'/></NavLink>
 			<GiHamburger className='hamburger-button' aria-label='Öppna navigeringsmeny' onClick={handleMenuClick}/>
 		</header>
-			 	<Navmeny className="nav" isMenuOpen={isMenuOpen} handleCloseMenu={handleCloseMenu}/>
+		{/* <AnimatePresence>
+            <motion.div 
+                initial={{x: '-100%'}}
+                animate={{x: 10}}
+                transition={{duration: 1.5, ease: easeInOut }}
+                exit={{ x: '100%' }}>		 */}
+				<Navmeny isMenuOpen={isMenuOpen} handleCloseMenu={handleCloseMenu}/>  
+            {/* </motion.div>
+            </AnimatePresence> */}
 		</>
 	)
 	
 }
+
 
 export default Header

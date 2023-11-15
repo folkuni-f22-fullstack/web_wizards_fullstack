@@ -29,7 +29,7 @@ const Navmeny = ({ isMenuOpen, handleCloseMenu }) => {
 				</div>
 			</section>
 			
-			<div className="nav-meny-container">
+			<section className="nav-meny-container">
 				<div className='icon-container'> 
 					<img
 							className="miniburger"
@@ -60,7 +60,7 @@ const Navmeny = ({ isMenuOpen, handleCloseMenu }) => {
 						</NavLink>
 					</li>
 				</ul>
-			</div>
+			</section>
 		</nav>
 		</>
 		
