@@ -9,14 +9,16 @@ const LogOut = () => {
 	const [isLoggingOut, setIsLoggingOut] = useRecoilState(isLoggingOutAtom)
 
 	const handleOnclick = () => {	
+		//  setUName('')
 		setIsLoggedIn(false)
-		setIsLoggingOut(true)	
+		setIsLoggingOut(true)
+			
 	}
 
 	return(
 		<div className="logout-container">
 			<NavLink 
-				to='/'
+				to='/login'
 				onClick={handleOnclick}>
 				<CgLogOut />
 			</NavLink>

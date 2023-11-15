@@ -4,7 +4,7 @@ import { useRecoilState } from "recoil"
 import { Navigate } from "react-router-dom"
 import { NameInput, PassInput, IsMatching } from "./handleLogin"
 import { uNameAtom, uPassAtom, formIsDirtyAtom, isLoggedInAtom } from "../../data/atom"
-
+import KeepLoggedIn from "../Login/keepLoggedIn";
 
 
 const Login = () => {
@@ -24,7 +24,6 @@ const Login = () => {
 		
 		if(loginMatch) {
 			setShouldNavigate(true)
-			setUName('')
 			setUPass('')
 			setFormIsDirty(false)
 			setIsLoggedIn(true)
@@ -37,6 +36,7 @@ const Login = () => {
 
 	return (
 		<>
+		<KeepLoggedIn/>
 			<div className=" login-container">
 				<div className="login">				
 					<form className="login-form" action="">

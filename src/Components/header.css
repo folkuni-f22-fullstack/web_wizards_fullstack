@@ -3,6 +3,7 @@ header {
 	align-items: center;
 	justify-content: space-between;
 	background-color: var(--bg-dark);
+	color: var(--light-green-acc);
 	padding: 1em;
 	position: fixed;
 	width: 100%;
@@ -27,6 +28,10 @@ header {
 	transform: scale(1.1);
 }
 
+.logged-in-container{
+	max-width: 3.1em ;
+	
+}
 
 
 .logo {
