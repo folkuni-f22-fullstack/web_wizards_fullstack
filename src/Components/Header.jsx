@@ -1,19 +1,24 @@
 import { IoCartOutline } from 'react-icons/io5'
 import { GiHamburger }from 'react-icons/gi'
 import './header.css'
+import './navmeny.css'
 import { useState } from 'react'
 import logo from '/src/Assets/Logo.svg'
 import Navmeny from './Navmeny'
 import { NavLink } from 'react-router-dom'
-import { AnimatePresence, motion, easeInOut } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
+import { transitionChangeState } from './transitionChangeState'
+import {useRecoilState} from 'recoil'
 
 
 const Header = () => {
 	const [colorChange, setColorChange ] = useState(false)
+	const [transitionChange, setTransitionChange ] = useRecoilState(transitionChangeState)
 	const [isMenuOpen, setIsMenuOpen] = useState(false)
 
 	const handleMenuClick = () => {
 		setIsMenuOpen(!isMenuOpen); 
+		setTransitionChange(true)
 	}
 
 	const handleCloseMenu = () => {
@@ -38,15 +43,7 @@ const Header = () => {
 			<NavLink to='/'><img className="logo" src={logo} alt='logo'/></NavLink>
 			<GiHamburger className='hamburger-button' aria-label='Öppna navigeringsmeny' onClick={handleMenuClick}/>
 		</header>
-		{/* <AnimatePresence>
-            <motion.div 
-                initial={{x: '-100%'}}
-                animate={{x: 10}}
-                transition={{duration: 1.5, ease: easeInOut }}
-                exit={{ x: '100%' }}>		 */}
 				<Navmeny isMenuOpen={isMenuOpen} handleCloseMenu={handleCloseMenu}/>  
-            {/* </motion.div>
-            </AnimatePresence> */}
 		</>
 	)
 	
@@ -54,3 +51,15 @@ const Header = () => {
 
 
 export default Header
+
+{/* <AnimatePresence>
+{isMenuOpen && (
+	<motion.div 
+	key="navmeny"
+	initial={{x: '100%'}}
+	animate={{x: 0}}
+exit={{ x: '100%' }}>		 */}
+//NAVMENY
+{/* </motion.div>
+)}
+</AnimatePresence> */}

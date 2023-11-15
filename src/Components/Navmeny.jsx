@@ -2,15 +2,25 @@ import './navmeny.css'
 import { NavLink } from 'react-router-dom'
 import miniburger from '../Assets/miniburger.svg'
 import {RxCross1} from 'react-icons/rx'
+import { transitionChangeState } from './transitionChangeState'
+import {useRecoilState} from 'recoil'
+import { motion } from 'framer-motion'
 
 const Navmeny = ({ isMenuOpen, handleCloseMenu }) => {
 	if(!isMenuOpen) {
 		return null
 	}
 
+	const [transitionChange, setTransitionChange ] = useRecoilState(transitionChangeState)
+
 	return (
 		<>
-		<nav className={`nav-container ${isMenuOpen ? 'menu-open' : 'start'}`}>
+		<motion.div
+		className={`nav-container ${transitionChange ? "transition-nav" : ''} `}
+		initial={{ x: '100%' }}
+		animate={{ x: 0 }}
+		exit={{ x: '100%'}}>
+		{/* <nav> */}
 			<section className='restaurang-info'>
 				<ul className='opening-hours-contatiner'>
 					<li>ÖPPETTIDER</li>
@@ -61,10 +71,14 @@ const Navmeny = ({ isMenuOpen, handleCloseMenu }) => {
 					</li>
 				</ul>
 			</section>
-		</nav>
+		{/* </nav> */}
+		</motion.div>
+		
 		</>
 		
 	)
 }
 
 export default Navmeny
+
+// ${isMenuOpen ? 'menu-open' : 'start'}

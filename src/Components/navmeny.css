@@ -2,26 +2,19 @@
 	position: absolute;
 	width: 100%;
 	height: 100%;
-	top: 12em;
-	z-index: 1000;
-	transition: all 0.5s ease-in-out;
+	top: 0em;
+	transform: translateX(-100px);
+	transition: transform 1.3s ease-in-out; 
+	
 }
 
-.nav-container .nav-meny-container {
-	transform: translateX(-400px)
+.transition-nav {
+	transform: translateX(0) ;
+	
 }
-
-
-.menu-open .nav-meny-container {
-	position: relative;
-	transform: translateX(0);
-}
-
-
 
 .nav-container, .nav-meny-container {
 	height: 100%; 
-	z-index: 1000;
 
 }
 
