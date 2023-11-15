@@ -2,6 +2,9 @@ import { NavLink } from "react-router-dom"
 import { GrInstagram } from "react-icons/gr"
 import { BsFacebook } from "react-icons/bs"
 import { FaPinterest } from "react-icons/fa"
+import miniburger from "../Assets/miniburger.svg"
+import { HashLink } from "react-router-hash-link"
+
 import "./footer.css"
 
 const Footer = () => {
@@ -10,13 +13,15 @@ const Footer = () => {
 			<div className="footer-links">
 				<ul>
 					<li>
-						<NavLink to="/MENY">MENY</NavLink>{" "}
+						<NavLink to="/Menu">MENY</NavLink>
 					</li>
 					<li>
-						<NavLink to="/OM-OSS">OM OSS</NavLink>
+						<HashLink smooth to="/#about_us">
+							OM OSS
+						</HashLink>
 					</li>
 					<li>
-						<NavLink to="/PERSONAL">PERSONAL</NavLink>
+						<NavLink to="/login">PERSONAL</NavLink>
 					</li>
 				</ul>
 			</div>
@@ -28,21 +33,48 @@ const Footer = () => {
 					<li>SÖN 12-20</li>
 				</ul>
 			</div>
-			<div className="socialmedia">
-				<div className="socialmedialogos">
-					<GrInstagram />
+			<div className="imagescontainer">
+				<div className="socialmedia">
+					<a aria-label="Instagram" href="https://www.instagram.com">
+						<div className="socialmedialogos">
+							<GrInstagram />
+						</div>
+					</a>
+					<a aria-label="Facebook" href="https://www.facebook.com">
+						<div className="socialmedialogos">
+							<BsFacebook />
+						</div>
+					</a>
+
+					<a aria-label="Pinterest" href="https://www.pinterest.com">
+						<div className="socialmedialogos">
+							<FaPinterest />
+						</div>
+					</a>
 				</div>
-				<div className="socialmedialogos">
-					<BsFacebook />
-				</div>
-				<div className="socialmedialogos">
-					<FaPinterest />
+				<div className="logoburger">
+					<NavLink to="/">
+						<img
+							className="miniburger"
+							src={miniburger}
+							alt="Miniburger Logo"
+						/>
+					</NavLink>
 				</div>
 			</div>
+
 			<div className="contact">
 				<ul>
 					<li>KONTAKTUPPGIFTER</li>
-					<li>MAIL@MAIL.COM</li>
+					<li>
+						<a
+							id="mail_link"
+							className="mail_link"
+							href="mailto:mail.mail.com"
+						>
+							MAIL@MAIL.COM
+						</a>
+					</li>
 					<li>123-456 78 90</li>
 					<li>ADRESSGATAN 1</li>
 					<li>STAD</li>

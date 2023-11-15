@@ -19,12 +19,16 @@ header {
 }
 
 
-
 .cart-button {
 	font-size: clamp(35px, 5vw, 50px);
 	height: auto;
-	color: var(--light-green-acc);
+	transition:all 0.3s ease-in-out;
+	
+}.cart-button:hover{
+	transform: scale(1.1);
 }
+
+
 
 .logo {
 	width: 70px;
@@ -41,5 +45,12 @@ header {
 .hamburger-button {
 	font-size: clamp(35px, 5vw, 50px);
 	height: auto;
-	color: var(--light-green-acc)
+	color: var(--light-green-acc);
+	transition:all 0.3s ease-in-out;
+}
+
+.hamburger-button:hover{
+	cursor: pointer;
+	transform: scale(1.1);
+	color: var(--light-brown-acc);
 }
