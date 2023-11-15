@@ -1,6 +1,6 @@
 import burgersStart from '../Assets/burgerstart-desktop.svg'
 import splashBurger from '../Assets/Splashburger.svg'
-import tomatoes from '../Assets/Tomater.svg'
+import tomatoes from '../Assets/tomatoes_hand.avif'
 import cows from '../Assets/Kossor.svg'
 import { IoFastFoodOutline } from 'react-icons/io5'
 

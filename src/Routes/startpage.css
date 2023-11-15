@@ -80,6 +80,14 @@
   color: var(--dark-green-acc);
 }
 
+.tomatoes_img img {
+ width: 300px;
+ padding: 1em;
+  
+}
+
+
+
 /* large desktop */
 @media screen and (min-width: 992px) {
 
@@ -141,8 +149,8 @@
     grid-column: 1;
     grid-row: 6;
     justify-self: center;
-    width: 430px;
-    height: 250px;
+    width: 400px;
+    
   }
 
   .tomatoes_img img {
