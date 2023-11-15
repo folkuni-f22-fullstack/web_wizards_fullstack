@@ -1,9 +1,12 @@
-
+import KeepLoggedIn from "./Login/keepLoggedIn"
 const Startpage = () => {
+
 	return (
 		<>
+		<KeepLoggedIn/>
 			<h1>Burger Bliss</h1>
 			<div className="card-container">
+				
 				<p>HEJ</p>
 				<button>Klicka</button>
 				<p>

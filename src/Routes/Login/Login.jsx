@@ -17,6 +17,8 @@ const Login = () => {
 	const loginMatch = IsMatching()
 	const loginErrorMessage = formIsDirty ? 'Vänligen kontrollera inloggningsuppgifterna' : ''
 
+	//Lägg till om redan inloggad, lägg lås så att det inte går att logga in igen! 
+
 	const handleSubmit = (event) => {
 		event.preventDefault()
 		

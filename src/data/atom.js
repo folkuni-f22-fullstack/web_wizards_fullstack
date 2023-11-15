@@ -20,3 +20,8 @@ export const isLoggedInAtom = atom ({
 	key: 'isLoggedIn',
 	default: false,
 })
+
+export const isLoggingOutAtom = atom ({
+	key: 'isLoggingOut',
+	default: false,
+})

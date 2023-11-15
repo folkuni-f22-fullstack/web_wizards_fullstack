@@ -1,7 +1,7 @@
 import './FoodMenu.css'
 import FoodCard from '../../Components/FoodCard'
 import { data, kidsData, drinksData, sidesData } from '../../data/testdata'
-
+import KeepLoggedIn from "../Login/keepLoggedIn";
 
 
 
@@ -16,6 +16,7 @@ const FoodMenu = () => {
 
 
 		<div className='food-menu'> 
+		<KeepLoggedIn/>
 			<h1>MENY</h1>
 			<ul>
 			{ dishes.map(dish =>(<FoodCard key = {dish.name} dish = {dish} />) ) } 
