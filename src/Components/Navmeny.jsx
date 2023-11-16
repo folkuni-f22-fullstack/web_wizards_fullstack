@@ -32,7 +32,7 @@ const Navmeny = () => {
 		<>
 			<nav className="nav-container">
 				<section className="opening-hours-container">
-					<ul className={ style ? 'small-info' : "restaurang-info"}>
+					<ul className={ style ? '' : "restaurang-info"}>
 						<li> 
 							ÖPPETTIDER
 						</li>
