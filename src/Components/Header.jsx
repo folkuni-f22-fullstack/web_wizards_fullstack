@@ -17,7 +17,7 @@ const Header = () => {
 	const [isMenuOpen, setIsMenuOpen] = useState(false)
 
 	const handleMenuClick = () => {
-		setIsMenuOpen(!isMenuOpen); 
+		setIsMenuOpen(isMenuOpen => !isMenuOpen); 
 		setTransitionChange(true)
 	}
 
@@ -43,7 +43,9 @@ const Header = () => {
 			<NavLink to='/'><img className="logo" src={logo} alt='logo'/></NavLink>
 			<GiHamburger className='hamburger-button' aria-label='Öppna navigeringsmeny' onClick={handleMenuClick}/>
 		</header>
-				<Navmeny isMenuOpen={isMenuOpen} handleCloseMenu={handleCloseMenu}/>  
+		<AnimatePresence>
+				{isMenuOpen && <Navmeny isMenuOpen={isMenuOpen} handleCloseMenu={handleCloseMenu}/>}  
+		</AnimatePresence>
 		</>
 	)
 	

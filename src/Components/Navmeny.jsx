@@ -4,12 +4,14 @@ import miniburger from '../Assets/miniburger.svg'
 import {RxCross1} from 'react-icons/rx'
 import { transitionChangeState } from './transitionChangeState'
 import {useRecoilState} from 'recoil'
-import { motion } from 'framer-motion'
+import { motion, easeInOut } from 'framer-motion'
 
 const Navmeny = ({ isMenuOpen, handleCloseMenu }) => {
 	if(!isMenuOpen) {
 		return null
 	}
+	console.log('Is menu open', isMenuOpen)
+	
 
 	const [transitionChange, setTransitionChange ] = useRecoilState(transitionChangeState)
 
@@ -19,6 +21,7 @@ const Navmeny = ({ isMenuOpen, handleCloseMenu }) => {
 		className={`nav-container ${transitionChange ? "transition-nav" : ''} `}
 		initial={{ x: '100%' }}
 		animate={{ x: 0 }}
+		transition={{duration: 1.5, ease: easeInOut }}
 		exit={{ x: '100%'}}>
 		{/* <nav> */}
 			<section className='restaurang-info'>
