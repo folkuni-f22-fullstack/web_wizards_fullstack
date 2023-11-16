@@ -1,0 +1,185 @@
+.startingpage {
+  display: flex;
+  flex-direction: column;
+}
+
+.landingpage_text_container {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  margin-bottom: 2em;
+  background-color: var(--bg-dark);
+  color: var(--text-light);
+  padding: 1em;
+  font-size: clamp(16px, 5vw, 24px);
+}
+
+.head_bliss {
+  color: var(--light-green-acc);
+  position: absolute;
+	top: 15%;
+	left: 11%;
+  font-size: clamp(24px, 5vw, 42px);
+}
+
+.hero-img-container {
+ position: relative;
+ background-color: var(--bg-dark);
+}
+
+.hero-img-container img {
+  width: 100%;
+ 
+}
+
+.text_padding {
+  padding: 1em 1.5em 1.5em 1.5em;
+}
+
+.text .text_scale {
+  font-size: scale(16px, 5vw, 24px);
+  border: green solid 1px;
+}
+
+.floater-btn {
+  background-color: var(--purple-acc);
+  font-size: 1em;
+  padding: 0.8em 0.5em 0.8em 0.5em;
+  margin-bottom: 3em;
+}
+
+.order_icon {
+  font-size: 1.2em;
+}
+
+.strong {
+  font-family: var(--bodytext-font-family);
+}
+
+.about_us_container h2 {
+  text-align: center;
+  color: var(--light-brown-acc);
+}
+.about_us_container {
+  display: flex;
+  flex-direction: column;
+  font-size: clamp(16px, 3vw, 24px);
+}
+
+.align_imgs {
+  align-self: center;
+}
+
+.about_us_container span {
+  color: var(--dark-green-acc);
+}
+
+.head_sustainability {
+  padding-top: 1em;
+  text-align: center;
+  color: var(--dark-green-acc);
+}
+
+.tomatoes_img img {
+ width: 300px;
+ padding: 1em;
+  
+}
+
+
+
+/* large desktop */
+@media screen and (min-width: 992px) {
+
+  .order_here_container {
+    /* border: solid 2px green; */
+    position: absolute;
+    top: -12em;
+    left: 0em;
+    width: 18em;
+  }  
+
+  .landingpage_text_container {
+    position: relative;
+  }
+
+  .about_us_container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto;
+    row-gap: 0.5em;
+  }
+
+  .text {
+    display: grid;
+  }
+
+  .about_us_container h2 {
+    grid-column: 1 / span 2;
+    padding-bottom: 0.5em;
+  }
+
+  .splashburger_img {
+    grid-column: 2;
+    grid-row: 2 / span 2;
+    height: 600px;
+    justify-self: center;
+  }
+
+  .splashburger_img img {
+    height: 100%;
+  }
+
+  .destination_text_3D {
+    grid-row: 3;
+    grid-column: 1;
+  }
+
+  .welcome_text {
+    grid-row: 4;
+    grid-column: 1 / span 2;
+  }
+
+  .head_sustainability {
+    grid-row: 5;
+    grid-column: 1 / span 2;
+  }
+
+  .tomatoes_img {
+    grid-column: 1;
+    grid-row: 6;
+    justify-self: center;
+    width: 400px;
+    
+  }
+
+  .tomatoes_img img {
+    width: 100%;
+  }
+
+  .cows_img {
+    grid-column: 2;
+    grid-row: 7 / span 8;
+    height: 600px;
+    justify-self: center;
+  }
+
+  .cows_img img {
+    height: 100%;
+  }
+
+  .sus_one {
+    grid-row: 7;
+    grid-column: 2;
+  }
+
+  .sus_two {
+    grid-row: 8;
+    grid-column: 1;
+  }
+
+  .sus_three {
+    grid-row: 9;
+    grid-column: 1;
+  }
+}

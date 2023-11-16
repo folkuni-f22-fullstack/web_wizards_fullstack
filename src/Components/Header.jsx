@@ -15,6 +15,7 @@ const Header = () => {
 	const [colorChange, setColorChange ] = useState(false)
 	const [transitionChange, setTransitionChange ] = useRecoilState(transitionChangeState)
 	const [isMenuOpen, setIsMenuOpen] = useState(false)
+	const [logoSize, setLogoSize] = useState(false)
 
 	const handleMenuClick = () => {
 		setIsMenuOpen(isMenuOpen => !isMenuOpen); 
@@ -28,40 +29,28 @@ const Header = () => {
 	function changeOpacityScroll() {
 		if (window.scrollY >= 100) {
 			setColorChange(true)
+			setLogoSize(true)
 			
 		} else {
 			setColorChange(false)
+			setLogoSize(false)
 		}
 	}
 
-	window.addEventListener('scroll', changeOpacityScroll)
+	window.addEventListener("scroll", changeOpacityScroll)
 
 	return (
 		<>
 		<header className={colorChange ? "scroll-opacity" : ''}>
-			<NavLink to='/shoppingcart'><IoCartOutline className='cart-button' aria-label='Gå till kundvagnen' /></NavLink>
-			<NavLink to='/'><img className="logo" src={logo} alt='logo'/></NavLink>
-			<GiHamburger className='hamburger-button' aria-label='Öppna navigeringsmeny' onClick={handleMenuClick}/>
+		<NavLink to='/shoppingcart'><IoCartOutline className='cart-button' aria-label='Gå till kundvagnen' /></NavLink>
+		<NavLink to='/'><img className={logoSize ? "scroll-size" : 'logo'} src={logo} alt='logo'/></NavLink>
+		<GiHamburger className='hamburger-button' aria-label='Öppna navigeringsmeny' onClick={handleMenuClick}/>
 		</header>
 		<AnimatePresence>
 				{isMenuOpen && <Navmeny isMenuOpen={isMenuOpen} handleCloseMenu={handleCloseMenu}/>}  
 		</AnimatePresence>
 		</>
 	)
-	
 }
 
-
 export default Header
-
-{/* <AnimatePresence>
-{isMenuOpen && (
-	<motion.div 
-	key="navmeny"
-	initial={{x: '100%'}}
-	animate={{x: 0}}
-exit={{ x: '100%' }}>		 */}
-//NAVMENY
-{/* </motion.div>
-)}
-</AnimatePresence> */}
