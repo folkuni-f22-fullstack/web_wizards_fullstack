@@ -3,7 +3,7 @@
 	height: 100%;
 }
 
-.opening-hours-contatiner {
+.opening-hours-container {
 	display: none;
 }
 
@@ -94,7 +94,7 @@
 
 /* large desktop */
 @media screen and (min-width: 1024px) {
-	.opening-hours-contatiner {
+	.opening-hours-container {
 		display: block;
 		width: 100%;
 		display: flex;
@@ -114,9 +114,6 @@
 		/* padding: 1em;  */
 	}
 
-	.links-nav-meny {
-		/* margin-top: 3em; */
-	}
 	.links-nav-meny li {
 		padding: 0.8em;
 		display: flex;
