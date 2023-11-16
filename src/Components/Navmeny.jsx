@@ -11,65 +11,56 @@ const Navmeny = () => {
 	const navMobile = "nav-mobile"
 	const navDesktop = "nav-desktop"
 
-	const [style, setStyle] = useState("large-info")
-	const [style2, setStyle2] = useState("small-info")
+	const [style, setStyle] = useState(false)
+	const [style2, setStyle2] = useState(false)
 
-	// const changeStyle = () => {
-	// 	console.log("you just clicked")
-	// 	if (style !== "large-info") setStyle("large-info")
-	// 	else setStyle("small-info")
-	// }
+	
 
 	const changeStyle = () => {
-		setStyle("small-info")
-		setStyle2("large-info")
+		setStyle(true)
+		setStyle2(true)
+		console.log('Du klickade' + style)
+		if (style) {
+			setStyle(false)
+			setStyle2(true)
+		}
 	}
 
-	// setStyle((prev) => (prev === "large-info" ? "small-info" : "large-info"))
+
 
 	return (
 		<>
 			<nav className="nav-container">
 				<section className="opening-hours-contatiner">
-					<ul className="restaurang-info">
-						<li className={style ? "large-info" : "small-info"}>
+					<ul className={ style ? 'small-info' : "restaurang-info"}>
+						<li> 
 							ÖPPETTIDER
 						</li>
-						<li className={style ? "large-info" : "small-info"}>
+						<li> 
 							MÅN-TORS 11-22
 						</li>
-						<li className={style ? "large-info" : "small-info"}>
+						<li> 
 							FRE-LÖR 12-02
 						</li>
-						<li className={style ? "large-info" : "small-info"}>
+						<li> 
 							SÖN 12-20
 						</li>
 					</ul>
 					<div className="contact-container">
-						<ul className="contact-info">
-							<li
-								className={style2 ? "small-info" : "large-info"}
-							>
+						<ul className={ style ? 'large-info' : "contact-info"}>
+							<li>
 								KONTAKTUPPGIFTER
 							</li>
-							<li
-								className={style2 ? "small-info" : "large-info"}
-							>
+							<li>
 								MAIL@MAIL.COM
 							</li>
-							<li
-								className={style2 ? "small-info" : "large-info"}
-							>
+							<li>
 								123-45678901
 							</li>
-							<li
-								className={style2 ? "small-info" : "large-info"}
-							>
+							<li>
 								ADRESSGATAN 1
 							</li>
-							<li
-								className={style2 ? "small-info" : "large-info"}
-							>
+							<li>
 								STAD
 							</li>
 						</ul>
