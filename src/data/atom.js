@@ -25,3 +25,8 @@ export const isLoggingOutAtom = atom ({
 	key: 'isLoggingOut',
 	default: false,
 })
+
+export const isDisabledAtom = atom ({
+	key: 'isDisabled',
+	default: false,
+})

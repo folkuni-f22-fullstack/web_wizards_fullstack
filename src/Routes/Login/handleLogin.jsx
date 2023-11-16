@@ -1,8 +1,8 @@
 import { useRecoilState, useRecoilValue } from "recoil";
 import { uNameAtom, uPassAtom, formIsDirtyAtom } from "../../data/atom";
-import { testUser } from "../../data/testdata";
+import { user } from "../../data/testdata";
 
-const users = [...testUser]
+const users = [...user]
 
 
 const setErrorClass = () => {

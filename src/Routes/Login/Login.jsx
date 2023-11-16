@@ -3,7 +3,7 @@ import { useState } from "react"
 import { useRecoilState } from "recoil"
 import { Navigate } from "react-router-dom"
 import { NameInput, PassInput, IsMatching } from "./handleLogin"
-import { uNameAtom, uPassAtom, formIsDirtyAtom, isLoggedInAtom } from "../../data/atom"
+import { uNameAtom, uPassAtom, formIsDirtyAtom, isLoggedInAtom, isDisabledAtom } from "../../data/atom"
 import KeepLoggedIn from "../Login/keepLoggedIn";
 
 
@@ -13,21 +13,24 @@ const Login = () => {
 	const [shouldNavigate, setShouldNavigate] = useState(false)
 	const [formIsDirty, setFormIsDirty] = useRecoilState(formIsDirtyAtom)
 	const [isLoggedIn, setIsLoggedIn] = useRecoilState(isLoggedInAtom)
-	
+	const [isDisabled, setIsDisabled] = useRecoilState(isDisabledAtom)
+
 	const loginMatch = IsMatching()
+	const isLoggedInMessage = isDisabled ? 'Du är redan inloggad, logga först ut om du vill logga in som annan användare' : ''
 	const loginErrorMessage = formIsDirty ? 'Vänligen kontrollera inloggningsuppgifterna' : ''
 
-	//Lägg till om redan inloggad, lägg lås så att det inte går att logga in igen! 
 
 	const handleSubmit = (event) => {
 		event.preventDefault()
-		
-		if(loginMatch) {
-			setShouldNavigate(true)
-			setUPass('')
-			setFormIsDirty(false)
-			setIsLoggedIn(true)
-		}else{setFormIsDirty(true)}
+		if(isLoggedIn){
+			setIsDisabled(true)
+		}else if (loginMatch) {
+				setShouldNavigate(true)
+				setUPass('')
+				setUName('')
+				setFormIsDirty(false)
+				setIsLoggedIn(true)
+		}else{setFormIsDirty(true)}			
 	}
 
 	if (shouldNavigate) {
@@ -46,9 +49,11 @@ const Login = () => {
 						<button 
 							className="loginbutton"
 							type="submit"
+							disabled = {isDisabled}
 							onClick={handleSubmit}
 							>Logga in</button>
 						<div className="error-message-container"> {loginErrorMessage}</div>
+						<div className="error-message-container"> {isLoggedInMessage}</div>
 					</form>
 				</div>
 			</div>

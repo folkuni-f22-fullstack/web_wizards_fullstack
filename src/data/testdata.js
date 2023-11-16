@@ -81,7 +81,7 @@ export const sidesData = [
 	}
   ]
 
-  export const testUser = [{
+  export const user = [{
 	"id":"1",
 	"name": "personal",
 	"password": "password"}
