@@ -27,7 +27,7 @@ const Login = () => {
 		}else if (loginMatch) {
 				setShouldNavigate(true)
 				setUPass('')
-				setUName('')
+				// setUName('')
 				setFormIsDirty(false)
 				setIsLoggedIn(true)
 		}else{setFormIsDirty(true)}			
@@ -39,7 +39,7 @@ const Login = () => {
 
 	return (
 		<>
-		<KeepLoggedIn/>
+		{!isLoggedIn ? null: <KeepLoggedIn/>}
 			<div className=" login-container">
 				<div className="login">				
 					<form className="login-form" action="">

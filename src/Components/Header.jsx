@@ -29,6 +29,8 @@ const Header = () => {
 		<>
 		<header className={colorChange ? "scroll-opacity" : ''}>
 		{!isLoggedIn ? <NavLink to='/shoppingcart'><IoCartOutline className='cart-button' aria-label='Gå till kundvagnen' /></NavLink> : <div className='logged-in-container'> Inloggad: {uName}</div>}
+
+		
 		<NavLink to='/'><img className="logo" src={logo} alt='logo'/></NavLink>
 		<GiHamburger className='hamburger-button' aria-label='Öppna navigeringsmeny'/>
 		</header>
