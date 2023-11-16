@@ -136,4 +136,8 @@
 	.nav-mobile {
 		display: none;
 	}
+
+	.miniburger {
+		visibility: hidden;
+	}
 }

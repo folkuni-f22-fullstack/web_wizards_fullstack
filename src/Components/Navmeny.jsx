@@ -12,11 +12,17 @@ const Navmeny = () => {
 	const navDesktop = "nav-desktop"
 
 	const [style, setStyle] = useState("large-info")
+	const [style2, setStyle2] = useState("small-info")
+
+	// const changeStyle = () => {
+	// 	console.log("you just clicked")
+	// 	if (style !== "large-info") setStyle("large-info")
+	// 	else setStyle("small-info")
+	// }
 
 	const changeStyle = () => {
-		console.log("you just clicked")
-		if (style !== "large-info") setStyle("large-info")
-		else setStyle("small-info")
+		setStyle("small-info")
+		setStyle2("large-info")
 	}
 
 	// setStyle((prev) => (prev === "large-info" ? "small-info" : "large-info"))
@@ -41,19 +47,29 @@ const Navmeny = () => {
 					</ul>
 					<div className="contact-container">
 						<ul className="contact-info">
-							<li className={style ? "small-info" : "large-info"}>
+							<li
+								className={style2 ? "small-info" : "large-info"}
+							>
 								KONTAKTUPPGIFTER
 							</li>
-							<li className={style ? "small-info" : "large-info"}>
+							<li
+								className={style2 ? "small-info" : "large-info"}
+							>
 								MAIL@MAIL.COM
 							</li>
-							<li className={style ? "small-info" : "large-info"}>
+							<li
+								className={style2 ? "small-info" : "large-info"}
+							>
 								123-45678901
 							</li>
-							<li className={style ? "small-info" : "large-info"}>
+							<li
+								className={style2 ? "small-info" : "large-info"}
+							>
 								ADRESSGATAN 1
 							</li>
-							<li className={style ? "small-info" : "large-info"}>
+							<li
+								className={style2 ? "small-info" : "large-info"}
+							>
 								STAD
 							</li>
 						</ul>
