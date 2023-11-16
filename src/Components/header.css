@@ -3,14 +3,24 @@ header {
 	align-items: center;
 	justify-content: space-between;
 	background-color: var(--bg-dark);
-	padding: 1em 4em;
+	padding: 1em 2em;
 	position: fixed;
 	width: 100%;
-	height: auto;
+	height: 70px;
 	transition: background-color 2s ease-in-out;
 	z-index: 1000;
 	
 }
+
+@media screen and (min-width:992px){
+	header {
+		padding: 1em 4em;
+		height: auto;
+	}
+
+}
+
+
 
 .scroll-opacity {
 	background-color: var(--bg-dark-opacity);
@@ -31,8 +41,9 @@ header {
 
 
 .logo {
-	width: 90px;
+	width: 79px;
 	height: auto;
+	padding: 1em;
 }
 
 
