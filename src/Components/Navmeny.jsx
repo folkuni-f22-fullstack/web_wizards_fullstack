@@ -38,7 +38,7 @@ const Navmeny = ({ isMenuOpen, handleCloseMenu }) => {
 		className={`nav-container ${transitionChange ? "transition-nav" : ''} `}
 		initial={{ x: '100%' }}
 		animate={{ x: 0 }}
-		transition={{duration: 1.5, ease: easeInOut }}
+		transition={{duration: 1, ease: easeInOut }}
 		exit={{ x: '100%'}}>
 			<section className='opening-hours-container'>
 				<ul className={ style ? '' : "restaurang-info"}>
@@ -69,18 +69,19 @@ const Navmeny = ({ isMenuOpen, handleCloseMenu }) => {
 				</div>
 				<ul className="links-nav-meny">
 						<li>
-							<NavLink to="/">HEM</NavLink>
+							<NavLink onClick={handleCloseMenu} to="/">HEM</NavLink>
 						</li>
 						<li>
-							<NavLink to="/Menu">MENY</NavLink>
+							<NavLink onClick={handleCloseMenu} to="/Menu">MENY</NavLink>
 						</li>
 						<li>
-							<HashLink smooth to="/#about_us">
+							<HashLink onClick={handleCloseMenu} smooth to="/#about_us">
 								OM OSS
 							</HashLink>
 						</li>
 						<li>
 							<HashLink
+								onClick={handleCloseMenu}
 								className={navMobile}
 								smooth
 								to="/#footer"
