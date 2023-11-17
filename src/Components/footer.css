@@ -34,6 +34,7 @@ ul {
 	flex-direction: row;
 	justify-content: space-between;
 	width: 160px;
+	height: 40px;
 }
 
 .socialmedialogos {
@@ -41,9 +42,21 @@ ul {
 	margin-bottom: 1em;
 }
 
-.miniburger {
+.socialmedialogos-svg {
+	width: 130%;
+	height: auto;
+	transition: 0.3s ease-in;
+}
+
+.socialmedialogos-svg:hover {
+	width: 150%;
+	height: auto;
+}
+
+.miniburger-footer {
 	grid-row: 2;
 	justify-self: center;
+	display: block;
 }
 
 .opening-hours,

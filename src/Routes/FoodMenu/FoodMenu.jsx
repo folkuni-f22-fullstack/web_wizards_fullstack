@@ -3,8 +3,6 @@ import FoodCard from '../../Components/FoodCard'
 import { data, kidsData, drinksData, sidesData } from '../../data/testdata'
 
 
-
-
 const FoodMenu = () => {
 
 	const dishes = [...data]

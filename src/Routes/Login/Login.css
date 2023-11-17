@@ -11,6 +11,7 @@
 	justify-content: center;
 	border-radius: var(--outer-radius);
 	border: 1px solid var(--text-dark);
+	box-shadow: var(--box-shadow);
 }
 
 .login-header {
@@ -25,14 +26,30 @@
 .login-form {
 	display: flex;
 	flex-direction: column;
+	align-items: center;
+	width: fit-content;
 }
-
-.form-text {
+.input-container{
+	display: flex;
+	flex-direction: column;
 	margin-top: 2em;
 }
 
 .loginbutton {
 	margin-top: 2em;
+	max-width: fit-content;
+	align-self: center;
+}
+
+.error-message-container{
+	margin-top:0.5em;
+	max-width: 50%;
+	height: 2em;
+	align-self: center;
+}
+
+.dirty{
+	border: 2px solid rgb(145, 1, 1);
 }
 
 .footer {
@@ -40,3 +57,18 @@
 }
 @media screen and (min-width: 1024px) {
 }
+
+
+.logout-container{
+	display: flex;
+	justify-content: center;
+	width: fit-content;
+	position:fixed;
+	top: 25%;
+	font-size: 2em;
+	padding: 0.5em 0.3em 0.3em 0.3em;
+	border-radius: 0 var(--outer-radius) var(--outer-radius) 0;
+	background-color: var(--bg-dark);
+
+}
+

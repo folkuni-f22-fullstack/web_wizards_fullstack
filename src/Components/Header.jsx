@@ -8,10 +8,13 @@ import Navmeny from './Navmeny'
 import { NavLink } from 'react-router-dom'
 import { AnimatePresence, motion } from 'framer-motion';
 import { transitionChangeState } from './transitionChangeState'
-import {useRecoilState} from 'recoil'
 
+
+import { isLoggedInAtom } from '../data/atom'
+import { useRecoilState, useRecoilValue } from 'recoil'
 
 const Header = () => {
+	const [isLoggedIn, setIsLoggedIn] = useRecoilState(isLoggedInAtom)
 	const [colorChange, setColorChange ] = useState(false)
 	const [transitionChange, setTransitionChange ] = useRecoilState(transitionChangeState)
 	const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -42,9 +45,17 @@ const Header = () => {
 	return (
 		<>
 		<header className={colorChange ? "scroll-opacity" : ''}>
-		<NavLink to='/shoppingcart'><IoCartOutline className='cart-button' aria-label='Gå till kundvagnen' /></NavLink>
-		<NavLink to='/'><img className={logoSize ? "scroll-size" : 'logo'} src={logo} alt='logo'/></NavLink>
-		<GiHamburger className='hamburger-button' aria-label='Öppna navigeringsmeny' onClick={handleMenuClick}/>
+			{!isLoggedIn 
+			? <NavLink to='/shoppingcart'><IoCartOutline className='cart-button' aria-label='Gå till kundvagnen' /></NavLink> 
+			: <div className='logged-in-container'> Inloggad</div>}
+
+			{!isLoggedIn 
+			? <NavLink to='/'><img className={logoSize ? "scroll-size" : 'logo'} src={logo} alt='logo'/></NavLink>
+			: <img className={logoSize ? "scroll-size" : 'logo'} src={logo} alt='logo'/>}
+
+			{!isLoggedIn 
+			? <GiHamburger className='hamburger-button' aria-label='Öppna navigeringsmeny' onClick={handleMenuClick}/> 
+			: <GiHamburger className='hamburger'/>}
 		</header>
 		<AnimatePresence>
 				{isMenuOpen && <Navmeny isMenuOpen={isMenuOpen} handleCloseMenu={handleCloseMenu}/>}  
