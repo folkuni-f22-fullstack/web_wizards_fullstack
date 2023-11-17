@@ -45,11 +45,17 @@ const Header = () => {
 	return (
 		<>
 		<header className={colorChange ? "scroll-opacity" : ''}>
-		{!isLoggedIn ? <NavLink to='/shoppingcart'><IoCartOutline className='cart-button' aria-label='Gå till kundvagnen' /></NavLink> : <div className='logged-in-container'> Inloggad</div>}
+			{!isLoggedIn 
+			? <NavLink to='/shoppingcart'><IoCartOutline className='cart-button' aria-label='Gå till kundvagnen' /></NavLink> 
+			: <div className='logged-in-container'> Inloggad</div>}
 
-		
-		{!isLoggedIn ?<NavLink to='/'><img className="logo" src={logo} alt='logo'/></NavLink>: <img className="logo" src={logo} alt='logo'/>}
-		{!isLoggedIn ?<GiHamburger className='hamburger-button' aria-label='Öppna navigeringsmeny'/>: <GiHamburger className='hamburger'/>}
+			{!isLoggedIn 
+			? <NavLink to='/'><img className={logoSize ? "scroll-size" : 'logo'} src={logo} alt='logo'/></NavLink>
+			: <img className={logoSize ? "scroll-size" : 'logo'} src={logo} alt='logo'/>}
+
+			{!isLoggedIn 
+			? <GiHamburger className='hamburger-button' aria-label='Öppna navigeringsmeny' onClick={handleMenuClick}/> 
+			: <GiHamburger className='hamburger'/>}
 		</header>
 		<AnimatePresence>
 				{isMenuOpen && <Navmeny isMenuOpen={isMenuOpen} handleCloseMenu={handleCloseMenu}/>}  
