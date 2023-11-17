@@ -5,11 +5,11 @@ const ShoppingCart = () => {
 		<section className="shopping-cart">
 		<h1>Varukorg</h1>
 			<div className="order-card-container">
-				<ul>
-				</ul>	
+				<ul>lalala</ul>	
 			</div>
-			<div className="sum-order-container">
-				<p>Totalt: </p> 
+				<div className="sum-order-container">
+					<p>Totalt: </p> 
+					<p>150:-</p>
 			</div>
 		</section>
 	)
