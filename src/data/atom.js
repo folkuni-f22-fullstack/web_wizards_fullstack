@@ -30,3 +30,8 @@ export const isDisabledAtom = atom ({
 	key: 'isDisabled',
 	default: false,
 })
+
+export const cartItemsAtom = atom ({
+	key: 'cartItem',
+	default: []
+})
