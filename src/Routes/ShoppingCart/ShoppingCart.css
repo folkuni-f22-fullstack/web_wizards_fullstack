@@ -1,0 +1,9 @@
+.shopping-cart {
+	text-align: center;
+}
+
+.shopping-cart h1 {
+	color: var(--light-brown-acc); 
+	margin-top: 0.8em; 
+	margin-bottom: 0.2em; 
+}
