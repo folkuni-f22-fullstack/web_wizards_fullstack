@@ -2,6 +2,7 @@ import "./Shoppingcart.css"
 
 const ShoppingCart = () => {
 	return (
+		<>
 		<section className="shopping-cart">
 		<h1>Varukorg</h1>
 			<div className="order-card-container">
@@ -12,6 +13,7 @@ const ShoppingCart = () => {
 					<p>150:-</p>
 			</div>
 		</section>
+		</>
 	)
 }
 
