@@ -1,0 +1,160 @@
+.nav-container {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top: 0em;	
+	z-index: 1000;
+}
+
+
+.nav-container,
+.nav-meny-container {
+	height: 100%;
+}
+
+.opening-hours-container {
+	display: none;
+	color: var()
+}
+
+.restaurang-info > li {
+	color: var(--text-dark);
+	font-size: 3em;
+	padding: 0.2em;
+}
+
+.contact-container {
+	margin-top: 4em;
+}
+
+.contact-info li {
+	color: var(--text-dark);
+	font-size: 1.5em;
+	padding: 0.1em;
+}
+.contact-container .contact-info li:nth-child(1) {
+	font-size: 2em;
+}
+
+.icon-container {
+	padding: 1.5em;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
+
+.cross-nav {
+	color: var(--text-light);
+	font-size: 3em;
+	/* margin-right: 0.3em;  */
+	transition: transform 0.3s ease-in-out;
+}
+.cross-nav:hover {
+	transform: rotate(180deg);
+}
+
+.links-nav-meny {
+	color: var(--text-light);
+}
+
+.cross-nav:hover,
+.links-nav-meny li a:hover {
+	color: var(--light-brown-acc);
+}
+
+
+.nav-meny-container {
+	width: 100%;
+	background-color: var(--dark-brown-acc);
+}
+
+.links-nav-meny {
+	padding: 1em;
+	text-decoration: none;
+	list-style-type: none;
+}
+
+.links-nav-meny li {
+	/* margin-top: 1em;  */
+	padding: 2em;
+}
+
+.links-nav-meny li a {
+	color: var(--text-light);
+	text-decoration: none;
+	font-size: 2em;
+}
+
+.nav-desktop {
+	display: none;
+	/* color: lime; */
+}
+
+.nav-mobile {
+	display: block;
+	/* color: hotpink; */
+}
+
+.large-info {
+	color: var(--text-dark);
+	font-size: 3em;
+	padding: 0.2em;
+}
+
+
+
+/* large desktop */
+@media screen and (min-width: 1024px) {
+	.opening-hours-container {
+		display: block;
+		width: 100%;
+		background-color: var(--bg-light);
+		display: flex; 
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		text-align: center;
+	}
+	.nav-container {
+		display: flex;
+		max-width: 100vw;
+	}
+	.icon-container {
+		padding: 2em 1.5em; 
+		margin: 2em 0em 1em 0em; 
+	}
+
+	.nav-meny-container {
+		width: 100%; 
+	}
+
+	.nav-meny-container li { 
+		font-size: 1.5em;
+		/* padding: 1em;  */
+	}
+
+	.links-nav-meny {
+		margin-top: 0.5em; 
+	}
+	.links-nav-meny li {
+		padding: 0.8em;
+		display: flex;
+		margin-left: 6em;
+	}
+
+	.links-nav-meny li a {
+		font-size: 2em;
+	}
+
+	.nav-desktop {
+		display: block;
+	}
+
+	.nav-mobile {
+		display: none;
+	}
+
+	.miniburger {
+		visibility: hidden;
+	}
+}

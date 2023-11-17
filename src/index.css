@@ -1,0 +1,132 @@
+@import url("https://fonts.googleapis.com/css2?family=Antonio&family=Barlow&display=swap");
+
+:root {
+	--heading-font-family: "Antonio", sans-serif;
+	--bodytext-font-family: "Barlow", sans-serif;
+	--bg-dark: #0e0e0e;
+	--bg-dark-opacity: rgba(14, 14, 14, 0.7);
+	--bg-light: #f3f3f3;
+	--text-light: #efefef;
+	--text-dark: #1e1e1e;
+	--purple-acc: #5b039e;
+	--light-brown-acc: #9e6403;
+	--dark-brown-acc: #332a1b;
+	--light-green-acc: #039e41;
+	--dark-green-acc: #1a492d;
+	--menu-card-color: #d9d9d9;
+	--opacity: 70%;
+	--outer-radius: 0.4em;
+	--inner-radius: 0.25em;
+	--box-shadow: 0 0.1em 0.3em  rgb(168, 168, 168);
+	                  
+}
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: var(--bodytext-font-family);
+}
+html {
+    overflow-y: scroll;
+}
+
+body {
+	width: 100%;
+	height: 100vh;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	position: relative;
+	background-color: var(--bg-light);
+}
+
+#root {
+	width: 100%;
+	height: 100%;
+}
+
+main {
+	width: 100%;
+	min-height: 100%;
+	margin-top: 4em;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+button {
+	border-radius: var(--inner-radius);
+	border:none;
+	padding:0.5em 1em;
+	color:var(--text-light);
+	box-shadow: var(--box-shadow);
+	background-color: #039E41;
+}
+
+input {
+	border-radius: var(--inner-radius);
+	padding: 0.5em 1em;
+	color: var(--text-dark);
+	background-color: var(--bg-light);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+	font-family: var(--heading-font-family);
+}
+
+a{
+	color: var(--light-green-acc);
+}
+
+a:hover{
+	color: var(--light-brown-acc);
+}
+
+input{
+	border-radius: var(--inner-radius);
+}
+
+ul{
+	list-style: none;
+}
+
+.card-container{
+	max-width: 85%;
+	border-radius: var(--outer-radius);
+	border: 1px solid var(--dark-green-acc);
+	padding: 0.7em;
+	display: grid;
+	grid-template-columns:repeat(8, 1fr);
+	box-shadow: 0 0.1em 0.3em  rgb(168, 168, 168);
+}
+
+.hidden {
+	display: none;
+}
+
+/* tablet */
+@media screen and (min-width: 768px) and (max-width:991px){
+ 
+}
+
+/* desktop */
+@media screen and (min-width:992px) and (max-width:1023px){
+
+}
+
+/* large desktop */
+@media screen and (min-width: 1024px) {
+	main {
+		max-width: 1024px;
+		margin: 11.5em auto;
+	}
+	
+}
+
+
+
