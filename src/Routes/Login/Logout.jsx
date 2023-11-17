@@ -15,7 +15,6 @@ const LogOut = () => {
 		setIsLoggedIn(false)
 		setIsLoggingOut(true)
 		setIsDisabled(false)
-		setUPass('')
 		setUName('')
 	}
 

@@ -12,6 +12,7 @@ const [isLoggingOut, setIsLoggingOut] = useRecoilState(isLoggingOutAtom)
 			setIsLoggingOut(true)
 			setIsLoggedIn(true)
 			setIsLoggingOut(false)
+			
 		}
 	}, [isLoggedIn, setIsLoggedIn, setIsLoggingOut])
 

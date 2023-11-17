@@ -12,11 +12,11 @@ const Root = () => {
 	return (
 		<>
 			<Header />
-			{isLoggedIn ? <LogOut/> : null}
+			{isLoggedIn ? <LogOut/> :null}
 			<main>
 				<Outlet />
 			</main>
-			<Footer />
+			{!isLoggedIn ?<Footer /> : null}
 		</>
 	)
 }

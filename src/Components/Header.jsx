@@ -7,12 +7,11 @@ import Navmeny from './Navmeny'
 import { NavLink } from 'react-router-dom'
 import { isLoggedInAtom } from '../data/atom'
 import { useRecoilState, useRecoilValue } from 'recoil'
-import { uNameAtom } from '../data/atom'
 
 const Header = () => {
 	const [isLoggedIn, setIsLoggedIn] = useRecoilState(isLoggedInAtom)
 	const [colorChange, setColorChange ] = useState(false)
-	const uName = useRecoilValue(uNameAtom)
+	
 
 	function changeOpacityScroll() {
 		if (window.scrollY >= 100) {
@@ -28,11 +27,11 @@ const Header = () => {
 	return (
 		<>
 		<header className={colorChange ? "scroll-opacity" : ''}>
-		{!isLoggedIn ? <NavLink to='/shoppingcart'><IoCartOutline className='cart-button' aria-label='Gå till kundvagnen' /></NavLink> : <div className='logged-in-container'> Inloggad: {uName}</div>}
+		{!isLoggedIn ? <NavLink to='/shoppingcart'><IoCartOutline className='cart-button' aria-label='Gå till kundvagnen' /></NavLink> : <div className='logged-in-container'> Inloggad</div>}
 
 		
-		<NavLink to='/'><img className="logo" src={logo} alt='logo'/></NavLink>
-		<GiHamburger className='hamburger-button' aria-label='Öppna navigeringsmeny'/>
+		{!isLoggedIn ?<NavLink to='/'><img className="logo" src={logo} alt='logo'/></NavLink>: <img className="logo" src={logo} alt='logo'/>}
+		{!isLoggedIn ?<GiHamburger className='hamburger-button' aria-label='Öppna navigeringsmeny'/>: <GiHamburger className='hamburger'/>}
 		</header>
 		<Navmeny />
 		</>
