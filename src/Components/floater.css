@@ -1,0 +1,33 @@
+.floater {
+	position: fixed;
+	bottom: 50%;
+	right: 1px;
+	width: 7em;
+	height: 7em;
+	background-color: var(--purple-acc);
+	border-radius: var(--outer-radius);
+	z-index: 1000;
+}
+
+.floater-logo {
+	width: 3.5em;
+	height: auto;
+}
+
+@media screen and (min-width: 992px) {
+	.floater {
+		position: fixed;
+		bottom: 50%;
+		right: -10em;
+		width: 15em;
+		height: 7em;
+		background-color: var(--purple-acc);
+		border-radius: var(--outer-radius);
+		z-index: 10000;
+		transition: 0.5s ease-in-out;
+	}
+
+	.floater:hover {
+		right: -1em;
+	}
+}
