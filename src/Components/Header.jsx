@@ -1,28 +1,46 @@
 import { IoCartOutline } from 'react-icons/io5'
 import { GiHamburger }from 'react-icons/gi'
 import './header.css'
+import './navmeny.css'
 import { useState } from 'react'
 import logo from '/src/Assets/Logo.svg'
 import Navmeny from './Navmeny'
 import { NavLink } from 'react-router-dom'
+import { AnimatePresence, motion } from 'framer-motion';
+import { transitionChangeState } from './transitionChangeState'
+
+
 import { isLoggedInAtom } from '../data/atom'
 import { useRecoilState, useRecoilValue } from 'recoil'
 
 const Header = () => {
 	const [isLoggedIn, setIsLoggedIn] = useRecoilState(isLoggedInAtom)
 	const [colorChange, setColorChange ] = useState(false)
-	
+	const [transitionChange, setTransitionChange ] = useRecoilState(transitionChangeState)
+	const [isMenuOpen, setIsMenuOpen] = useState(false)
+	const [logoSize, setLogoSize] = useState(false)
+
+	const handleMenuClick = () => {
+		setIsMenuOpen(isMenuOpen => !isMenuOpen); 
+		setTransitionChange(true)
+	}
+
+	const handleCloseMenu = () => {
+		setIsMenuOpen(false)
+	}
 
 	function changeOpacityScroll() {
 		if (window.scrollY >= 100) {
 			setColorChange(true)
+			setLogoSize(true)
 			
 		} else {
 			setColorChange(false)
+			setLogoSize(false)
 		}
 	}
 
-	window.addEventListener('scroll', changeOpacityScroll)
+	window.addEventListener("scroll", changeOpacityScroll)
 
 	return (
 		<>
@@ -33,10 +51,11 @@ const Header = () => {
 		{!isLoggedIn ?<NavLink to='/'><img className="logo" src={logo} alt='logo'/></NavLink>: <img className="logo" src={logo} alt='logo'/>}
 		{!isLoggedIn ?<GiHamburger className='hamburger-button' aria-label='Öppna navigeringsmeny'/>: <GiHamburger className='hamburger'/>}
 		</header>
-		<Navmeny />
+		<AnimatePresence>
+				{isMenuOpen && <Navmeny isMenuOpen={isMenuOpen} handleCloseMenu={handleCloseMenu}/>}  
+		</AnimatePresence>
 		</>
 	)
-	
 }
 
 export default Header

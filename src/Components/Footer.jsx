@@ -9,7 +9,7 @@ import "./footer.css"
 
 const Footer = () => {
 	return (
-		<div className="footer">
+		<div id="footer" className="footer">
 			<div className="footer-links">
 				<ul>
 					<li>
