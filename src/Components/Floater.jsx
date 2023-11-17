@@ -1,23 +1,23 @@
 import React from "react"
-import Fab from "@mui/material/Fab"
-import AddIcon from "@mui/icons-material/Add"
-import styled from "styled-components"
+import { Link } from "react-router-dom"
 
-const StyledFab = styled(Fab)`
-	position: fixed;
-	bottom: 50%;
-	left: 96%;
-	width: 5em;
-	height: 5em;
-	background-color: var(--purple-acc);
-	border-radius: var(--outer-radius);
-`
+import "./floater.css"
+import { IoFastFoodOutline } from "react-icons/io5"
+IoFastFoodOutline
 
-const Floater = ({ onClick }) => {
+const handleFabClick = () => {
+	console.log("FAB Clicked!")
+}
+const Floater = () => {
 	return (
-		<StyledFab color="primary" aria-label="add" onClick={onClick}>
-			<AddIcon />
-		</StyledFab>
+		<Link to="/menu">
+			<button className="floater">
+				<IoFastFoodOutline
+					className="floater-logo"
+					onClick={handleFabClick}
+				/>
+			</button>
+		</Link>
 	)
 }
 
