@@ -37,25 +37,25 @@ const Footer = () => {
 				<div className="socialmedia">
 					<a aria-label="Instagram" href="https://www.instagram.com">
 						<div className="socialmedialogos">
-							<GrInstagram />
+							<GrInstagram className="socialmedialogos-svg" />
 						</div>
 					</a>
 					<a aria-label="Facebook" href="https://www.facebook.com">
 						<div className="socialmedialogos">
-							<BsFacebook />
+							<BsFacebook className="socialmedialogos-svg" />
 						</div>
 					</a>
 
 					<a aria-label="Pinterest" href="https://www.pinterest.com">
 						<div className="socialmedialogos">
-							<FaPinterest />
+							<FaPinterest className="socialmedialogos-svg" />
 						</div>
 					</a>
 				</div>
 				<div className="logoburger">
 					<NavLink to="/">
 						<img
-							className="miniburger"
+							className="miniburger-footer"
 							src={miniburger}
 							alt="Miniburger Logo"
 						/>
