@@ -1,16 +1,16 @@
 .floater {
 	position: fixed;
 	bottom: 50%;
-	right: 1px;
-	width: 7em;
-	height: 7em;
+	right: 0px;
+	width: 4em;
+	height: 4em;
 	background-color: var(--purple-acc);
-	border-radius: var(--outer-radius);
+	border-radius: var(--outer-radius) 0 0 var(--outer-radius);
 	z-index: 1000;
 }
 
 .floater-logo {
-	width: 3.5em;
+	width: 2.2em;
 	height: auto;
 }
 
@@ -25,6 +25,11 @@
 		border-radius: var(--outer-radius);
 		z-index: 10000;
 		transition: 0.5s ease-in-out;
+	}
+
+	floater-logo {
+		width: 3.5em;
+		height: auto;
 	}
 
 	.floater:hover {
