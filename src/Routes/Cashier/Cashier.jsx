@@ -16,7 +16,7 @@ const Cashier = () => {
 				<div className="changes">
 					<p>"eventuella ändringar"</p>
 				</div>
-				<div className="send_btn"><button> Skicka till köket </button></div>
+				<div className="send_btn"><button> SKICKA TILL KÖKET </button></div>
 			</div>
 		</div>
 		</section>
