@@ -1,0 +1,35 @@
+.head_confirmation {
+	color: var(--light-brown-acc);
+	margin-top: 1em;
+}
+
+.confirmation_container {
+	padding-top: 1em;
+	text-align: center;
+	margin: 1em;
+}
+
+.order_confirmation_info {
+	border: 1px solid var(--dark-green-acc);
+	box-shadow: var(--box-shadow);
+	border-radius: var(--outer-radius);
+	padding: 1em;
+	margin: 0.5em 2em 0.55em 2em;
+}
+
+.head_your_order {
+	text-align: left;
+	color: var(--light-brown-acc);
+	margin-top: 2em;
+}
+
+
+.open_order_text, p {
+	font-size: clamp(16px, 5vw, 24px);
+	padding-top: 0.5em;
+}
+
+.open_order_text, h2 {
+	font-size: clamp(24px, 5vw, 32px);
+
+}
