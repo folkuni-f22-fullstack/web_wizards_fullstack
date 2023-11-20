@@ -18,7 +18,7 @@ const Confirmation = () => {
 					<h3>Nu är din order skickad till restaurangen.</h3>
 					
 					<p> Vill du ändra något i din beställning? </p>
-						<p>Passa på nu innan beställningen blir låst.</p>
+					<p>Passa på nu innan beställningen blir låst.</p>
 				</div>
 				{/* <div className="locked_order_text">
 					<h3>Nu är din beställning låst och maten tillagas</h3>
