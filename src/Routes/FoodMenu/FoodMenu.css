@@ -32,7 +32,7 @@
 	color: var(--dark-green-acc);
 }
 
-.menu-card >img{
+.menu-card > img{
 grid-area: 1/ 1/ 8/ span 2;
 width: 80%;
 }

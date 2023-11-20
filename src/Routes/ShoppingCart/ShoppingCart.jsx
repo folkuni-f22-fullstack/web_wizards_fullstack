@@ -1,6 +1,8 @@
 import "./Shoppingcart.css"
 import { useRecoilValue } from "recoil"
 import { cartItemsAtom } from "../../data/atom"
+import { IoMdAdd } from "react-icons/io"
+import { IoRemoveOutline, IoTrashSharp } from "react-icons/io5"
 
 
 const ShoppingCart = () => {
@@ -9,21 +11,29 @@ const ShoppingCart = () => {
 		<>
 		<section className="shopping-cart">
 		<h1>Varukorg</h1>
-			{/* <div className="order-card-container"> */}
-				<div className="card-container">
-					<div>bilden</div>
-					<div>Namnet</div>
-					<div>description</div>
-					<div>korg</div>
-					<div className="button-container">
-						<button>-</button>
-						<p>1</p>
-						<button>+</button>
-					</div>
-					<p>Ändra/ta bort i din beställning:</p>
-					<input />
+		<li className="card-container order-menu">
+				<div className="dumpster">
+					<IoTrashSharp  className="trashbin"/>
 				</div>
-			{/* </div> */}
+					<div className="image-container">
+				<p>bilden</p>
+					</div>
+					<div className="name-container">
+						<h3>Namnet</h3>
+					</div>
+					<p className="description">description detta är texten</p>
+					<div className="button-container">
+						<IoRemoveOutline className="remove-food"/>
+						<p>1</p>
+						<IoMdAdd className="add-food" />
+					</div>
+					<p className="price">109 :-</p>
+					<div className="input">
+						<p>Ändra/ta bort i din beställning:</p>
+						<input className="input change"/>
+					</div>
+				</li>
+				
 				<div className="sum-order-container">
 					<p>Totalt: </p> 
 					<p></p>
