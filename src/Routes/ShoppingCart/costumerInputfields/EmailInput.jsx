@@ -17,7 +17,7 @@ const EmailInput = () => {
 				type="e-mail"
 				value={costumer.email}
 				id="email"
-				placeholder="E-post"
+				placeholder="*E-post"
 				onChange={handleEmailChange}
 				required />
 		</div>

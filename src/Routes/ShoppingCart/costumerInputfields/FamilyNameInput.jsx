@@ -18,7 +18,7 @@ const FamilyNameInput = () => {
 						type="text"
 						value={costumer.familyName}
 						id="family-name"
-						placeholder="Efternamn"
+						placeholder="*Efternamn"
 						onChange={handleNameChange}
 						required />
 				</div>

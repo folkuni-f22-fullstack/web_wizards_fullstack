@@ -22,7 +22,7 @@ const FirstNameInput = () => {
 				type="text"
 				value={costumer.firstName}
 				id="first-name"
-				placeholder="Förnamn"
+				placeholder="*Förnamn"
 				onChange={handleNameChange}
 				required />
 		</div>

@@ -16,7 +16,7 @@ const PhoneInput = () => {
 			type="tel"
 			value={costumer.phone}
 			id="phone"
-			placeholder="Telefonnummer"
+			placeholder="*Telefonnummer"
 			onChange={handlePhoneChange}
 			required />
 	</div>
