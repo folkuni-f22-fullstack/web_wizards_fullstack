@@ -23,7 +23,7 @@ const router = createBrowserRouter([
 			},
 			{
 				path: "/cashier",
-						element: <Cashier />,
+				element: <Cashier />,
 			},
 			{
 				path: "/chef",
