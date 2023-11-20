@@ -3,17 +3,10 @@ import splashBurger from "../Assets/Splashburger.svg"
 import tomatoes from "../Assets/tomatoes_hand.avif"
 import cows from "../Assets/Kossor.svg"
 import { IoFastFoodOutline } from "react-icons/io5"
-// import Floater from "../Components/Floater"
 import "./startpage.css"
-
-// const handleFabClick = () => {
-// 	console.log("FAB Clicked!")
-// }
+import { NavLink } from "react-router-dom"
 
 const Startpage = () => {
-
-		
-
 	return (
 		<section className="startingpage">
 			<div className="hero-img-container">
@@ -27,11 +20,12 @@ const Startpage = () => {
 						Klimatsmarta burgare för din skull. Beställ enkelt
 						online och hämta på plats.
 					</p>
-					<button className="floater-btn">
-						BESTÄLL <IoFastFoodOutline className="order_icon" />
-					</button>
+					<NavLink to="/menu">
+						<button className="floater-btn">
+							BESTÄLL <IoFastFoodOutline className="order_icon" />
+						</button>
+					</NavLink>
 				</div>
-				{/* <Floater onClick={handleFabClick} /> */}
 				<h2>NYHET!</h2>
 				<div>
 					<p className="news text_padding">
