@@ -35,7 +35,7 @@
 		height: 7em;
 		background-color: var(--purple-acc);
 		border-radius: var(--outer-radius);
-		z-index: 10000;
+		z-index: 1000;
 		transition: 0.5s ease-in-out;
 	}
 
