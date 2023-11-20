@@ -1,8 +1,11 @@
 import "./Shoppingcart.css"
 
+
 const ShoppingCart = () => {
 	return (
-		<></>
+		<>
+		
+		</>
 	)
 }
 
