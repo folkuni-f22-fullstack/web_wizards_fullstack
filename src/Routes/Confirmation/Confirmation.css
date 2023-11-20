@@ -16,13 +16,13 @@
 	box-shadow: var(--box-shadow);
 	border-radius: var(--outer-radius);
 	padding: 2.5em;
-	margin: 0.5em 2em 0.55em 2em;
+	min-width: 300px;
 }
 
 .confirmation_container .head_your_order {
 	text-align: left;
 	color: var(--light-brown-acc);
-	margin-top: 2em;
+	margin: 1em 0.5em 0em 0.5em;
 }
 
 
