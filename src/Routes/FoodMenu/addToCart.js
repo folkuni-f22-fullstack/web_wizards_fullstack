@@ -1,7 +1,7 @@
 import { useRecoilState } from 'recoil'
 import { cartItemsAtom } from '../../data/atom'
 
-// TODO fixa så att antal uppdateras när man lägger till fler, typ uppdatera amount först och räkna sedan itemTotal
+
 
 const useCart = () => {
 
@@ -15,7 +15,7 @@ const [cart, setCart] = useRecoilState(cartItemsAtom)
 			name: dish.name,
 			description: dish.description,
 			price: dish.price,
-			itemTotal: dish.price
+			priceTotal: dish.price,
 		} 
 
 			let dishInCart = cart.find(dish => dish.name === cartItem.name)
@@ -25,7 +25,8 @@ const [cart, setCart] = useRecoilState(cartItemsAtom)
 					if(dish.name === cartItem.name){
 						return{
 							...dish,
-							itemTotal: (2*dish.price) * dish.amount
+							priceTotal: (2*dish.price) * dish.amount,
+							amountTotal:dish.amount+1
 						}
 					}else{
 						return dish
