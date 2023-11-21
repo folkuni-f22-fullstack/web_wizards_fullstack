@@ -16,7 +16,7 @@ const Floater = () => {
 					className="floater-logo"
 					onClick={handleFabClick}
 				/>
-				<p className="floater-text">Beställ Här</p>
+				<p className="floater-text">Beställ här</p>
 			</button>
 		</Link>
 	)
