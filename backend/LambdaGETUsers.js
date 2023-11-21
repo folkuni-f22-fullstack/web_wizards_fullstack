@@ -2,18 +2,16 @@ import { DynamoDBClient } from "@aws-sdk/client-dynamodb"
 import {
 	DynamoDBDocumentClient,
 	ScanCommand,
-	PutCommand,
 	GetCommand,
-	DeleteCommand,
 } from "@aws-sdk/lib-dynamodb"
 
 const client = new DynamoDBClient({})
 
 const dynamo = DynamoDBDocumentClient.from(client)
 
-const tableName = "MenuTable"
+const tableName = "UsersTable"
 
-export const handler = async (event, context) => {
+export const handler = async (event) => {
 	let body
 	let statusCode = 200
 	const headers = {
@@ -22,7 +20,7 @@ export const handler = async (event, context) => {
 
 	try {
 		switch (event.routeKey) {
-			case "GET /webwizards/menu/items/{id}":
+			case "GET /webwizards/users/{id}":
 				body = await dynamo.send(
 					new GetCommand({
 						TableName: tableName,
@@ -33,26 +31,12 @@ export const handler = async (event, context) => {
 				)
 				body = body.Item
 				break
-			case "GET /webwizards/menu/items":
+			case "GET /webwizards/users":
 				body = await dynamo.send(
 					new ScanCommand({ TableName: tableName })
 				)
 				body = body.Items
 				break
-			// case "PUT /webwizards/menu/items":
-			// 	let requestJSON = JSON.parse(event.body)
-			// 	await dynamo.send(
-			// 		new PutCommand({
-			// 			TableName: tableName,
-			// 			Item: {
-			// 				id: requestJSON.id,
-			// 				price: requestJSON.price,
-			// 				name: requestJSON.name,
-			// 			},
-			// 		})
-			// 	)
-			// 	body = `Put item ${requestJSON.id}`
-			// 	break
 			default:
 				throw new Error(`Unsupported route: "${event.routeKey}"`)
 		}
