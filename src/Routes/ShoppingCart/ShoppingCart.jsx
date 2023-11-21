@@ -12,22 +12,22 @@ const ShoppingCart = () => {
 		<section className="shopping-cart">
 		<h1>Varukorg</h1>
 		<li className="card-container order-menu">
-				<div className="dumpster">
-					<IoTrashSharp  className="trashbin"/>
-				</div>
 					<div className="image-container">
 				<p>bilden</p>
 					</div>
 					<div className="name-container">
 						<h3>Namnet</h3>
 					</div>
-					<p className="description">description detta är texten</p>
+					<p className="description-text">description detta är texten</p>
 					<div className="button-container">
 						<IoRemoveOutline className="remove-food"/>
 						<p>1</p>
 						<IoMdAdd className="add-food" />
 					</div>
-					<p className="price">109 :-</p>
+					<p className="food-price">109 :-</p>
+					<div className="dumpster">
+						<IoTrashSharp  className="trashbin"/>
+					</div>
 					<div className="input">
 						<p>Ändra/ta bort i din beställning:</p>
 						<input className="input change"/>
