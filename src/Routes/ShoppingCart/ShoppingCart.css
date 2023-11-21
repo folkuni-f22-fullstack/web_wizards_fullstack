@@ -28,7 +28,7 @@
 	font-size: 1.7em;
 	grid-area: 1 / 8 / 1; 
 	align-self: flex-end;
-	margin-bottom: 0.5em; 
+	/* margin-bottom: 0.5em;  */
 }
 
 
@@ -137,23 +137,23 @@
 	}
 
 	.dumpster {
-		grid-area: 1/ 8 / 2 ;
-		margin-left: 1em; 
+		grid-area: 1/ 8 / 5 ;
+		margin: 0em 0em 0.2em 1em;
 	}
 
 	.button-container {
-		grid-area: 4/ 7 / 8 ;
+		grid-area: 4/ 6 / 8 ;
 		max-height: 2em;
 		margin: 2em 0em 0em 1em;  
 	}
 
 	.food-price {
-		grid-area: 3 / 8 / 8;
-		margin: 1.5em 0em 0em 2em; 
+		grid-area: 3 / 7 / 8;
+		margin: 1.5em 0em 0em 3em; 
 	}
 
 	.input {
-		grid-area: 4 / 3 / 5 / span 4;
+		grid-area: 4 / 3 / 5 / span 4; 
 		width: 85%;
 		margin-top: 0.4em; 
 	}
