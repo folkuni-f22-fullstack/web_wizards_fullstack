@@ -17,6 +17,7 @@
 .order-menu {
 	grid-template-rows: repeat(8, 1fr);
 	height: 20em;
+	min-width: 16em;
 	margin: 0.35em 0;
 	text-align: left;
 	background-color: var(--menu-card-color);
@@ -104,11 +105,12 @@
 	
 }
 
-.order-section{
+.order-form-section{
 	margin: 1em auto;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	width: 100%;
 	}
 	
 	.costumer-form{
@@ -116,28 +118,33 @@
 		flex-direction: column;
 		align-items: center;
 		margin-top: 1em;
+		width: 100%;
 	}
 	
 	.costumer-form h3{
 		align-self: flex-start;
-		padding-left:1em;
+		padding-left:8%;
 	}
 	
 	.card-container.costumer-info-container{
 		display: flex;
 		flex-direction: column;
 		align-items: center;
-		justify-content: flex-start;
-		width: 15em;
+		min-width: 16em;
+		width: 100%;
 		margin: 0.5em 0;
-		padding: 1em;
-		
+		padding: 1em;		
 	}
 	
 	.costumer-info-container div:nth-last-child(-n+3){
 		margin-top: 1em;
 	
 	}
+	
+	.card-container.costumer-info-container  * {
+		width: 100%;
+	}
+
 	
 	.payment-container label{
 		align-self: flex-start;
@@ -152,13 +159,24 @@
 		font-weight: 400;
 		border-bottom: 1px solid var(--text-dark);
 		padding-bottom: 1em;
-		margin: 0.2em 0 1em 1.5em;
+		margin: 0.2em 0 1em;
 		font-size: 14px;
 	}
 	
 	#payment-input-container{
 		margin: 0;
 	}
+
+	#payment-input-container > label{
+		display: flex;
+		flex-direction: column;
+		align-items:flex-start
+	}
+
+	#payment-input-container input {
+		width: fit-content;
+	}
+
 
 
 @media screen and (min-width: 550px) {
@@ -184,6 +202,35 @@
 	}
 } 
 
+
+/* tablet */
+@media screen and (min-width: 768px) and (max-width: 991px) {
+	.shopping-cart .sum-order-container {
+		margin-left: 50%; 
+		width: 35%; 
+	}
+}
+
+/* desktop */
+@media screen and (min-width: 992px) and (max-width: 1023px) {
+
+	.card-container.costumer-info-container  * {
+		width: 95%;	
+	}
+
+	.card-container.costumer-info-container p{
+width: 100%;
+	}
+	.card-container.costumer-info-container{
+		align-items: flex-start;
+	}
+	.shopping-cart .sum-order-container {
+		margin-left: 50%; 
+		width: 35%; 
+	}
+}
+
+/* large desktop */
 @media screen and (min-width: 1024px)  {
 
 	.order-menu {
@@ -219,4 +266,17 @@
 		margin-left: 50%; 
 		width: 35%; 
 	}
+
+	
+	.card-container.costumer-info-container  * {
+		width: 90%;
+	}
+
+	.card-container.costumer-info-container{
+		align-items: flex-start;
+	}
+
+	.card-container.costumer-info-container p{
+		width: 100%;
+			}
 }
