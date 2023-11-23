@@ -1,18 +1,24 @@
 import { useRecoilState } from "recoil"
-import { costumerAtom } from "../../../data/atom"
+import { costumerAtom, errorMessageAtom  } from "../../../data/atom"
+import { isValidName } from "../validation.js"
 
 
 const FirstNameInput = () => {
-
-
-	const [costumer, setCostumer] = useRecoilState(costumerAtom)
-
-
+const [costumer, setCostumer] = useRecoilState(costumerAtom)
+const [errorMessage, setErrorMessage] = useRecoilState(errorMessageAtom)
 
 	const handleNameChange = (event) => {
-		setCostumer({...costumer, firstName: event.target.value})
-	}
-
+		const firstName = event.target.value;
+		const [isValid, error] = isValidName(firstName)
+        if(isValid) {
+            setErrorMessage(""); 
+            setCostumer({...costumer, firstName: firstName})
+        } else {
+            setErrorMessage(error)
+        }
+    }
+	
+	// setCostumer({...costumer, firstName: event.target.value})
 	return(
 		
 		<div className="">
@@ -25,6 +31,7 @@ const FirstNameInput = () => {
 				placeholder="*Förnamn"
 				onChange={handleNameChange}
 				required />
+				<div className="error-message">{errorMessage}</div>
 		</div>
 			
 	)

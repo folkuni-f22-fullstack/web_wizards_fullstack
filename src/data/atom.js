@@ -53,3 +53,8 @@ export const costumerAtom = atom ({
 		email: '',
 	}
 })
+
+export const errorMessageAtom = atom({
+    key: 'error', 
+    default: ''
+}); 
