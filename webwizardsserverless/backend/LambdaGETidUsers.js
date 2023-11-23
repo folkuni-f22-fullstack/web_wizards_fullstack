@@ -1,45 +1,45 @@
-import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
-import { DynamoDBDocumentClient, GetCommand } from "@aws-sdk/lib-dynamodb";
+const { DynamoDBClient } = require("@aws-sdk/client-dynamodb")
+const { DynamoDBDocumentClient, GetCommand } = require("@aws-sdk/lib-dynamodb")
 
-const client = new DynamoDBClient({});
+const client = new DynamoDBClient({})
 
-const dynamo = DynamoDBDocumentClient.from(client);
+const dynamo = DynamoDBDocumentClient.from(client)
 
-const tableName = "UsersTable";
+const tableName = "UsersTable"
 
 export const handler = async (event) => {
-  let body;
-  let statusCode = 200;
-  const headers = {
-    "Content-Type": "application/json",
-  };
+	let body
+	let statusCode = 200
+	const headers = {
+		"Content-Type": "application/json",
+	}
 
-  try {
-    switch (event.routeKey) {
-      case "GET /webwizards/users/{id}":
-        body = await dynamo.send(
-          new GetCommand({
-            TableName: tableName,
-            Key: {
-              id: event.pathParameters.id,
-            },
-          })
-        );
-        body = body.Item;
-        break;
-      default:
-        throw new Error(`Unsupported route: "${event.routeKey}"`);
-    }
-  } catch (err) {
-    statusCode = 400;
-    body = err.message;
-  } finally {
-    body = JSON.stringify(body);
-  }
+	try {
+		switch (event.routeKey) {
+			case "GET /webwizards/users/{id}":
+				body = await dynamo.send(
+					new GetCommand({
+						TableName: tableName,
+						Key: {
+							id: event.pathParameters.id,
+						},
+					})
+				)
+				body = body.Item
+				break
+			default:
+				throw new Error(`Unsupported route: "${event.routeKey}"`)
+		}
+	} catch (err) {
+		statusCode = 400
+		body = err.message
+	} finally {
+		body = JSON.stringify(body)
+	}
 
-  return {
-    statusCode,
-    body,
-    headers,
-  };
-};
+	return {
+		statusCode,
+		body,
+		headers,
+	}
+}
