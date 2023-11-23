@@ -7,7 +7,7 @@ const dynamo = DynamoDBDocumentClient.from(client)
 
 const tableName = "MenuTable"
 
-export const handler = async (event) => {
+module.exports.handler = async (event) => {
 	let body
 	let statusCode = 200
 	const headers = {

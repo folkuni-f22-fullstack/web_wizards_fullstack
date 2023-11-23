@@ -1,8 +1,5 @@
 import { DynamoDBClient } from "@aws-sdk/client-dynamodb"
-import {
-	DynamoDBDocumentClient,
-	PutCommand
-} from "@aws-sdk/lib-dynamodb"
+import { DynamoDBDocumentClient, PutCommand } from "@aws-sdk/lib-dynamodb"
 
 const client = new DynamoDBClient({})
 
@@ -10,7 +7,7 @@ const dynamo = DynamoDBDocumentClient.from(client)
 
 const tableName = "MenuTable"
 
-export const handler = async (event) => {
+module.exports.handler = async (event) => {
 	let body
 	let statusCode = 200
 	const headers = {
@@ -22,7 +19,7 @@ export const handler = async (event) => {
 			case "PUT /webwizards/menu/items":
 				let requestJSON = JSON.parse(event.body)
 				await dynamo.send(
-					new PutCommand({ 
+					new PutCommand({
 						TableName: tableName,
 						Item: {
 							id: requestJSON.id,
