@@ -21,7 +21,7 @@ module.exports.handler = async (event) => {
 					new GetCommand({
 						TableName: tableName,
 						Key: {
-							id: event.pathParameters.id,
+							id: Number(event.pathParameters.id),
 						},
 					})
 				)
