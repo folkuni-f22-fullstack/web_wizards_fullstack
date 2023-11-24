@@ -1,0 +1,257 @@
+service: webwizardsserverless
+frameworkVersion: '3'
+configValidationMode: error
+
+plugins:
+  -serverless-webpack
+
+package: 
+    individually: true 
+
+provider:
+  name: aws
+  runtime: nodejs20.x
+  profile: David 
+  region: eu-north-1
+  iam: 
+    role: arn:aws:iam::497017796861:role/service-role/web-wizards
+
+
+functions:
+  lambdaGetMenu:
+    handler: backend/LambdaGETMenu.handler
+    events:
+      - httpApi:
+          path: /webwizards/menu/items
+          method: GET
+
+  lambdaGetidMenu:
+    handler: backend/LambdaGETidMenu.handler
+    events:
+      - httpApi:
+          path: /webwizards/menu/items/{id}
+          method: GET
+
+  lambdaPUTMenu:
+    handler: backend/LambdaPUTMenu.handler
+    events:
+      - httpApi:
+          path: /webwizards/menu/items
+          method: PUT
+
+  lambdaGetUsers:
+    handler: backend/LambdaGETUsers.handler
+    events:
+      - httpApi:
+          path: /webwizards/users
+          method: GET
+
+  lambdaGetidUsers:
+    handler: backend/LambdaGETidUsers.handler
+    events:
+      - httpApi:
+          path: /webwizards/users/{id}
+          method: GET
+
+  lambdaGetOrders:
+    handler: backend/LambdaGETOrders.handler
+    events:
+      - httpApi:
+          path: /webwizards/orders/items
+          method: GET
+
+  lambdaPostOrders:
+    handler: backend/LambdaPOSTOrders.handler
+    events:
+      - httpApi:
+          path: /webwizards/orders/items
+          method: POST
+
+  lambdaGetIdOrders:
+    handler: backend/LambdaGETidOrders.handler
+    events:
+      - httpApi:
+          path: /webwizards/orders/items/{ordersId}
+          method: GET
+
+  lambdaPutOrders:
+    handler: backend/LambdaPUTOrders.handler
+    events:
+      - httpApi:
+          path: /webwizards/orders/items/{ordersId}
+          method: PUT
+
+  lambdaDeleteOrders:
+    handler: backend/LambdaDELETEOrders.handler
+    events:
+      - httpApi:
+          path: /webwizards/orders/items/{ordersId}
+          method: DELETE
+      
+Resources:
+  # Bots Table
+  botsTable:
+    Type: AWS::DynamoDB::Table
+    DeletionPolicy: Retain
+    Properties:
+      TableName: AizoBotsTable
+      AttributeDefinitions:
+        - AttributeName: "pk"
+          AttributeType: "S"
+        - AttributeName: "sk"
+          AttributeType: "S"
+        - AttributeName: "orderId"
+          AttributeType: "S"
+      BillingMode: PAY_PER_REQUEST
+      PointInTimeRecoverySpecification:
+        PointInTimeRecoveryEnabled: false
+      KeySchema:
+        - AttributeName: "pk"
+          KeyType: HASH
+        - AttributeName: "sk"
+          KeyType: RANGE
+      GlobalSecondaryIndexes:
+        - IndexName: orderIndex
+          KeySchema:
+            - AttributeName: "orderId"
+              KeyType: HASH
+          Projection:
+            ProjectionType: "ALL"
+
+#  resources: 
+#       Resources: 
+#         MenuTable:
+#                  Type: AWS::DynamoDB::Table 
+#                   Properties: 
+#                        TableName: MenuTable
+#                        AttributeDefinitions: 
+#                              -AttributeName: id    
+#                                AttributeType: S        
+#                               -AttributeName: menu    
+#                                AttributeType: M
+#                                AttributeDefinitions:
+#                                 -AttributeName: drinks    
+#                                 AttributeType: L
+#                                 AttributeDefinitions:
+#                                   -AttributeName: id    
+#                                   AttributeType: N   
+#                                   -AttributeName: image    
+#                                   AttributeType: B
+#                                   -AttributeName: name    
+#                                   AttributeType: S
+#                                   -AttributeName: price    
+#                                   AttributeType: N
+#                                 AttributeDefinitions:
+#                                 -AttributeName: food    
+#                                 AttributeType: L
+#                                 AttributeDefinitions:
+#                                   -AttributeName: id    
+#                                   AttributeType: N
+#                                   -AttributeName: description    
+#                                   AttributeType: S   
+#                                   -AttributeName: image    
+#                                   AttributeType: B
+#                                   -AttributeName: name    
+#                                   AttributeType: S
+#                                   -AttributeName: price    
+#                                   AttributeType: N
+#                                 AttributeDefinitions:
+#                                 -AttributeName: Kids food    
+#                                 AttributeType: L
+#                                 AttributeDefinitions:
+#                                   -AttributeName: id    
+#                                   AttributeType: N
+#                                   -AttributeName: description    
+#                                   AttributeType: S   
+#                                   -AttributeName: image    
+#                                   AttributeType: B
+#                                   -AttributeName: name    
+#                                   AttributeType: S
+#                                   -AttributeName: price    
+#                                   AttributeType: N
+#                                 AttributeDefinitions:
+#                                 -AttributeName: sides    
+#                                 AttributeType: L
+#                                 AttributeDefinitions:
+#                                   -AttributeName: id    
+#                                   AttributeType: N
+#                                   -AttributeName: description    
+#                                   AttributeType: S   
+#                                   -AttributeName: image    
+#                                   AttributeType: B
+#                                   -AttributeName: name    
+#                                   AttributeType: S
+#                                   -AttributeName: price    
+#                                   AttributeType: N
+#                                KeySchema: 
+#                             -AttributeName: id  
+#                               KeyType: HASH
+#                              -AttributeName:        
+#                               KeyType: RANGE        
+#                        BillingMode: PAY_PER_REQUEST
+
+#         OrdersTable:
+#                  Type: AWS::DynamoDB::Table 
+#                   Properties: 
+#                        TableName: OrdersTable
+#                        AttributeDefinitions: 
+#                              -AttributeName: ordersId    
+#                                AttributeType: S        
+#                               -AttributeName: costumerId     
+#                                AttributeType: S
+#                               -AttributeName: costumerInfo     
+#                                AttributeType: M
+#                               AttributeDefinitions:  
+#                                 -AttributeName: email     
+#                                 AttributeType: S 
+#                                 -AttributeName: familyname    
+#                                 AttributeType: S 
+#                                 -AttributeName: firstname     
+#                                 AttributeType: S 
+#                                 -AttributeName: phone     
+#                                 AttributeType: N
+#                               -AttributeName: orderContent     
+#                                AttributeType: L
+#                               AttributeDefinitions:
+#                                 -AttributeName: amount     
+#                                 AttributeType: N
+#                                 -AttributeName: description     
+#                                 AttributeType: S
+#                                 -AttributeName: id     
+#                                 AttributeType: N 
+#                                 -AttributeName: message     
+#                                 AttributeType: S
+#                                 -AttributeName: name     
+#                                 AttributeType: S
+#                                 -AttributeName: price     
+#                                 AttributeType: N        
+#                               -AttributeName: orderOpen     
+#                                AttributeType: BOOL                                      
+#                                KeySchema: 
+#                             -AttributeName: ordersId  
+#                               KeyType: HASH   
+#                        BillingMode: PAY_PER_REQUEST
+#           UsersTable:
+#                  Type: AWS::DynamoDB::Table 
+#                   Properties: 
+#                        TableName: UsersTable
+#                        AttributeDefinitions: 
+#                              -AttributeName: id    
+#                                 AttributeType: S
+#                              -AttributeName: username    
+#                                 AttributeType: S
+#                              -AttributeName: password    
+#                                 AttributeType: S                                 
+#                                KeySchema: 
+#                             -AttributeName: id  
+#                               KeyType: HASH       
+#                        BillingMode: PAY_PER_REQUEST     
+#     WebWizardsBucketBackend:
+#       Type: AWS::S3::Bucket
+#       Properties:
+#         BucketName: web-wizards-bucket-backend
+    
+#     WebWizardsBucketWebpage:
+#       Type: AWS::S3::Bucket
+#       Properties:
+#         BucketName: web-wizards-bucket-webpage
