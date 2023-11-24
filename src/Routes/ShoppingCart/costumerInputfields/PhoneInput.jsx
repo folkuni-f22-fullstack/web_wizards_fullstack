@@ -19,6 +19,7 @@ const PhoneInput = () => {
 			placeholder="*Telefonnummer"
 			onChange={handlePhoneChange}
 			required />
+		<div className="order-error-message-container"></div>	
 	</div>
 
 	)

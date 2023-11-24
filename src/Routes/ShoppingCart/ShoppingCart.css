@@ -5,19 +5,22 @@
 	align-items: center;
 	margin: 1em; 
 	width: 100%; 
+	box-shadow: var(--box-shadow);
+	border: 1px solid var(--dark-green-acc);
+	padding: 2em 0;
+	border-radius: var(--outer-radius);
 }
 
-.shopping-cart h1 {
+.cart-h1 {
 	color: var(--light-brown-acc); 
 	margin-top: 0.8em; 
 	margin-bottom: 0.2em; 
 }
 
-
-
 .order-menu {
 	grid-template-rows: repeat(8, 1fr);
 	min-width: 16em;
+	width: 100%;
 	margin: 0.35em 0;
 	text-align: left;
 	background-color: var(--menu-card-color);
@@ -144,7 +147,10 @@
 	.card-container.costumer-info-container  * {
 		width: 100%;
 	}
+	
+	.order-error-message-container{
 
+	}
 	
 	.payment-container label{
 		font-weight: 700;
@@ -177,6 +183,10 @@
 		grid-template-columns: 2em 1fr 1fr;
 		grid-template-rows: 2fr 2fr 1fr 1fr;
 		align-items:flex-start;
+	}
+
+	.order-submit-button{
+		font-size: 18px;
 	}
 
 
