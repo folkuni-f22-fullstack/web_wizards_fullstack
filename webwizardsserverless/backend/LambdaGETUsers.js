@@ -1,40 +1,31 @@
-const { DynamoDBClient } = require("@aws-sdk/client-dynamodb")
-const { DynamoDBDocumentClient, ScanCommand } = require("@aws-sdk/lib-dynamodb")
+import { DynamoDB } from "@aws-sdk/client-dynamodb"
+import { DynamoDBDocument } from "@aws-sdk/lib-dynamodb"
 
-const client = new DynamoDBClient({})
+const client = new DynamoDB({})
+const db = DynamoDBDocument.from(client)
 
-const dynamo = DynamoDBDocumentClient.from(client)
-
-const tableName = "UsersTable"
-
-module.exports.handler = async (event) => {
-	let body
-	let statusCode = 200
-	const headers = {
-		"Content-Type": "application/json",
-	}
-
+module.exports.handler = async () => {
+	const tableName = "UserTable"
 	try {
-		switch (event.routeKey) {
-			case "GET /webwizards/users":
-				body = await dynamo.send(
-					new ScanCommand({ TableName: tableName })
-				)
-				body = body.Items
-				break
-			default:
-				throw new Error(`Unsupported route: "${event.routeKey}"`)
+		const { Items } = await db.query({
+			TableName: tableName,
+			// IndexName: "sk",
+			KeyConditionExpression: "pk = :pk",
+			ExpressionAttributeValues: {
+				":pk": "users",
+			},
+		})
+
+		return {
+			statusCode: 200,
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify({ items: Items }),
 		}
 	} catch (err) {
-		statusCode = 400
-		body = err.message
-	} finally {
-		body = JSON.stringify(body)
-	}
-
-	return {
-		statusCode,
-		body,
-		headers,
+		return {
+			statusCode: err.statusCode,
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify({ message: err.message }),
+		}
 	}
 }
