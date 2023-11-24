@@ -1,5 +1,5 @@
-import CostumerForm from "./CostumerForm"
-import "./Shoppingcart.css"
+import CostumerForm from "../../utils/CostumerForm"
+import "./ShoppingCart.css"
 import { useRecoilValue } from "recoil"
 import { cartItemsAtom } from "../../data/atom"
 import { IoMdAdd } from "react-icons/io"

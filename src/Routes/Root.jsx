@@ -5,7 +5,7 @@ import Floater from "../Components/Floater"
 
 import { isLoggedInAtom } from "../data/atom"
 import { useRecoilState } from "recoil"
-import LogOut from "./Login/Logout"
+import LogOut from "../utils/Logout"
 
 const Root = () => {
 	const [isLoggedIn, setIsLoggedIn] = useRecoilState(isLoggedInAtom)

@@ -1,4 +1,4 @@
-import { isLoggedInAtom, isLoggingOutAtom} from "../../data/atom";
+import { isLoggedInAtom, isLoggingOutAtom} from "../data/atom";
 import { useRecoilState } from "recoil";
 import { useEffect } from "react";
 

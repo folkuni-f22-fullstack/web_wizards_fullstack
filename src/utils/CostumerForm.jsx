@@ -2,7 +2,6 @@ import EmailInput from "./costumerInputfields/EmailInput"
 import FamilyNameInput from "./costumerInputfields/FamilyNameInput"
 import FirstNameInput from "./costumerInputfields/FirstNameInput"
 import PhoneInput from "./costumerInputfields/PhoneInput"
-import './ShoppingCart.css'
 import PaymentInput from "./costumerInputfields/PaymentInput"
 
 

@@ -2,9 +2,8 @@ import "./login.css"
 import { useState } from "react"
 import { useRecoilState } from "recoil"
 import { Navigate } from "react-router-dom"
-import { NameInput, PassInput, IsMatching } from "./handleLogin"
+import { NameInput, PassInput, IsMatching } from "../../utils/handleLogin"
 import { uNameAtom, uPassAtom, formIsDirtyAtom, isLoggedInAtom, isDisabledAtom } from "../../data/atom"
-import KeepLoggedIn from "../Login/keepLoggedIn";
 
 
 const Login = () => {

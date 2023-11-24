@@ -1,4 +1,4 @@
-import { uNameAtom, uPassAtom, isLoggedInAtom, isLoggingOutAtom, isDisabledAtom} from "../../data/atom";
+import { uNameAtom, uPassAtom, isLoggedInAtom, isLoggingOutAtom, isDisabledAtom} from "../data/atom";
 import { useRecoilState } from "recoil";
 import { NavLink } from "react-router-dom";
 
