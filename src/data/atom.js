@@ -56,5 +56,26 @@ export const costumerAtom = atom ({
 
 export const errorMessageAtom = atom({
     key: 'error', 
-    default: ''
+    default: {
+		firstName: '', 
+		familyName: '', 
+		phone: '', 
+		email: '', 
+	}
 }); 
+
+export const isValidAtom = atom({
+	key: 'isValidKey',
+	default: null,
+})
+
+export const isValidPhoneAtom = atom({
+	key: 'isValidPhone',
+	default: null,
+})
+
+export const isValidEmailAtom = atom({
+	key: 'isValidEmail', 
+	default: null, 
+})
+
