@@ -16,7 +16,6 @@ provider:
   iam: 
     role: arn:aws:iam::497017796861:role/service-role/web-wizards
 
-
 functions:
   lambdaGetMenu:
     handler: backend/LambdaGETMenu.handler
@@ -87,165 +86,59 @@ functions:
       - httpApi:
           path: /webwizards/orders/items/{ordersId}
           method: DELETE
-      
-Resources:
-  # Bots Table
-  botsTable:
-    Type: AWS::DynamoDB::Table
-    DeletionPolicy: Retain
-    Properties:
-      TableName: AizoBotsTable
-      AttributeDefinitions:
-        - AttributeName: "pk"
-          AttributeType: "S"
-        - AttributeName: "sk"
-          AttributeType: "S"
-        - AttributeName: "orderId"
-          AttributeType: "S"
-      BillingMode: PAY_PER_REQUEST
-      PointInTimeRecoverySpecification:
-        PointInTimeRecoveryEnabled: false
-      KeySchema:
-        - AttributeName: "pk"
-          KeyType: HASH
-        - AttributeName: "sk"
-          KeyType: RANGE
-      GlobalSecondaryIndexes:
-        - IndexName: orderIndex
-          KeySchema:
-            - AttributeName: "orderId"
-              KeyType: HASH
-          Projection:
-            ProjectionType: "ALL"
 
-#  resources: 
-#       Resources: 
-#         MenuTable:
-#                  Type: AWS::DynamoDB::Table 
-#                   Properties: 
-#                        TableName: MenuTable
-#                        AttributeDefinitions: 
-#                              -AttributeName: id    
-#                                AttributeType: S        
-#                               -AttributeName: menu    
-#                                AttributeType: M
-#                                AttributeDefinitions:
-#                                 -AttributeName: drinks    
-#                                 AttributeType: L
-#                                 AttributeDefinitions:
-#                                   -AttributeName: id    
-#                                   AttributeType: N   
-#                                   -AttributeName: image    
-#                                   AttributeType: B
-#                                   -AttributeName: name    
-#                                   AttributeType: S
-#                                   -AttributeName: price    
-#                                   AttributeType: N
-#                                 AttributeDefinitions:
-#                                 -AttributeName: food    
-#                                 AttributeType: L
-#                                 AttributeDefinitions:
-#                                   -AttributeName: id    
-#                                   AttributeType: N
-#                                   -AttributeName: description    
-#                                   AttributeType: S   
-#                                   -AttributeName: image    
-#                                   AttributeType: B
-#                                   -AttributeName: name    
-#                                   AttributeType: S
-#                                   -AttributeName: price    
-#                                   AttributeType: N
-#                                 AttributeDefinitions:
-#                                 -AttributeName: Kids food    
-#                                 AttributeType: L
-#                                 AttributeDefinitions:
-#                                   -AttributeName: id    
-#                                   AttributeType: N
-#                                   -AttributeName: description    
-#                                   AttributeType: S   
-#                                   -AttributeName: image    
-#                                   AttributeType: B
-#                                   -AttributeName: name    
-#                                   AttributeType: S
-#                                   -AttributeName: price    
-#                                   AttributeType: N
-#                                 AttributeDefinitions:
-#                                 -AttributeName: sides    
-#                                 AttributeType: L
-#                                 AttributeDefinitions:
-#                                   -AttributeName: id    
-#                                   AttributeType: N
-#                                   -AttributeName: description    
-#                                   AttributeType: S   
-#                                   -AttributeName: image    
-#                                   AttributeType: B
-#                                   -AttributeName: name    
-#                                   AttributeType: S
-#                                   -AttributeName: price    
-#                                   AttributeType: N
-#                                KeySchema: 
-#                             -AttributeName: id  
-#                               KeyType: HASH
-#                              -AttributeName:        
-#                               KeyType: RANGE        
-#                        BillingMode: PAY_PER_REQUEST
+resources:      
+  Resources:
+  # Menu Table
+    MenuTable:
+      Type: AWS::DynamoDB::Table
+      DeletionPolicy: Retain
+      Properties:
+        TableName: MenuTable
+        AttributeDefinitions:
+          - AttributeName: "pk"
+            AttributeType: "S"
+          - AttributeName: "sk"
+            AttributeType: "S"
+        BillingMode: PAY_PER_REQUEST
+        PointInTimeRecoverySpecification:
+          PointInTimeRecoveryEnabled: false
+        KeySchema:
+          - AttributeName: "pk"
+            KeyType: HASH
+          - AttributeName: "sk"
+            KeyType: RANGE
 
-#         OrdersTable:
-#                  Type: AWS::DynamoDB::Table 
-#                   Properties: 
-#                        TableName: OrdersTable
-#                        AttributeDefinitions: 
-#                              -AttributeName: ordersId    
-#                                AttributeType: S        
-#                               -AttributeName: costumerId     
-#                                AttributeType: S
-#                               -AttributeName: costumerInfo     
-#                                AttributeType: M
-#                               AttributeDefinitions:  
-#                                 -AttributeName: email     
-#                                 AttributeType: S 
-#                                 -AttributeName: familyname    
-#                                 AttributeType: S 
-#                                 -AttributeName: firstname     
-#                                 AttributeType: S 
-#                                 -AttributeName: phone     
-#                                 AttributeType: N
-#                               -AttributeName: orderContent     
-#                                AttributeType: L
-#                               AttributeDefinitions:
-#                                 -AttributeName: amount     
-#                                 AttributeType: N
-#                                 -AttributeName: description     
-#                                 AttributeType: S
-#                                 -AttributeName: id     
-#                                 AttributeType: N 
-#                                 -AttributeName: message     
-#                                 AttributeType: S
-#                                 -AttributeName: name     
-#                                 AttributeType: S
-#                                 -AttributeName: price     
-#                                 AttributeType: N        
-#                               -AttributeName: orderOpen     
-#                                AttributeType: BOOL                                      
-#                                KeySchema: 
-#                             -AttributeName: ordersId  
-#                               KeyType: HASH   
-#                        BillingMode: PAY_PER_REQUEST
-#           UsersTable:
-#                  Type: AWS::DynamoDB::Table 
-#                   Properties: 
-#                        TableName: UsersTable
-#                        AttributeDefinitions: 
-#                              -AttributeName: id    
-#                                 AttributeType: S
-#                              -AttributeName: username    
-#                                 AttributeType: S
-#                              -AttributeName: password    
-#                                 AttributeType: S                                 
-#                                KeySchema: 
-#                             -AttributeName: id  
-#                               KeyType: HASH       
-#                        BillingMode: PAY_PER_REQUEST     
+    # Order Table
+    OrderTable:
+      Type: AWS::DynamoDB::Table
+      DeletionPolicy: Retain
+      Properties:
+        TableName: OrderTable
+        AttributeDefinitions:
+          - AttributeName: "pk"
+            AttributeType: "S"
+          - AttributeName: "sk"
+            AttributeType: "S"
+          - AttributeName: "orderId"
+            AttributeType: "S"
+        BillingMode: PAY_PER_REQUEST
+        PointInTimeRecoverySpecification:
+          PointInTimeRecoveryEnabled: false
+        KeySchema:
+          - AttributeName: "pk"
+            KeyType: HASH
+          - AttributeName: "sk"
+            KeyType: RANGE
+        GlobalSecondaryIndexes:
+          - IndexName: orderIndex
+            KeySchema:
+              - AttributeName: "orderId"
+                KeyType: HASH
+            Projection:
+              ProjectionType: "ALL"
+
+
 #     WebWizardsBucketBackend:
 #       Type: AWS::S3::Bucket
 #       Properties:
