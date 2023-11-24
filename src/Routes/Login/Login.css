@@ -64,7 +64,7 @@
 	justify-content: center;
 	width: fit-content;
 	position:fixed;
-	top: 30%;
+	top: 90%;
 	font-size: 2em;
 	padding: 0.5em 0.3em 0.3em 0.3em;
 	border-radius: 0 var(--outer-radius) var(--outer-radius) 0;
