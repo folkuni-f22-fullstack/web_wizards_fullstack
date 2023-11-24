@@ -18,8 +18,10 @@ const [selectedPayment, setSelectedPayment] = useState('Card')
 							value='Card' 
 							checked= {selectedPayment === 'Card'}
 							onChange={onPaymentChange}/>
-						Betala med kort
+						Kortbetalning
 						<p>fyll i dina kortuppgifter</p>
+						
+					<span></span>
 					</label>
 					<label>
 						<input 
@@ -30,6 +32,8 @@ const [selectedPayment, setSelectedPayment] = useState('Card')
 							onChange={onPaymentChange} />
 						Swish
 						<p>Fyll i ditt telefonnumer</p>
+					
+					<span></span>
 					</label>
 					<label>
 						<input 

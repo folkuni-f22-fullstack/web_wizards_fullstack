@@ -14,9 +14,9 @@
 }
 
 
+
 .order-menu {
 	grid-template-rows: repeat(8, 1fr);
-	height: 20em;
 	min-width: 16em;
 	margin: 0.35em 0;
 	text-align: left;
@@ -147,20 +147,25 @@
 
 	
 	.payment-container label{
-		align-self: flex-start;
 		font-weight: 700;
 	}
 	
 	.payment-container input{
-		margin-right: 0.5em;
+		
+		align-self: center;
+	
 	}
 	
 	.payment-container label > p{
-		font-weight: 400;
-		border-bottom: 1px solid var(--text-dark);
-		padding-bottom: 1em;
-		margin: 0.2em 0 1em;
+		font-weight: 400;	
 		font-size: 14px;
+		grid-area: 2/2/2/4;
+	}
+
+	.payment-container span{
+		border-bottom: 1px solid var(--text-dark);
+		grid-area: 4/2/4/4;
+		
 	}
 	
 	#payment-input-container{
@@ -168,15 +173,11 @@
 	}
 
 	#payment-input-container > label{
-		display: flex;
-		flex-direction: column;
-		align-items:flex-start
+		display: grid;
+		grid-template-columns: 2em 1fr 1fr;
+		grid-template-rows: 2fr 2fr 1fr 1fr;
+		align-items:flex-start;
 	}
-
-	#payment-input-container input {
-		width: fit-content;
-	}
-
 
 
 @media screen and (min-width: 550px) {
@@ -209,13 +210,16 @@
 		margin-left: 50%; 
 		width: 35%; 
 	}
+	.card-container.costumer-info-container{
+		padding: 2em;
+	}
 }
 
 /* desktop */
 @media screen and (min-width: 992px) and (max-width: 1023px) {
 
-	.card-container.costumer-info-container  * {
-		width: 95%;	
+	.costumer-form{
+		width: 50%;
 	}
 
 	.card-container.costumer-info-container p{
@@ -223,6 +227,7 @@ width: 100%;
 	}
 	.card-container.costumer-info-container{
 		align-items: flex-start;
+		padding: 2em;
 	}
 	.shopping-cart .sum-order-container {
 		margin-left: 50%; 
@@ -268,12 +273,13 @@ width: 100%;
 	}
 
 	
-	.card-container.costumer-info-container  * {
-		width: 90%;
+	.costumer-form{
+		width: 50%;
 	}
 
 	.card-container.costumer-info-container{
 		align-items: flex-start;
+		padding: 2em;
 	}
 
 	.card-container.costumer-info-container p{
