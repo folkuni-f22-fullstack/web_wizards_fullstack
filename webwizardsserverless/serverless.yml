@@ -21,21 +21,21 @@ functions:
     handler: backend/LambdaGETMenu.handler
     events:
       - httpApi:
-          path: /webwizards/menu/items
+          path: /webwizards/menu
           method: GET
 
   lambdaGetidMenu:
     handler: backend/LambdaGETidMenu.handler
     events:
       - httpApi:
-          path: /webwizards/menu/items/{id}
+          path: /webwizards/menu/{sk}
           method: GET
 
   lambdaPUTMenu:
     handler: backend/LambdaPUTMenu.handler
     events:
       - httpApi:
-          path: /webwizards/menu/items
+          path: /webwizards/menu/{sk}
           method: PUT
 
   lambdaGetUsers:
@@ -56,35 +56,35 @@ functions:
     handler: backend/LambdaGETOrders.handler
     events:
       - httpApi:
-          path: /webwizards/orders/items
+          path: /webwizards/orders
           method: GET
 
   lambdaPostOrders:
     handler: backend/LambdaPOSTOrders.handler
     events:
       - httpApi:
-          path: /webwizards/orders/items
+          path: /webwizards/orders
           method: POST
 
   lambdaGetIdOrders:
     handler: backend/LambdaGETidOrders.handler
     events:
       - httpApi:
-          path: /webwizards/orders/items/{ordersId}
+          path: /webwizards/orders/{ordersId}
           method: GET
 
   lambdaPutOrders:
     handler: backend/LambdaPUTOrders.handler
     events:
       - httpApi:
-          path: /webwizards/orders/items/{ordersId}
+          path: /webwizards/orders/{ordersId}
           method: PUT
 
   lambdaDeleteOrders:
     handler: backend/LambdaDELETEOrders.handler
     events:
       - httpApi:
-          path: /webwizards/orders/items/{ordersId}
+          path: /webwizards/orders/{ordersId}
           method: DELETE
 
 resources:      
@@ -110,15 +110,13 @@ resources:
             KeyType: RANGE
 
     # Order Table
-    OrderTable:
+    orderTable:
       Type: AWS::DynamoDB::Table
       DeletionPolicy: Retain
       Properties:
-        TableName: OrderTable
+        TableName: orderTable
         AttributeDefinitions:
           - AttributeName: "pk"
-            AttributeType: "S"
-          - AttributeName: "sk"
             AttributeType: "S"
           - AttributeName: "orderId"
             AttributeType: "S"
@@ -128,8 +126,6 @@ resources:
         KeySchema:
           - AttributeName: "pk"
             KeyType: HASH
-          - AttributeName: "sk"
-            KeyType: RANGE
         GlobalSecondaryIndexes:
           - IndexName: orderIndex
             KeySchema:
@@ -137,7 +133,6 @@ resources:
                 KeyType: HASH
             Projection:
               ProjectionType: "ALL"
-
 
 #     WebWizardsBucketBackend:
 #       Type: AWS::S3::Bucket
