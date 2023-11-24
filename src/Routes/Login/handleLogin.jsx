@@ -49,7 +49,7 @@ export const PassInput = () => {
 			<label htmlFor="password">Lösenord</label>
 			<input 
 				className={setErrorClass()} 
-				type="text"
+				type="password"
 				value={uPass}
 				id="password"
 				onChange={HandlePassChange} 

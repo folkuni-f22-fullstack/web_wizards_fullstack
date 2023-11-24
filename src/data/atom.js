@@ -1,6 +1,8 @@
 import { atom } from "recoil";
 
 
+// atomer för personal-inloggning
+
 export const uNameAtom = atom ({
 	key:'userName',
 	default: '',
@@ -31,7 +33,23 @@ export const isDisabledAtom = atom ({
 	default: false,
 })
 
+// atomer för kundvagn
+
 export const cartItemsAtom = atom ({
 	key: 'cartItem',
 	default: []
+})
+
+
+
+// atomer för order-formulär
+
+export const costumerAtom = atom ({
+	key: 'costumer',
+	default: {
+		firstName: '',
+		familyName: '',
+		phone: '',
+		email: '',
+	}
 })

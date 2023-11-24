@@ -1,9 +1,5 @@
-import { DynamoDBClient } from "@aws-sdk/client-dynamodb"
-import {
-	DynamoDBDocumentClient,
-	ScanCommand,
-	GetCommand,
-} from "@aws-sdk/lib-dynamodb"
+const { DynamoDBClient } = require("@aws-sdk/client-dynamodb")
+const { DynamoDBDocumentClient, ScanCommand } = require("@aws-sdk/lib-dynamodb")
 
 const client = new DynamoDBClient({})
 
@@ -11,7 +7,7 @@ const dynamo = DynamoDBDocumentClient.from(client)
 
 const tableName = "MenuTable"
 
-export const handler = async (event) => {
+module.exports.handler = async (event) => {
 	let body
 	let statusCode = 200
 	const headers = {
@@ -20,17 +16,6 @@ export const handler = async (event) => {
 
 	try {
 		switch (event.routeKey) {
-			case "GET /webwizards/menu/items/{id}":
-				body = await dynamo.send(
-					new GetCommand({
-						TableName: tableName,
-						Key: {
-							id: event.pathParameters.id,
-						},
-					})
-				)
-				body = body.Item
-				break
 			case "GET /webwizards/menu/items":
 				body = await dynamo.send(
 					new ScanCommand({ TableName: tableName })
