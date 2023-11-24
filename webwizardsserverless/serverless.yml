@@ -1,0 +1,150 @@
+service: webwizardsserverless
+frameworkVersion: '3'
+configValidationMode: error
+
+plugins:
+  -serverless-webpack
+
+package: 
+    individually: true 
+
+provider:
+  name: aws
+  runtime: nodejs20.x
+  profile: David 
+  region: eu-north-1
+  iam: 
+    role: arn:aws:iam::497017796861:role/service-role/web-wizards
+
+functions:
+  lambdaGetMenu:
+    handler: backend/LambdaGETMenu.handler
+    events:
+      - httpApi:
+          path: /webwizards/menu/items
+          method: GET
+
+  lambdaGetidMenu:
+    handler: backend/LambdaGETidMenu.handler
+    events:
+      - httpApi:
+          path: /webwizards/menu/items/{id}
+          method: GET
+
+  lambdaPUTMenu:
+    handler: backend/LambdaPUTMenu.handler
+    events:
+      - httpApi:
+          path: /webwizards/menu/items
+          method: PUT
+
+  lambdaGetUsers:
+    handler: backend/LambdaGETUsers.handler
+    events:
+      - httpApi:
+          path: /webwizards/users
+          method: GET
+
+  lambdaGetidUsers:
+    handler: backend/LambdaGETidUsers.handler
+    events:
+      - httpApi:
+          path: /webwizards/users/{id}
+          method: GET
+
+  lambdaGetOrders:
+    handler: backend/LambdaGETOrders.handler
+    events:
+      - httpApi:
+          path: /webwizards/orders/items
+          method: GET
+
+  lambdaPostOrders:
+    handler: backend/LambdaPOSTOrders.handler
+    events:
+      - httpApi:
+          path: /webwizards/orders/items
+          method: POST
+
+  lambdaGetIdOrders:
+    handler: backend/LambdaGETidOrders.handler
+    events:
+      - httpApi:
+          path: /webwizards/orders/items/{ordersId}
+          method: GET
+
+  lambdaPutOrders:
+    handler: backend/LambdaPUTOrders.handler
+    events:
+      - httpApi:
+          path: /webwizards/orders/items/{ordersId}
+          method: PUT
+
+  lambdaDeleteOrders:
+    handler: backend/LambdaDELETEOrders.handler
+    events:
+      - httpApi:
+          path: /webwizards/orders/items/{ordersId}
+          method: DELETE
+
+resources:      
+  Resources:
+  # Menu Table
+    MenuTable:
+      Type: AWS::DynamoDB::Table
+      DeletionPolicy: Retain
+      Properties:
+        TableName: MenuTable
+        AttributeDefinitions:
+          - AttributeName: "pk"
+            AttributeType: "S"
+          - AttributeName: "sk"
+            AttributeType: "S"
+        BillingMode: PAY_PER_REQUEST
+        PointInTimeRecoverySpecification:
+          PointInTimeRecoveryEnabled: false
+        KeySchema:
+          - AttributeName: "pk"
+            KeyType: HASH
+          - AttributeName: "sk"
+            KeyType: RANGE
+
+    # Order Table
+    OrderTable:
+      Type: AWS::DynamoDB::Table
+      DeletionPolicy: Retain
+      Properties:
+        TableName: OrderTable
+        AttributeDefinitions:
+          - AttributeName: "pk"
+            AttributeType: "S"
+          - AttributeName: "sk"
+            AttributeType: "S"
+          - AttributeName: "orderId"
+            AttributeType: "S"
+        BillingMode: PAY_PER_REQUEST
+        PointInTimeRecoverySpecification:
+          PointInTimeRecoveryEnabled: false
+        KeySchema:
+          - AttributeName: "pk"
+            KeyType: HASH
+          - AttributeName: "sk"
+            KeyType: RANGE
+        GlobalSecondaryIndexes:
+          - IndexName: orderIndex
+            KeySchema:
+              - AttributeName: "orderId"
+                KeyType: HASH
+            Projection:
+              ProjectionType: "ALL"
+
+
+#     WebWizardsBucketBackend:
+#       Type: AWS::S3::Bucket
+#       Properties:
+#         BucketName: web-wizards-bucket-backend
+    
+#     WebWizardsBucketWebpage:
+#       Type: AWS::S3::Bucket
+#       Properties:
+#         BucketName: web-wizards-bucket-webpage
