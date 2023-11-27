@@ -3,7 +3,7 @@
 }
 
 .chef_container {
-	margin-top: 6em;
+	margin-top: 2em;
 }
 .chef_container h1 {
 	margin-bottom: 0.5em;
@@ -48,3 +48,8 @@
 	grid-column: 2 / span  2;
 	grid-row: 3;
 }
+
+
+
+
+
