@@ -15,7 +15,8 @@ provider:
   region: eu-north-1
   iam: 
     role: arn:aws:iam::497017796861:role/service-role/web-wizards
-
+    
+# Här är våra lambdafunktioner
 functions:
   lambdaGetMenu:
     handler: backend/LambdaGETMenu.handler
@@ -64,7 +65,7 @@ functions:
     events:
       - httpApi:
           path: /webwizards/orders
-          method: POST
+          method: PUT
 
   lambdaGetIdOrders:
     handler: backend/LambdaGETidOrders.handler
