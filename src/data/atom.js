@@ -64,8 +64,13 @@ export const errorMessageAtom = atom({
 	}
 }); 
 
-export const isValidAtom = atom({
+export const isValidFamilyNameAtom = atom({
 	key: 'isValidKey',
+	default: null,
+})
+
+export const isValidFirstNameAtom = atom({
+	key: 'isValidFirstNameKey',
 	default: null,
 })
 

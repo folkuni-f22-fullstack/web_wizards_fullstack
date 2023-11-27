@@ -1,12 +1,12 @@
 				import { useRecoilState } from "recoil"
-				import { costumerAtom, errorMessageAtom, isValidAtom  } from "../../../data/atom"
+				import { costumerAtom, errorMessageAtom, isValidFirstNameAtom  } from "../../../data/atom"
 				import { isValidName } from "../validation.js"
 				import './order-form.css'
 				
 				
 				const FirstNameInput = () => {
 				const [costumer, setCostumer] = useRecoilState(costumerAtom)
-				const [isValid, setIsValid ] = useRecoilState(isValidAtom)
+				const [isValid, setIsValid ] = useRecoilState(isValidFirstNameAtom)
 				const [errorMessage, setErrorMessage] = useRecoilState(errorMessageAtom)
 				// console.log('Den är isvalid:' , isValid)
 				

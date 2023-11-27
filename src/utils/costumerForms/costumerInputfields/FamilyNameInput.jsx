@@ -1,11 +1,11 @@
 import { useRecoilState } from "recoil"
-import { costumerAtom, errorMessageAtom, isValidAtom } from "../../../data/atom"
+import { costumerAtom, errorMessageAtom, isValidFamilyNameAtom } from "../../../data/atom"
 import { isValidName } from "../validation.js"
 
 
 const FamilyNameInput = () => {
 	const [costumer, setCostumer] = useRecoilState(costumerAtom)
-	const [isValid, setIsValid] = useRecoilState(isValidAtom)
+	const [isValid, setIsValid] = useRecoilState(isValidFamilyNameAtom)
 	const [errorMessage, setErrorMessage] = useRecoilState(errorMessageAtom)
 
 	const handleNameChange = (event) => {
