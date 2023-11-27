@@ -2,7 +2,7 @@ import "./login.css"
 import { useState } from "react"
 import { useRecoilState } from "recoil"
 import { Navigate } from "react-router-dom"
-import { NameInput, PassInput, IsMatching } from "../../utils/handleLogin"
+import { NameInput, PassInput, IsMatching } from "../../utils/login/handleLogin"
 import { uNameAtom, uPassAtom, formIsDirtyAtom, isLoggedInAtom, isDisabledAtom } from "../../data/atom"
 
 

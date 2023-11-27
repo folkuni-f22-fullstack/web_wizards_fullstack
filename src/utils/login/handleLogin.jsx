@@ -1,6 +1,6 @@
 import { useRecoilState, useRecoilValue } from "recoil";
-import { uNameAtom, uPassAtom, formIsDirtyAtom } from "../data/atom";
-import { user } from "../data/testdata";
+import { uNameAtom, uPassAtom, formIsDirtyAtom } from "../../data/atom";
+import { user } from "../../data/testdata";
 
 const users = [...user]
 

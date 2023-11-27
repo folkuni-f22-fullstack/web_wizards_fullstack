@@ -1,5 +1,5 @@
 import "./cashier.css"
- import KeepLoggedIn from "../../utils/KeepLoggedIn";
+ import KeepLoggedIn from "../../utils/login/KeepLoggedIn";
 
 
 const Cashier = () => {

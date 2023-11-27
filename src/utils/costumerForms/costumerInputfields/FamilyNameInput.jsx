@@ -1,5 +1,5 @@
 import { useRecoilState } from "recoil"
-import { costumerAtom } from "../../data/atom"
+import { costumerAtom } from "../../../data/atom"
 
 
 const FamilyNameInput = () => {

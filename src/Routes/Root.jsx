@@ -2,12 +2,12 @@ import { Outlet } from "react-router-dom"
 import Footer from "../Components/Footer"
 import Header from "../Components/Header"
 import Floater from "../Components/Floater"
-import CashierTab from "./Tabs/CashierTab"
-import ChefTab from "./Tabs/ChefTab"
+import CashierTab from "../utils/Tabs/CashierTab"
+import ChefTab from "../utils/Tabs/ChefTab"
 
 import { isLoggedInAtom } from "../data/atom"
 import { useRecoilState } from "recoil"
-import LogOut from "../utils/Logout"
+import LogOut from "../utils/login/Logout"
 
 const Root = () => {
 	const [isLoggedIn, setIsLoggedIn] = useRecoilState(isLoggedInAtom)

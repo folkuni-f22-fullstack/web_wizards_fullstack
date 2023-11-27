@@ -1,4 +1,4 @@
-import CostumerForm from "../../utils/CostumerForm"
+import CostumerForm from "../../utils/costumerForms/CostumerForm"
 import "./ShoppingCart.css"
 import { useRecoilValue } from "recoil"
 import { cartItemsAtom } from "../../data/atom"
