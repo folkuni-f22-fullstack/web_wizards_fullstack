@@ -1,14 +1,135 @@
-
-.isvalid-input {
-	border: 2px solid var(--light-green-acc)
-}
-
-.invalid-input {
-	border: 2px solid rgb(145, 1, 1);
-}
-
-.order-error-message-container {
-	font-size: 0.8em;
+.order-form-section{
+	margin: 1em auto;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 100%;
+	}
 	
+	.costumer-form{
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		margin-top: 1em;
+		width: 100%;
+	}
 	
+	.costumer-form h3{
+		align-self: flex-start;
+		padding-left:8%;
+	}
+	
+	.card-container.costumer-info-container{
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		min-width: 16em;
+		width: 100%;
+		margin: 0.5em 0;
+		padding: 1em;		
+	}
+	
+	.costumer-info-container>div:nth-last-child(-n+3){
+		margin-top: 1em;
+	
+	}
+	
+	.card-container.costumer-info-container  * {
+		width: 100%;
+	}
+	
+	.order-error-message-container {
+		font-size: 0.8em;
+		height: 0.7em;
+		margin-bottom:0.3em;
+			
+	}
+
+	.isvalid-input {
+		border: 2px solid var(--light-green-acc)
+	}
+	
+	.invalid-input {
+		border: 2px solid rgb(145, 1, 1);
+	}
+
+	
+	.payment-container label{
+		font-weight: 700;
+	}
+	
+	.payment-container input{
+		
+		align-self: center;
+	
+	}
+	
+	.payment-container label > p{
+		font-weight: 400;	
+		font-size: 14px;
+		grid-area: 2/2/2/4;
+	}
+
+	.payment-container span{
+		border-bottom: 1px solid var(--text-dark);
+		grid-area: 4/2/4/4;
+		
+	}
+	
+	#payment-input-container{
+		margin: 0;
+	}
+
+	#payment-input-container > label{
+		display: grid;
+		grid-template-columns: 2em 1fr 1fr;
+		grid-template-rows: 2fr 2fr 1fr 1fr;
+		align-items:flex-start;
+	}
+
+	.order-submit-button{
+		font-size: 18px;
+		margin: 1.5em 0 2.5em;
+	}
+
+
+	/* tablet */
+@media screen and (min-width: 768px) and (max-width: 991px) {
+	.card-container.costumer-info-container{
+		padding: 2em;
+	}
+
+	}
+
+/* desktop */
+@media screen and (min-width: 992px) and (max-width: 1023px) {
+	.costumer-form{
+		width: 50%;
+	}
+
+	.card-container.costumer-info-container p{
+		width: 100%;
+	}
+	.card-container.costumer-info-container{
+		align-items: flex-start;
+		padding: 2em;
+	}
 }
+
+/* large desktop */
+@media screen and (min-width: 1024px)  {
+
+	.costumer-form{
+		width: 50%;
+	}
+
+	.card-container.costumer-info-container{
+		align-items: flex-start;
+		padding: 2em;
+	}
+
+	.card-container.costumer-info-container p{
+		width: 100%;
+			}
+}
+
