@@ -50,8 +50,8 @@ const Login = () => {
 							disabled = {isDisabled}
 							onClick={handleSubmit}
 							>Logga in</button>
-						<div className="error-message-container"> {loginErrorMessage}</div>
-						<div className="error-message-container"> {isLoggedInMessage}</div>
+						<div className="login-error-message-container"> {loginErrorMessage}</div>
+						<div className="login-error-message-container"> {isLoggedInMessage}</div>
 					</form>
 				</div>
 			</div>

@@ -20,6 +20,7 @@ const EmailInput = () => {
 				placeholder="*E-post"
 				onChange={handleEmailChange}
 				required />
+			<div className="order-error-message-container"></div>		
 		</div>
 
 	)

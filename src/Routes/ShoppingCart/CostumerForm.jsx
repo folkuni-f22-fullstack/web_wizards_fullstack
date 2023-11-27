@@ -9,7 +9,7 @@ import PaymentInput from "./costumerInputfields/PaymentInput"
 const CostumerForm = () => {
 
 	return(
-		<section className="order-section">
+		<section className="order-form-section">
 			<form action="#" className="costumer-form">					
 				<h3>Dina uppgifter</h3>
 				<div className="card-container costumer-info-container" >

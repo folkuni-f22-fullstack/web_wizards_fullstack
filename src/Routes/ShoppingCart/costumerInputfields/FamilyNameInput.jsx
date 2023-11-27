@@ -21,6 +21,7 @@ const FamilyNameInput = () => {
 						placeholder="*Efternamn"
 						onChange={handleNameChange}
 						required />
+					<div className="order-error-message-container"></div>		
 				</div>
 	)
 }
