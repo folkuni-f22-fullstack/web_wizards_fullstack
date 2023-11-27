@@ -53,3 +53,14 @@ export const costumerAtom = atom ({
 		email: '',
 	}
 })
+
+// Atomer för personal Tabs
+
+export const activeTabState = atom ({
+	key: 'activeTabState',
+	default: false
+})
+export const activeChefTabState = atom ({
+	key: 'activeChefTabState',
+	default: false
+})
