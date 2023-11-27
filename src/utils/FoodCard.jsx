@@ -1,6 +1,6 @@
 import {IoIosArrowDown} from 'react-icons/io'
 import { BiCartAdd } from 'react-icons/bi'
-import useCart from '../Routes/FoodMenu/addToCart'
+import useCart from './addToCart'
 
 
 const FoodCard = (props) => {

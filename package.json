@@ -12,8 +12,9 @@
 	"dependencies": {
 		"@emotion/react": "^11.11.1",
 		"@emotion/styled": "^11.11.0",
-		"@mui/material": "^5.14.18",
 		"@mui/icons-material": "5.14.18",
+		"@mui/material": "^5.14.18",
+		"aws-sdk": "^2.1499.0",
 		"framer-motion": "^10.16.5",
 		"react": "^18.2.0",
 		"react-dom": "^18.2.0",
@@ -32,6 +33,7 @@
 		"eslint": "^8.45.0",
 		"eslint-plugin-react-hooks": "^4.6.0",
 		"eslint-plugin-react-refresh": "^0.4.3",
+		"serverless-webpack": "^5.13.0",
 		"typescript": "^5.0.2",
 		"vite": "^4.4.5"
 	}

@@ -1,5 +1,5 @@
 import { useRecoilState } from 'recoil'
-import { cartItemsAtom } from '../../data/atom'
+import { cartItemsAtom } from '../data/atom'
 
 
 

@@ -36,7 +36,7 @@ const FamilyNameInput = () => {
 						onChange={handleNameChange}
 						onBlur={handleBlur}
 						required />
-						<div className="error-message">{errorMessage.familyName}</div>
+						<div className="order-error-message-container">{errorMessage.familyName}</div>
 				</div>
 	)
 }

@@ -2,14 +2,13 @@ import EmailInput from "./costumerInputfields/EmailInput"
 import FamilyNameInput from "./costumerInputfields/FamilyNameInput"
 import FirstNameInput from "./costumerInputfields/FirstNameInput"
 import PhoneInput from "./costumerInputfields/PhoneInput"
-import './ShoppingCart.css'
 import PaymentInput from "./costumerInputfields/PaymentInput"
 
 
 const CostumerForm = () => {
 
 	return(
-		<section className="order-section">
+		<section className="order-form-section">
 			<form action="#" className="costumer-form">					
 				<h3>Dina uppgifter</h3>
 				<div className="card-container costumer-info-container" >

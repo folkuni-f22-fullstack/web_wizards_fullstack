@@ -1,5 +1,5 @@
 import "./Chef.css"
-import KeepLoggedIn from "../Login/keepLoggedIn";
+import KeepLoggedIn from "../../utils/login/KeepLoggedIn";
 
 const Chef = () => {
 	return (

@@ -1,3 +1,4 @@
+
 import { useRecoilState } from "recoil"
 import { costumerAtom, errorMessageAtom, isValidEmailAtom } from "../../../data/atom"
 import { isValidEmail } from "../validation.js"
@@ -34,10 +35,12 @@ const EmailInput = () => {
 				onChange={handleEmailChange}
 				onBlur={handleEmailBlur}
 				required />
-				<div className="error-message">{errorMessage.email}</div>
+				<div className="order-error-message-container">{errorMessage.email}</div>
 		</div>
 
 	)
 }
+
+
 
 export default EmailInput

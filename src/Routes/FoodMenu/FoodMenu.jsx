@@ -1,5 +1,5 @@
 import './FoodMenu.css'
-import FoodCard from '../../Components/FoodCard'
+import FoodCard from '../../utils/FoodCard'
 import { data, kidsData, drinksData, sidesData } from '../../data/testdata'
 
 
