@@ -1,11 +1,11 @@
-import { DynamoDB } from "@aws-sdk/client-dynamodb"
-import { DynamoDBDocument } from "@aws-sdk/lib-dynamodb"
+const { DynamoDBClient } = require("@aws-sdk/client-dynamodb");
+const { DynamoDBDocument} = require("@aws-sdk/lib-dynamodb")
 
-const client = new DynamoDB({})
+const client = new DynamoDBClient({})
 const db = DynamoDBDocument.from(client)
 
 module.exports.handler = async () => {
-	const tableName = "OrdersTable"
+	const tableName = "orderTable"
 	try {
 		const { Items } = await db.query({
 			TableName: tableName,

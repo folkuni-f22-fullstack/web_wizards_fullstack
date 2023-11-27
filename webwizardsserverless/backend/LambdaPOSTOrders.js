@@ -1,31 +1,39 @@
-import { DynamoDB } from "@aws-sdk/client-dynamodb"
-import { DynamoDBDocument } from "@aws-sdk/lib-dynamodb"
+const { DynamoDBClient, PutCommand } = require("@aws-sdk/client-dynamodb");
+const { DynamoDBDocument} = require("@aws-sdk/lib-dynamodb")
 
-const client = new DynamoDB({})
+const client = new DynamoDBClient({})
 const db = DynamoDBDocument.from(client)
 
-module.exports.handler = async () => {
-	const tableName = "OrderTable"
-	try {
-		const { Items } = await db.query({
-			TableName: tableName,
-			// IndexName: "sk",
-			KeyConditionExpression: "pk = :pk",
-			ExpressionAttributeValues: {
-				":pk": "orders",
-			},
-		})
+module.exports.handler = async (event) => {
+    const tableName = "orderTable"
 
-		return {
-			statusCode: 200,
-			headers: { "Content-Type": "application/json" },
-			body: JSON.stringify({ items: Items }),
-		}
-	} catch (err) {
-		return {
-			statusCode: err.statusCode,
-			headers: { "Content-Type": "application/json" },
-			body: JSON.stringify({ message: err.message }),
-		}
-	}
+    const requestBody = JSON.parse(event.body)
+
+    try {
+        const newItem = {
+            pk: requestBody.items[0].pk,
+            sk: requestBody.items[0].sk,
+            ordersId: requestBody.items[0].ordersId,
+            orderContent: requestBody.items[0].orderContent,
+        }
+
+        await db.send(
+            new PutCommand({
+                TableName: tableName,
+                Item: newItem,
+            })
+        )
+
+        return {
+            statusCode: 200,
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ message: "Data inserted successfully" }),
+        }
+    } catch (err) {
+        return {
+            statusCode: err.statusCode,
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ message: err.message }),
+        }
+    }
 }
