@@ -6,8 +6,9 @@ const db = DynamoDBDocument.from(client)
 
 module.exports.handler = async (event) => {
 	const tableName = "orderTable"
-	const primaryKey = 'orders';
-	const ordersId = event.queryStringParameters && event.queryStringParameters.ordersId;
+	const primaryKey = 'pk';
+	const ordersId = event.pathParameters.ordersId;
+	console.log('delete order: ', event)
 	try {
 		await db.delete({
 			TableName: tableName,
