@@ -1,20 +1,24 @@
-const { DynamoDBClient } = require("@aws-sdk/client-dynamodb");
-const { DynamoDBDocument} = require("@aws-sdk/lib-dynamodb")
+import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
+import { DynamoDBDocumentClient, QueryCommand } from "@aws-sdk/lib-dynamodb";
 
-const client = new DynamoDBClient({})
-const db = DynamoDBDocument.from(client)
+const client = new DynamoDBClient({});
+const dynamo = DynamoDBDocumentClient.from(client);
 
-module.exports.handler = async () => {
-	const tableName = "orderTable"
-	try {
-		const { Items } = await db.query({
-			TableName: tableName,
-			// IndexName: "sk",
-			KeyConditionExpression: "pk = :pk",
-			ExpressionAttributeValues: {
-				":pk": "orders",
-			},
-		})
+export const handler = async () => {
+    const tableName = "orderTable";
+    const partitionKey = "orders"; // pk value
+    // const sortKey = dynamically provide or calculate the value based on your logic
+
+    try {
+        const { Items } = await dynamo.send(
+            new QueryCommand({
+                TableName: tableName,
+                KeyConditionExpression: "pk = :pk",
+                ExpressionAttributeValues: {
+                    ":pk": partitionKey,
+                },
+            })
+        );
 
 		return {
 			statusCode: 200,
