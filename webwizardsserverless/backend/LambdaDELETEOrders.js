@@ -1,12 +1,12 @@
-const { DynamoDBClient } = require("@aws-sdk/client-dynamodb");
-const { DynamoDBDocumentClient, DeleteCommand, GetCommand } = require("@aws-sdk/lib-dynamodb");
+import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
+import {DynamoDBDocumentClient,GetCommand, DeleteCommand} from "@aws-sdk/lib-dynamodb";
 
 const client = new DynamoDBClient({});
 const dynamo = DynamoDBDocumentClient.from(client);
 
 const tableName = "orderTable";
 
-exports.handler = async (event) => {
+export const handler = async (event) => {
   let body;
   let statusCode = 200;
   const headers = {
