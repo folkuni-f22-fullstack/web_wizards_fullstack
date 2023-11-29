@@ -32,9 +32,12 @@
 	color: var(--dark-green-acc);
 }
 
+/* lägg in en image-container med allt som nu är på img, overflow-hidden och sedan 100% på img*/
+
 .menu-card > img{
 grid-area: 1/ 1/ 8/ span 2;
 width: 80%;
+
 }
 
 .menu-card > h3{
