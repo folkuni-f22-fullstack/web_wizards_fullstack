@@ -16,6 +16,9 @@ const ShoppingCart = () => {
 		removeFromCart(name)
 		console.log('removed')
 	}
+	const countPriceTotal = cartItems.reduce((total, cartItem) => total + cartItem.priceTotal, 0)
+	
+	
 
 	return (
 		<>
@@ -36,7 +39,7 @@ const ShoppingCart = () => {
 						<p>1</p>
 						<IoMdAdd className="add-food" />
 					</div>
-					<p className="food-price">{item.price} :-</p>
+					<p className="food-price">{item.priceTotal} :-</p>
 					<div onClick={() => handleRemoveFromCart(item.name)} className="dumpster">
 						<IoTrashSharp  className="trashbin"/>
 					</div>
@@ -48,7 +51,7 @@ const ShoppingCart = () => {
 					
 				</li>))}
 				<div className="sum-order-container">
-					<p>Totalt: </p> 
+					<p>{countPriceTotal} :- </p> 
 					<p></p>
 				</div>
 			</section>
