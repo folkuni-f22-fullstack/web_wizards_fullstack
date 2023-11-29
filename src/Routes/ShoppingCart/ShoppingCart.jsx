@@ -19,6 +19,7 @@ const ShoppingCart = () => {
 	const countPriceTotal = cartItems.reduce((total, cartItem) => total + cartItem.priceTotal, 0)
 	
 	
+	
 
 	return (
 		<>
@@ -27,8 +28,8 @@ const ShoppingCart = () => {
 				{cartItems.map(item => (
 				<li key={item.name} className="card-container order-menu">
 					
-							<div className="image-container">
-						<p>{item.image}</p>
+					<div className="image-container">
+						<img src={item.image} />
 					</div>
 					<div className="name-container">
 						<h3>{item.name}</h3>
@@ -36,7 +37,7 @@ const ShoppingCart = () => {
 					<p className="description-text">{item.description}</p>
 					<div className="button-container">
 						<IoRemoveOutline className="remove-food"/>
-						<p>1</p>
+						<p>{item.amount}</p>
 						<IoMdAdd className="add-food" />
 					</div>
 					<p className="food-price">{item.priceTotal} :-</p>
@@ -44,15 +45,15 @@ const ShoppingCart = () => {
 						<IoTrashSharp  className="trashbin"/>
 					</div>
 					<div className="input">
-						<p>Ändra/ta bort i din beställning:</p>
+						<p>Ändra/ta bort i din rätt:</p>
 						<input className="input change"/>
 					</div>
 
 					
 				</li>))}
 				<div className="sum-order-container">
-					<p>{countPriceTotal} :- </p> 
-					<p></p>
+					<p>Totalt:</p> 
+					<p>{countPriceTotal} :- </p>
 				</div>
 			</section>
 			<CostumerForm/>
