@@ -1,15 +1,29 @@
 import './FoodMenu.css'
 import FoodCard from '../../utils/FoodCard'
-import { data, kidsData, drinksData, sidesData } from '../../data/testdata'
-
+import { useState, useEffect } from 'react'
+import  getMenu  from '../../data/GetMenu.js'
 
 const FoodMenu = () => {
 
-	const dishes = [...data]
-	const kidsDishes = [...kidsData]
-	const drinks = [...drinksData]
-	const sides = [...sidesData]
+ const [data, setData] = useState([])
 
+	useEffect(() => {
+		const fetchData = async () => {
+			const menuData = await getMenu()
+			setData(menuData.items)
+		}
+		fetchData()
+	}, [])
+	
+	console.log('data',data);
+	const allData = data ?  [...data] : []
+
+	
+	const dishes = allData.filter(dish => dish.sk.includes('burger'))
+	const kidsDishes = allData.filter(dish => dish.sk.includes('kids'))
+	const drinks = allData.filter(dish => dish.sk.includes('drinks'))
+	const sides =allData.filter(dish => dish.sk.includes('sides'))
+	// console.log('dishes', dishes);
 	return(
 
 
