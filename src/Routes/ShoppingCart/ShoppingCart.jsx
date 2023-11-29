@@ -1,39 +1,52 @@
 import CostumerForm from "../../utils/costumerForms/CostumerForm"
 import "./ShoppingCart.css"
 import { useRecoilValue } from "recoil"
-import { cartItemsAtom } from "../../data/atom"
+import { cartItemState } from "../../data/atom.js"
 import { IoMdAdd } from "react-icons/io"
 import { IoRemoveOutline, IoTrashSharp } from "react-icons/io5"
+import  useRemoveFromCart from "../../utils/removeFromCart"
 
 
 const ShoppingCart = () => {
 	// const cart = useRecoilValue(cartItemsAtom)
+	const cartItems = useRecoilValue(cartItemState)
+	const removeFromCart = useRemoveFromCart()
+	console.log(cartItems)
+	const handleRemoveFromCart = (name) => {
+		removeFromCart(name)
+		console.log('removed')
+	}
+
 	return (
 		<>
 				<h1 className="cart-h1">VARUKORG</h1>		
 			<section className="shopping-cart">
-				<li className="card-container order-menu">
-					<div className="image-container">
-						<p>bilden</p>
+				{cartItems.map(item => (
+				<li key={item.name} className="card-container order-menu">
+					
+							<div className="image-container">
+						<p>{item.image}</p>
 					</div>
 					<div className="name-container">
-						<h3>Namnet</h3>
+						<h3>{item.name}</h3>
 					</div>
-					<p className="description-text">description detta är texten</p>
+					<p className="description-text">{item.description}</p>
 					<div className="button-container">
 						<IoRemoveOutline className="remove-food"/>
 						<p>1</p>
 						<IoMdAdd className="add-food" />
 					</div>
-					<p className="food-price">109 :-</p>
-					<div className="dumpster">
+					<p className="food-price">{item.price} :-</p>
+					<div onClick={() => handleRemoveFromCart(item.name)} className="dumpster">
 						<IoTrashSharp  className="trashbin"/>
 					</div>
 					<div className="input">
 						<p>Ändra/ta bort i din beställning:</p>
 						<input className="input change"/>
 					</div>
-				</li>
+
+					
+				</li>))}
 				<div className="sum-order-container">
 					<p>Totalt: </p> 
 					<p></p>

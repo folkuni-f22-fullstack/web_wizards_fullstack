@@ -1,11 +1,11 @@
 import { useRecoilState } from 'recoil'
-import { cartItemsAtom } from '../data/atom'
+import { cartItemState } from '../data/atom'
 
 
 
 const useCart = () => {
 
-const [cart, setCart] = useRecoilState(cartItemsAtom)
+const [cartItems, setCartItems] = useRecoilState(cartItemState)
 
 	const addToCart = (dish) => {
 
@@ -18,10 +18,10 @@ const [cart, setCart] = useRecoilState(cartItemsAtom)
 			priceTotal: dish.price,
 		} 
 
-			let dishInCart = cart.find(dish => dish.name === cartItem.name)
+			let dishInCart = cartItems.find(dish => dish.name === cartItem.name)
 
 			if (dishInCart) {
-				let newCart = cart.map((dish) => {
+				let newCart = cartItems.map((dish) => {
 					if(dish.name === cartItem.name){
 						return{
 							...dish,
@@ -32,18 +32,18 @@ const [cart, setCart] = useRecoilState(cartItemsAtom)
 						return dish
 					}
 				})
-				 setCart(newCart)
+				setCartItems(newCart)
 				
 			}else{
-				const newCart = [...cart, cartItem]
-				setCart(newCart)
+				const newCart = [...cartItems, cartItem]
+				setCartItems(newCart)
 			}
 	
 	}
-console.log(cart);
+console.log(cartItems);
 
 
-return {cart, addToCart}
+return {cartItems, addToCart}
 }
 
 export default useCart

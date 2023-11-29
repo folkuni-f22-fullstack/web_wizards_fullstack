@@ -35,8 +35,12 @@ export const isDisabledAtom = atom ({
 
 // atomer för kundvagn
 
+export const cartItemState = atom ({
+	key: 'cartItemState',
+	default: []
+})
 export const cartItemsAtom = atom ({
-	key: 'cartItem',
+	key: 'cartItemsAtom',
 	default: []
 })
 
