@@ -77,10 +77,14 @@ const Cashier = () => {
 		<section className="cashier_page">
 			<KeepLoggedIn />
 			<p>Kassa</p>
-			<h1>Beställningar</h1>
-			<button>
-				<FiRefreshCcw />
-			</button>
+			<div className="header-button-container">
+				<h1>Beställningar</h1>
+				<div className="staff-button-container">
+					<button className="staff-button">
+						<FiRefreshCcw />
+					</button>
+				</div>
+			</div>
 			<div className="costumer_order_container">
 				<ul>
 					{orders.map((order) => (

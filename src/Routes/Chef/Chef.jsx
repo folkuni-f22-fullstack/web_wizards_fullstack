@@ -8,10 +8,15 @@ const Chef = () => {
 		<section className="chef_container">
 			<KeepLoggedIn />
 			<p>Kocken</p>
-			<h1>Beställningar</h1>
-			<button className="staff-button">
-				<FiRefreshCcw />
-			</button>
+			<div className="header-button-container">
+				<h1>Beställningar</h1>
+				<div className="staff-button-container">
+					<button className="staff-button">
+						<FiRefreshCcw />
+					</button>
+				</div>
+			</div>
+
 			<div className="costumer_order_container">
 				<div className="costumer_order_card">
 					<p className="order_number">"ordernummer"</p>

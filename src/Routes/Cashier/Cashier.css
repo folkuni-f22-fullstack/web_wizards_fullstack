@@ -8,7 +8,7 @@
 
 .costumer_order_card {
 	display: grid;
-	grid-template-columns:repeat(8, 1fr);
+	grid-template-columns: repeat(8, 1fr);
 	grid-template-rows: auto;
 	border: 1px solid var(--dark-green-acc);
 	border-radius: var(--outer-radius);
@@ -17,26 +17,25 @@
 	margin-bottom: 1em;
 }
 
-.order_open{
+.order_open {
 	grid-column: 7/8;
 	justify-self: flex-end;
 }
 
-.costumer_order_card > ul{
+.costumer_order_card > ul {
 	grid-column: 2/7;
 	grid-row-start: 1;
 }
 
-.card-container.order-card-dish{
+.card-container.order-card-dish {
 	display: flex;
 	align-items: center;
 	justify-content: space-around;
 	margin-bottom: 1em;
-	border-radius: var(--inner-radius)
+	border-radius: var(--inner-radius);
 }
 
 .changes {
-
 }
 
 .order_number {
@@ -46,21 +45,32 @@
 	font-weight: 700;
 }
 
-.order_amount{
+.order_amount {
 	font-weight: 700;
 }
 
 .order_dish {
-
 }
 
 .send_btn {
 	display: inline-grid;
-	grid-column: 7 / span  9;
+	grid-column: 7 / span 9;
 	grid-row: 3;
 	max-width: 13em;
 }
 
 .send_btn button {
 	font-size: 1em;
+}
+
+.header-button-container {
+	display: grid;
+	grid-template-columns: repeat(8, 1fr);
+	margin-right: 1.5em;
+}
+
+.staff-button-container {
+	grid-column: 8/8;
+	width: 4em;
+	justify-self: flex-end;
 }
