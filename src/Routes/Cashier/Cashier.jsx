@@ -15,7 +15,7 @@ const Cashier = () => {
 	// testvariabel:
 	const orders = [
 		{ 	ordersId: "1234",
-			orderOpen: true,
+			orderOpen: false,
 			orderContent: [
 				{
 					name: "Bliss",
@@ -33,7 +33,7 @@ const Cashier = () => {
 					message:"ingen gurka"			
 				}
 				],
-				costumerInfo:{
+			costumerInfo:{
 				firstname: "my",
 				familyname: "Myson",
 				phone: 123546,
@@ -44,7 +44,7 @@ const Cashier = () => {
 			orderOpen: true,
 			orderContent: [
 				{
-					name: "Bliss",
+					name: "Blobb",
 					description: "tomat",
 					price: 79,
 					amount: 1,
@@ -52,7 +52,7 @@ const Cashier = () => {
 			
 				},
 				{
-					name: "Halloumi",
+					name: "Orginal",
 					description: "gurka",
 					price: 79,
 					amount: 2,
@@ -86,15 +86,16 @@ const Cashier = () => {
 				{orders.map(order => (
 				<li className="costumer_order_card"
 					key={order.ordersId}>
-						<p className="order_number">{order.ordersId}</p>
+						<p className="order_number">order: {order.ordersId}</p>
+						<p className="order_open">{order.orderOpen ? "Order öppen" : "Order låst"}</p>
 						<ul>
 						{order.orderContent.map(dish => (
-							<li className="order-card-dish"
+							<li className="card-container order-card-dish "
 								key={dish.name}>	
-								<p className="order-amount">{dish.amount}</p>		
+								<p className="order_amount">{dish.amount} st</p>		
 								<p className="order_dish">{dish.name}</p>
 								<div className="changes">
-									<p>{dish.message}</p>
+									<p>Meddelande: {dish.message}</p>
 								</div>
 							</li>
 							))}
