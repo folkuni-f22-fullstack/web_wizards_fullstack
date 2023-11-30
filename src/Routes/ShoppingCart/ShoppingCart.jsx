@@ -5,6 +5,7 @@ import { cartItemState } from "../../data/atom.js"
 import { IoMdAdd } from "react-icons/io"
 import { IoRemoveOutline, IoTrashSharp } from "react-icons/io5"
 import  useRemoveFromCart from "../../utils/removeFromCart"
+import useAddInCart from "../../utils/addInCart.js"
 
 
 const ShoppingCart = () => {
@@ -15,6 +16,10 @@ const ShoppingCart = () => {
 	const handleRemoveFromCart = (name) => {
 		removeFromCart(name)
 		console.log('removed')
+	}
+	const addInCart = useAddInCart()
+	const handleAddToCart = (name) => {
+		addInCart(name)
 	}
 	const countPriceTotal = cartItems.reduce((total, cartItem) => total + cartItem.priceTotal, 0)
 	
@@ -38,7 +43,9 @@ const ShoppingCart = () => {
 					<div className="button-container">
 						<IoRemoveOutline className="remove-food"/>
 						<p>{item.amount}</p>
-						<IoMdAdd className="add-food" />
+						<div onClick={() => handleAddToCart(item.name)}>
+							<IoMdAdd className="add-food" />
+						</div>
 					</div>
 					<p className="food-price">{item.priceTotal} :-</p>
 					<div onClick={() => handleRemoveFromCart(item.name)} className="dumpster">
