@@ -1,23 +1,108 @@
 import "./cashier.css"
  import KeepLoggedIn from "../../utils/login/KeepLoggedIn";
+// import { useRecoilState } from "recoil";
+// import { useState } from "react";
+/* import getOrders from "../../utils/APIfrontendFunctions/getOrders";
+
+const dborders = getOrders()
+console.log(dborders); */
 
 
 const Cashier = () => {
+
+	// const [orders, setOrders] = useState()
+
+	// testvariabel:
+	const orders = [
+		{ 	ordersId: "1234",
+			orderOpen: true,
+			orderContent: [
+				{
+					name: "Bliss",
+					description: "tomat",
+					price: 79,
+					amount: 1,
+					message:"ingen tomat"
+			
+				},
+				{
+					name: "Halloumi",
+					description: "gurka",
+					price: 79,
+					amount: 2,
+					message:"ingen gurka"			
+				}
+				],
+				costumerInfo:{
+				firstname: "my",
+				familyname: "Myson",
+				phone: 123546,
+				email: "abc@abs"
+				}
+		},
+		{ 	ordersId: "5678",
+			orderOpen: true,
+			orderContent: [
+				{
+					name: "Bliss",
+					description: "tomat",
+					price: 79,
+					amount: 1,
+					message:"ingen tomat"
+			
+				},
+				{
+					name: "Halloumi",
+					description: "gurka",
+					price: 79,
+					amount: 2,
+					message:"ingen gurka"			
+				}
+				],
+				costumerInfo:{
+				firstname: "my",
+				familyname: "Myson",
+				phone: 123546,
+				email: "abc@abs"
+				}
+		}
 	
-	return (
+	]
+
+	console.log('orders: ',orders);
+
+	const orderContent = orders.flatMap(dish => dish.orderContent)
+	console.log("orderContent:", orderContent)
+
+
+	return ( 
 		<section className="cashier_page">
 		<KeepLoggedIn/>
 		<p>Kassa</p>
 		<h1>Beställningar</h1>
+		
 		<div className="costumer_order_container">
-			<div className="costumer_order_card">
-				<p className="order_number">"ordernummer"</p>
-				<p className="order_dish">"vara"</p>
-				<div className="changes">
-					<p>"eventuella ändringar"</p>
-				</div>
-				<div className="send_btn"><button> SKICKA TILL KÖKET </button></div>
-			</div>
+			<ul>
+				{orders.map(order => (
+				<li className="costumer_order_card"
+					key={order.ordersId}>
+						<p className="order_number">{order.ordersId}</p>
+						<ul>
+						{order.orderContent.map(dish => (
+							<li className="order-card-dish"
+								key={dish.name}>	
+								<p className="order-amount">{dish.amount}</p>		
+								<p className="order_dish">{dish.name}</p>
+								<div className="changes">
+									<p>{dish.message}</p>
+								</div>
+							</li>
+							))}
+						</ul>
+					<div className="send_btn"><button> SKICKA TILL KÖKET </button></div>
+				</li>
+				))}
+			</ul>
 		</div>
 		</section>
 	)
