@@ -1,7 +1,7 @@
 import './FoodMenu.css'
 import FoodCard from '../../utils/FoodCard'
 import { useState, useEffect } from 'react'
-import  getMenu  from '../../data/GetMenu.js'
+import  getMenu  from '../../utils/APIfrontendFunctions/GetMenu.js'
 
 const FoodMenu = () => {
 
