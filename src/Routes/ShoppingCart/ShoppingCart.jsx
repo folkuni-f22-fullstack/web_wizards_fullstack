@@ -5,21 +5,32 @@ import { cartItemState } from "../../data/atom.js"
 import { IoMdAdd } from "react-icons/io"
 import { IoRemoveOutline, IoTrashSharp } from "react-icons/io5"
 import  useRemoveFromCart from "../../utils/removeFromCart"
+import { postOrder } from "../../data/PostOrder"
+import { costumerAtom } from "../../data/atom"
 
 
 const ShoppingCart = () => {
-	// const cart = useRecoilValue(cartItemsAtom)
+	const userInput = useRecoilValue(costumerAtom)
 	const cartItems = useRecoilValue(cartItemState)
 	const removeFromCart = useRemoveFromCart()
+	
 	console.log(cartItems)
 	const handleRemoveFromCart = (name) => {
 		removeFromCart(name)
 		console.log('removed')
 	}
 	const countPriceTotal = cartItems.reduce((total, cartItem) => total + cartItem.priceTotal, 0)
-	
-	
-	
+
+	const handleOrderSubmit = async (event) => {
+		try {
+		
+			await postOrder(cartItems, userInput)
+			console.log('success, order är skikad till restaurang', cartItems, userInput)
+			event.preventDefault
+		} catch (error) {
+			console.error('error, order inte skickad', error.message )
+		}
+	}
 
 	return (
 		<>
@@ -46,7 +57,7 @@ const ShoppingCart = () => {
 					</div>
 					<div className="input">
 						<p>Ändra/ta bort i din rätt:</p>
-						<input className="input change"/>
+						<input name={item.message} onChange={(event) => event.target.value} className="input change"/>
 					</div>
 
 					
@@ -60,6 +71,7 @@ const ShoppingCart = () => {
 			<button 
 			type="submit"
 			className="order-submit-button"
+			onClick={() => handleOrderSubmit(cartItems, userInput)}
 			>Bekräfta</button>
 		</>
 	)
