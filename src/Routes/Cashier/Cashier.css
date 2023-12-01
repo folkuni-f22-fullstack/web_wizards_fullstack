@@ -47,8 +47,14 @@
 
 .order_amount {
 	font-weight: 700;
-	grid-column: 1;
+	/* grid-column: 1;
 	grid-row-start: 1;
+	margin-bottom: 0.2em; */
+}
+
+.order_amount_container {
+	grid-column: 1/2;
+	grid-row-start: 1/2;
 	margin-bottom: 0.2em;
 }
 

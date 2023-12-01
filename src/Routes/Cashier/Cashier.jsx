@@ -1,9 +1,11 @@
 import "./cashier.css"
 import KeepLoggedIn from "../../utils/login/KeepLoggedIn"
 import { FiRefreshCcw } from "react-icons/fi"
+import { IoRemoveOutline } from "react-icons/io5"
+import { IoMdAdd } from "react-icons/io"
 
 // import { useRecoilState } from "recoil";
-// import { useState } from "react";
+import { useState } from "react"
 /* import getOrders from "../../utils/APIfrontendFunctions/getOrders";
 
 const dborders = getOrders()
@@ -11,6 +13,29 @@ console.log(dborders); */
 
 const Cashier = () => {
 	// const [orders, setOrders] = useState()
+	const [orderQuantities, setOrderQuantities] = useState({})
+
+	const handleIncreaseAmount = (orderId, dishName) => {
+		setOrderQuantities((prevQuantities) => {
+			const currentQuantity = prevQuantities[dishName] || 0
+			return {
+				...prevQuantities,
+				[dishName]: currentQuantity + 1,
+			}
+		})
+	}
+
+	const handleDecreaseAmount = (orderId, dishName) => {
+		setOrderQuantities((prevQuantities) => {
+			const currentQuantity = prevQuantities[dishName] || 0
+			// Ensure the quantity doesn't go below 0
+			const newQuantity = Math.max(0, currentQuantity - 1)
+			return {
+				...prevQuantities,
+				[dishName]: newQuantity,
+			}
+		})
+	}
 
 	// testvariabel:
 	const orders = [
@@ -101,12 +126,39 @@ const Cashier = () => {
 							<ul>
 								{order.orderContent.map((dish) => (
 									<li
-										className="card-container order-card-dish "
+										className="card-container order-card-dish"
 										key={dish.name}
 									>
-										<p className="order_amount">
-											{dish.amount} st
-										</p>
+										<div className="order_amount_container">
+											{" "}
+											<div className="add-delete-button-container">
+												<div
+													onClick={() =>
+														handleDecreaseAmount(
+															order.ordersId,
+															dish.name
+														)
+													}
+												>
+													<IoRemoveOutline className="remove-food" />
+												</div>
+											</div>
+											<p className="order_amount">
+												{orderQuantities[dish.name] ||
+													dish.amount}{" "}
+												st
+											</p>
+											<div
+												onClick={() =>
+													handleIncreaseAmount(
+														order.ordersId,
+														dish.name
+													)
+												}
+											>
+												<IoMdAdd className="add-food" />
+											</div>
+										</div>
 										<p className="order_dish">
 											{dish.name}
 										</p>
@@ -126,7 +178,8 @@ const Cashier = () => {
 										</div>
 										<div className="staff_price">
 											<p>
-												Pris: {dish.price * dish.amount}
+												Pris: {dish.price * dish.amount}{" "}
+												:-
 											</p>
 										</div>
 									</li>
