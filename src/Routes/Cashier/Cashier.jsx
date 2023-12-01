@@ -58,9 +58,9 @@ const Cashier = () => {
 
 	const orders = ordersData ? [...ordersData] : []
 
-	/* const handleOnClickSend = async () => {
-		await putOrder
-	} */
+	const handleOnClickSend = async () => {
+		// await putOrder
+	}
 
 	// const updatedOrders = orders.map((order) => {
 	// 	if (
@@ -218,9 +218,9 @@ const Cashier = () => {
 									))}
 							</ul>
 							<div className="send_btn">
-								{/* <button onClick={handleOnClickSend}>
+								<button onClick={handleOnClickSend}>
 									SKICKA TILL KÖKET
-								</button> */}
+								</button>
 							</div>
 						</li>
 					))}
