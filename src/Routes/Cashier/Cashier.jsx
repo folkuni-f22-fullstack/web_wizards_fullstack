@@ -10,6 +10,7 @@ const Cashier = () => {
 	const [ordersData, setOrdersData] = useState([])
 	const [orderQuantities, setOrderQuantities] = useState({})
 	const [staffMessage, setStaffMessage] = useState({})
+	const [dishDescriptions, setDishDescriptions] = useState({})
 
 	const handleIncreaseAmount = (ordersId, dishName) => {
 		setOrderQuantities((prevQuantities) => {
@@ -30,6 +31,13 @@ const Cashier = () => {
 				[dishName]: newQuantity,
 			}
 		})
+	}
+
+	const handleChangeDescription = (orderId, dishName, description) => {
+		setDishDescriptions((prev) => ({
+			...prev,
+			[`${orderId}-${dishName}`]: description,
+		}))
 	}
 
 	const handleInputStaffMessage = (orderId, dishName, message) => {
@@ -175,9 +183,24 @@ const Cashier = () => {
 												/>
 											</div>
 											<div className="ingredients">
+												<input
+													value={
+														dishDescriptions[
+															`${order.ordersId}-${dish.name}`
+														] || dish.description
+													}
+													onChange={(e) =>
+														handleChangeDescription(
+															order.orderId,
+															order.dishName,
+															e.target.value
+														)
+													}
+												/>
 												<p>
-													Ingredienser:
-													{dish.description}
+													{dishDescriptions[
+														`${order.ordersId}-${dish.name}`
+													] || dish.description}
 												</p>
 											</div>
 											<div className="staff_price">
