@@ -3,16 +3,12 @@ import KeepLoggedIn from "../../utils/login/KeepLoggedIn"
 import { FiRefreshCcw } from "react-icons/fi"
 import { IoRemoveOutline } from "react-icons/io5"
 import { IoMdAdd } from "react-icons/io"
-
-// import { useRecoilState } from "recoil";
+import { useEffect } from "react"
 import { useState } from "react"
-/* import getOrders from "../../utils/APIfrontendFunctions/getOrders";
-
-const dborders = getOrders()
-console.log(dborders); */
+import getOrders from "../../utils/APIfrontendFunctions/getOrders"
 
 const Cashier = () => {
-	// const [orders, setOrders] = useState()
+	const [ordersData, setOrdersData] = useState([])
 	const [orderQuantities, setOrderQuantities] = useState({})
 
 	const handleIncreaseAmount = (orderId, dishName) => {
@@ -37,66 +33,15 @@ const Cashier = () => {
 		})
 	}
 
-	// testvariabel:
-	const orders = [
-		{
-			ordersId: "1234",
-			orderOpen: false,
-			orderContent: [
-				{
-					name: "Bliss",
-					description: "tomat",
-					price: 79,
-					amount: 1,
-					message: "ingen tomat",
-				},
-				{
-					name: "Halloumi",
-					description: "gurka",
-					price: 79,
-					amount: 2,
-					message: "ingen gurka",
-				},
-			],
-			costumerInfo: {
-				firstname: "my",
-				familyname: "Myson",
-				phone: 123546,
-				email: "abc@abs",
-			},
-		},
-		{
-			ordersId: "5678",
-			orderOpen: true,
-			orderContent: [
-				{
-					name: "Blobb",
-					description: "tomat",
-					price: 79,
-					amount: 1,
-					message: "ingen tomat",
-				},
-				{
-					name: "Orginal",
-					description: "gurka",
-					price: 79,
-					amount: 2,
-					message: "ingen gurka",
-				},
-			],
-			costumerInfo: {
-				firstname: "my",
-				familyname: "Myson",
-				phone: 123546,
-				email: "abc@abs",
-			},
-		},
-	]
+	useEffect(() => {
+		const fetchData = async () => {
+			const data = await getOrders()
+			setOrdersData(data.items)
+		}
+		fetchData()
+	}, [])
 
-	console.log("orders: ", orders)
-
-	const orderContent = orders.flatMap((dish) => dish.orderContent)
-	console.log("orderContent:", orderContent)
+	const orders = ordersData ? [...ordersData] : []
 
 	return (
 		<section className="cashier_page">
@@ -124,66 +69,73 @@ const Cashier = () => {
 								{order.orderOpen ? "Order öppen" : "Order låst"}
 							</p>
 							<ul>
-								{order.orderContent.map((dish) => (
-									<li
-										className="card-container order-card-dish"
-										key={dish.name}
-									>
-										<div className="order_amount_container">
-											{" "}
-											<div className="add-delete-button-container">
+								{order.orderContent &&
+									order.orderContent.cartItems &&
+									order.orderContent.cartItems.map((dish) => (
+										<li
+											className="card-container order-card-dish"
+											key={dish.name}
+										>
+											<div className="order_amount_container">
+												{" "}
+												<div className="add-delete-button-container">
+													<div
+														onClick={() =>
+															handleDecreaseAmount(
+																order.ordersId,
+																dish.name
+															)
+														}
+													>
+														<IoRemoveOutline className="remove-food" />
+													</div>
+												</div>
+												<p className="order_amount">
+													{orderQuantities[
+														dish.name
+													] || dish.amount}{" "}
+													st
+												</p>
 												<div
 													onClick={() =>
-														handleDecreaseAmount(
+														handleIncreaseAmount(
 															order.ordersId,
 															dish.name
 														)
 													}
 												>
-													<IoRemoveOutline className="remove-food" />
+													<IoMdAdd className="add-food" />
 												</div>
 											</div>
-											<p className="order_amount">
-												{orderQuantities[dish.name] ||
-													dish.amount}{" "}
-												st
+											<p className="order_dish">
+												{dish.name}
 											</p>
-											<div
-												onClick={() =>
-													handleIncreaseAmount(
-														order.ordersId,
-														dish.name
-													)
-												}
-											>
-												<IoMdAdd className="add-food" />
+											<div className="changes">
+												<p>
+													Meddelande: {dish.message}
+												</p>
 											</div>
-										</div>
-										<p className="order_dish">
-											{dish.name}
-										</p>
-										<div className="changes">
-											<p>Meddelande: {dish.message}</p>
-										</div>
-										<div className="staff_changes">
-											<p>
-												Meddelande från personalen:{" "}
-												{dish.staffmessage}
-											</p>
-										</div>
-										<div className="ingredients">
-											<p>
-												Ingredienser: {dish.description}
-											</p>
-										</div>
-										<div className="staff_price">
-											<p>
-												Pris: {dish.price * dish.amount}{" "}
-												:-
-											</p>
-										</div>
-									</li>
-								))}
+											<div className="staff_changes">
+												<p>
+													Meddelande från personalen:{" "}
+													{dish.staffmessage}
+												</p>
+											</div>
+											<div className="ingredients">
+												<p>
+													Ingredienser:{" "}
+													{dish.description}
+												</p>
+											</div>
+											<div className="staff_price">
+												<p>
+													Pris:{" "}
+													{dish.price * dish.amount}{" "}
+													:-
+												</p>
+											</div>
+										</li>
+									))}
 							</ul>
 							<div className="send_btn">
 								<button> SKICKA TILL KÖKET </button>
