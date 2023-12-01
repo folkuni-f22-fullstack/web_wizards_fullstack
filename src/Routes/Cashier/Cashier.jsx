@@ -33,10 +33,10 @@ const Cashier = () => {
 		})
 	}
 
-	const handleChangeDescription = (orderId, dishName, description) => {
+	const handleChangeDescription = (ordersId, dish, description) => {
 		setDishDescriptions((prev) => ({
 			...prev,
-			[`${orderId}-${dishName}`]: description,
+			[`${ordersId}-${dish}`]: description,
 		}))
 	}
 
@@ -191,12 +191,13 @@ const Cashier = () => {
 													}
 													onChange={(e) =>
 														handleChangeDescription(
-															order.orderId,
-															order.dishName,
+															order.ordersId,
+															dish.name,
 															e.target.value
 														)
 													}
 												/>
+
 												<p>
 													{dishDescriptions[
 														`${order.ordersId}-${dish.name}`
