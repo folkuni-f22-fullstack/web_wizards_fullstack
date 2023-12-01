@@ -3,13 +3,13 @@ import KeepLoggedIn from "../../utils/login/KeepLoggedIn"
 import { FiRefreshCcw } from "react-icons/fi"
 import { IoRemoveOutline } from "react-icons/io5"
 import { IoMdAdd } from "react-icons/io"
-import { useEffect } from "react"
-import { useState } from "react"
-import getOrders from "../../utils/APIfrontendFunctions/getOrders"
+import { useEffect, useState } from "react"
+import getOrders from "../../utils/APIfrontendFunctions/GetOrders"
 
 const Cashier = () => {
 	const [ordersData, setOrdersData] = useState([])
 	const [orderQuantities, setOrderQuantities] = useState({})
+	const [staffMessage, setStaffMessage] = useState({})
 
 	const handleIncreaseAmount = (ordersId, dishName) => {
 		setOrderQuantities((prevQuantities) => {
@@ -32,6 +32,14 @@ const Cashier = () => {
 		})
 	}
 
+	const handleInputStaffMessage = (orderId, dishName, message) => {
+		setStaffMessage((prevMessages) => ({
+			...prevMessages,
+			[`${orderId}-${dishName}`]: message,
+		}))
+		console.log("staffMessage:", message)
+	}
+
 	useEffect(() => {
 		const fetchData = async () => {
 			const data = await getOrders()
@@ -46,13 +54,35 @@ const Cashier = () => {
 		await putOrder
 	} */
 
-	// const handleInputStaffMessage = () => {
-	// 	const updatedOrders = orders.map(() =>
-	// 		ordersId.name === ordersId.name
-	// 			? { ...cartItem, message: event.target.value }
-	// 			: cartItem
-	// 	)
-	// }
+	// const updatedOrders = orders.map((order) => {
+	// 	if (
+	// 		order &&
+	// 		order.ordersId === ordersId &&
+	// 		order.orderContent &&
+	// 		order.orderContent.cartItems
+	// 	) {
+	// 		const updatedCartItems = order.ordersContent.cartItems.map(
+	// 			(item) => {
+	// 				if (item.name === dishName) {
+	// 					return { ...item, staffMessage: event.target.value }
+	// 				}
+
+	// 				return item
+	// 			}
+	// 		)
+	// 		return {
+	// 			...order,
+	// 			orderContent: {
+	// 				...order.orderContent,
+	// 				cartItems: updatedCartItems,
+	// 			},
+	// 		}
+	// 	}
+	// 	return order
+	// })
+	// setOrdersData(updatedOrders)
+	// console.log(updatedOrders)
+
 	return (
 		<section className="cashier_page">
 			<KeepLoggedIn />
@@ -125,11 +155,24 @@ const Cashier = () => {
 												</p>
 											</div>
 											<div className="staff_changes">
-												{/* <input
+												<input
 													type="text"
 													placeholder="Skicka meddelande till kocken"
-													onChange={handleInputStaffMessage()}
-												/> */}
+													value={
+														staffMessage[
+															`${order.ordersId}-${dish.name}`
+														] ||
+														dish.staffMessage ||
+														""
+													}
+													onChange={(event) =>
+														handleInputStaffMessage(
+															order.ordersId,
+															dish.name,
+															event.target.value
+														)
+													}
+												/>
 											</div>
 											<div className="ingredients">
 												<p>
