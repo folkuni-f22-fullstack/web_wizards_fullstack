@@ -73,6 +73,11 @@ const Chef = () => {
 		},
 	]
 
+	const filteredOrders = orders.filter((order) => !order.orderOpen)
+
+	const orderContent = filteredOrders.flatMap((dish) => dish.orderContent)
+	console.log(orderContent, "orderContent")
+
 	return (
 		<section className="chef_container">
 			<KeepLoggedIn />
@@ -87,16 +92,50 @@ const Chef = () => {
 			</div>
 
 			<div className="costumer_order_container">
-				<div className="costumer_order_card">
-					<p className="order_number">"ordernummer"</p>
-					<p className="order_dish">"vara"</p>
-					<div className="changes">
-						<p>"eventuella ändringar"</p>
-					</div>
-					<div className="send_btn">
-						<button> ORDER REDO</button>
-					</div>
-				</div>
+				<ul>
+					{filteredOrders.map((order) => (
+						<li
+							className="costumer_order_card"
+							key={order.ordersId}
+						>
+							<p className="order_number">
+								order: {order.ordersId}
+							</p>
+							<ul>
+								{order.orderContent.map((dish) => (
+									<li
+										className="card-container order-card-dish "
+										key={dish.name}
+									>
+										<p className="order_amount">
+											{dish.amount} st
+										</p>
+										<p className="order_dish">
+											{dish.name}
+										</p>
+										<div className="changes">
+											<p>Meddelande: {dish.message}</p>
+										</div>
+										<div className="staff_changes">
+											<p>
+												Meddelande från personalen:{" "}
+												{dish.staffmessage}
+											</p>
+										</div>
+										<div className="ingredients">
+											<p>
+												Ingredienser: {dish.description}
+											</p>
+										</div>
+									</li>
+								))}
+							</ul>
+							<div className="send_btn">
+								<button> ORDER KLAR </button>
+							</div>
+						</li>
+					))}
+				</ul>
 			</div>
 		</section>
 	)

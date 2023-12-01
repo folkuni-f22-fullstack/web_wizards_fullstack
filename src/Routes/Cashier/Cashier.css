@@ -28,14 +28,14 @@
 }
 
 .card-container.order-card-dish {
-	display: flex;
+	/* display: flex;
 	align-items: center;
-	justify-content: space-around;
+	justify-content: space-around; */
 	margin-bottom: 1em;
 	border-radius: var(--inner-radius);
-}
-
-.changes {
+	display: grid;
+	grid-template-columns: repeat(6, 1fr);
+	grid-template-rows: auto;
 }
 
 .order_number {
@@ -47,9 +47,30 @@
 
 .order_amount {
 	font-weight: 700;
+	grid-column: 1;
+	grid-row-start: 1;
+	margin-bottom: 0.2em;
 }
 
 .order_dish {
+	grid-column: 2/3;
+	grid-row-start: 1;
+}
+
+.changes {
+	grid-column: 3/6;
+	grid-row-start: 1;
+}
+
+.staff_changes {
+	grid-column: 2/6;
+	grid-row-start: 2;
+	margin-bottom: 0.2em;
+}
+
+.ingredients {
+	grid-column: 2/6;
+	grid-row-start: 3;
 }
 
 .send_btn {
