@@ -1,15 +1,21 @@
 import "./confirmation.css"
+import { FiRefreshCcw } from "react-icons/fi" 
 
 // Behöver importera datan från varukorgen så att vi kan mappa ut den.
 
 // eventuella states som kan behövas för att rendera om beställningen är öppen eller låst: 
 
-// const [openOrder setOpenOrder ] = usestate()
-// const [ OrderLocked setOrderLocked ] = usestate()
+const [openOrder, setOpenOrder ] = usestate()
+const [ OrderLocked, setOrderLocked ] = usestate()
 
 const Confirmation = () => {
 	return (
 		<section className="confirmation_container">
+			<div className="update-container">
+				<button className="update-button">
+                        <FiRefreshCcw />
+                </button>
+			</div>
 			<h1 className="head_confirmation">Bekräftelse</h1>
 			<div className="order_confirmation_info">
 				{/* Här vill vi att det ska renderas olika texter beroende på om beställningen är öppen eller låst */}

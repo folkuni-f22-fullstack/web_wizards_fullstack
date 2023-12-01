@@ -42,3 +42,14 @@
 	color: var(--dark-green-acc);
 	padding: 0em 0 1em 0;
 }
+
+.update-container {
+	display: flex; 
+	flex-direction: row;
+	justify-content: flex-end;
+}
+
+.update-button {
+	width: 4em;
+	padding: 0.5em; 
+}
