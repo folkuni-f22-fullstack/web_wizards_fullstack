@@ -4,14 +4,15 @@ import { cartItemState } from "../data/atom";
 const useCart = () => {
   const [cartItems, setCartItems] = useRecoilState(cartItemState);
 
-  const addToCart = (dish, message) => {
+  const addToCart = (dish,) => {
     let cartItem = {
       amount: 1,
       amountTotal: 1,
       image: dish.image,
       name: dish.name,
       description: dish.description,
-		message: message,
+		message: '',
+		staffMessage: '',
       price: dish.price,
       priceTotal: dish.price,
     };

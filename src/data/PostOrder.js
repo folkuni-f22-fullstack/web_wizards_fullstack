@@ -9,12 +9,12 @@ export async function postOrder(cartItems, userInput) {
 				'Content-Type': 'application/json'
 			},
 			body: JSON.stringify({
-				"items": [
-				{	"orderLocked": false,
-					"orderContent": {cartItems,
-					"costumerInfo": userInput
+				"items": [ {
+					"orderContent": {
+						cartItems,
+						"costumerInfo": userInput,
+						"orderLocked": false,
 					} 
-					
 				}
 				]
 			}),

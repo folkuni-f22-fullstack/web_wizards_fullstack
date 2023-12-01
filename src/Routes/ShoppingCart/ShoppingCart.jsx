@@ -1,6 +1,6 @@
 import CostumerForm from "../../utils/costumerForms/CostumerForm"
 import "./ShoppingCart.css"
-import { useRecoilValue } from "recoil"
+import { useRecoilValue, useRecoilState } from "recoil"
 import { cartItemState } from "../../data/atom.js"
 import { IoMdAdd } from "react-icons/io"
 import { IoRemoveOutline, IoTrashSharp } from "react-icons/io5"
@@ -13,7 +13,7 @@ const ShoppingCart = () => {
 	const userInput = useRecoilValue(costumerAtom)
 	const cartItems = useRecoilValue(cartItemState)
 	const removeFromCart = useRemoveFromCart()
-	
+	const [, setCartItems] = useRecoilState(cartItemState);
 	console.log(cartItems)
 	const handleRemoveFromCart = (name) => {
 		removeFromCart(name)
@@ -23,13 +23,25 @@ const ShoppingCart = () => {
 
 	const handleOrderSubmit = async (event) => {
 		try {
-		
+			event.preventDefault;
+
+			await setCartItems((prevCartItems) => [...prevCartItems])
+
 			await postOrder(cartItems, userInput)
-			console.log('success, order är skikad till restaurang', cartItems, userInput)
-			event.preventDefault
+			console.log('success, order är skickad till restaurang', cartItems, userInput)
+			
 		} catch (error) {
 			console.error('error, order inte skickad', error.message )
 		}
+	}
+
+	const handleInputMessage = (event, item) => {
+		const orderItems = cartItems.map((cartItem) => 
+		cartItem.name === item?.name ? {...cartItem,
+					message: event.target.value }
+					: cartItem )
+		
+		setCartItems(orderItems)
 	}
 
 	return (
@@ -57,7 +69,7 @@ const ShoppingCart = () => {
 					</div>
 					<div className="input">
 						<p>Ändra/ta bort i din rätt:</p>
-						<input name={item.message} onChange={(event) => event.target.value} className="input change"/>
+						<input onChange={(event) => handleInputMessage(event, item)} className="input change"/>
 					</div>
 
 					
