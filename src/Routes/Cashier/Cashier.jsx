@@ -113,6 +113,22 @@ const Cashier = () => {
 										<div className="changes">
 											<p>Meddelande: {dish.message}</p>
 										</div>
+										<div className="staff_changes">
+											<p>
+												Meddelande från personalen:{" "}
+												{dish.staffmessage}
+											</p>
+										</div>
+										<div className="ingredients">
+											<p>
+												Ingredienser: {dish.description}
+											</p>
+										</div>
+										<div className="staff_price">
+											<p>
+												Pris: {dish.price * dish.amount}
+											</p>
+										</div>
 									</li>
 								))}
 							</ul>
