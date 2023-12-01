@@ -8,7 +8,7 @@ const getOrders = async () => {
 			throw new Error("Failed to fetch data")
 		}
 		const data = await response.json()
-		console.log(data)
+		console.log('Data i get orders: ', data)
 		return data
 	} catch (error) {
 		console.error("Error fetching data:", error.message)

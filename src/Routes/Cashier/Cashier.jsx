@@ -1,78 +1,27 @@
 import "./cashier.css"
 import KeepLoggedIn from "../../utils/login/KeepLoggedIn"
 import { FiRefreshCcw } from "react-icons/fi"
+import { useEffect } from "react"
+ import { useState } from "react";
+ import getOrders from "../../utils/APIfrontendFunctions/getOrders";
 
-// import { useRecoilState } from "recoil";
-// import { useState } from "react";
-/* import getOrders from "../../utils/APIfrontendFunctions/getOrders";
 
-const dborders = getOrders()
-console.log(dborders); */
 
 const Cashier = () => {
-	// const [orders, setOrders] = useState()
+	 const [ordersData, setOrdersData] = useState([])
+	 
 
-	// testvariabel:
-	const orders = [
-		{
-			ordersId: "1234",
-			orderOpen: false,
-			orderContent: [
-				{
-					name: "Bliss",
-					description: "tomat",
-					price: 79,
-					amount: 1,
-					message: "ingen tomat",
-				},
-				{
-					name: "Halloumi",
-					description: "gurka",
-					price: 79,
-					amount: 2,
-					message: "ingen gurka",
-				},
-			],
-			costumerInfo: {
-				firstname: "my",
-				familyname: "Myson",
-				phone: 123546,
-				email: "abc@abs",
-			},
-		},
-		{
-			ordersId: "5678",
-			orderOpen: true,
-			orderContent: [
-				{
-					name: "Blobb",
-					description: "tomat",
-					price: 79,
-					amount: 1,
-					message: "ingen tomat",
-				},
-				{
-					name: "Orginal",
-					description: "gurka",
-					price: 79,
-					amount: 2,
-					message: "ingen gurka",
-				},
-			],
-			costumerInfo: {
-				firstname: "my",
-				familyname: "Myson",
-				phone: 123546,
-				email: "abc@abs",
-			},
-		},
-	]
+	useEffect(() => {
+		const fetchData = async () => {
+			const data = await getOrders()
+			setOrdersData(data.items)
+			
+		}
+		fetchData()
+	}, [])
 
-	console.log("orders: ", orders)
-
-	const orderContent = orders.flatMap((dish) => dish.orderContent)
-	console.log("orderContent:", orderContent)
-
+	const orders = ordersData ? [...ordersData]: []
+	
 	return (
 		<section className="cashier_page">
 			<KeepLoggedIn />
@@ -95,7 +44,7 @@ const Cashier = () => {
 								{order.orderOpen ? "Order öppen" : "Order låst"}
 							</p>
 							<ul>
-								{order.orderContent.map((dish) => (
+								{order.orderContent && order.orderContent.cartItems && order.orderContent.cartItems.map((dish) => (
 									<li
 										className="card-container order-card-dish "
 										key={dish.name}
@@ -124,3 +73,5 @@ const Cashier = () => {
 }
 
 export default Cashier
+
+
