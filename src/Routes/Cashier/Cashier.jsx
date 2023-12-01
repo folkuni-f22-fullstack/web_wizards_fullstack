@@ -6,8 +6,8 @@ import { useEffect } from "react"
  import getOrders from "../../utils/APIfrontendFunctions/getOrders";
 
 
-
 const Cashier = () => {
+
 	 const [ordersData, setOrdersData] = useState([])
 	 
 
