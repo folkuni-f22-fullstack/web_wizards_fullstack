@@ -1,42 +1,57 @@
-import './FoodMenu.css'
-import FoodCard from '../../Components/FoodCard'
-import { data, kidsData, drinksData, sidesData } from '../../data/testdata'
-
-
-
+import "./FoodMenu.css"
+import FoodCard from "../../utils/FoodCard"
+import { useState, useEffect } from "react"
+import getMenu from "../../utils/APIfrontendFunctions/GetMenu.js"
 
 const FoodMenu = () => {
+	const [data, setData] = useState([])
 
-	const dishes = [...data]
-	const kidsDishes = [...kidsData]
-	const drinks = [...drinksData]
-	const sides = [...sidesData]
+	useEffect(() => {
+		const fetchData = async () => {
+			const menuData = await getMenu()
+			setData(menuData.items)
+		}
+		fetchData()
+	}, [])
 
-	return(
+	console.log("data", data)
+	const allData = data ? [...data] : []
 
-
-		<div className='food-menu'> 
+	const dishes = allData.filter((dish) => dish.sk.includes("burger"))
+	const kidsDishes = allData.filter((dish) => dish.sk.includes("kids"))
+	const drinks = allData.filter((dish) => dish.sk.includes("drinks"))
+	const sides = allData.filter((dish) => dish.sk.includes("sides"))
+	// console.log('dishes', dishes);
+	return (
+		<div className="food-menu">
 			<h1>MENY</h1>
 			<ul>
-			{ dishes.map(dish =>(<FoodCard key = {dish.name} dish = {dish} />) ) } 
+				{dishes.map((dish) => (
+					<FoodCard key={dish.name} dish={dish} />
+				))}
 			</ul>
 
 			<h1>BARNMENY</h1>
 			<ul>
-			{ kidsDishes.map(dish =>(<FoodCard key = {dish.name} dish = {dish} />) ) } 
+				{kidsDishes.map((dish) => (
+					<FoodCard key={dish.name} dish={dish} />
+				))}
 			</ul>
 
 			<h1>DRYCKER</h1>
 			<ul>
-			{ drinks.map(dish =>(<FoodCard key = {dish.name} dish = {dish} />) ) } 
+				{drinks.map((dish) => (
+					<FoodCard key={dish.name} dish={dish} />
+				))}
 			</ul>
 			<h1>TILLBEHÖR</h1>
 			<ul>
-			{ sides.map(dish =>(<FoodCard key = {dish.name} dish = {dish} />) ) } 
+				{sides.map((dish) => (
+					<FoodCard key={dish.name} dish={dish} />
+				))}
 			</ul>
 		</div>
 	)
-
 }
 
 export default FoodMenu
