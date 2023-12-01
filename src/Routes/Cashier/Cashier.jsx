@@ -11,7 +11,7 @@ const Cashier = () => {
 	const [ordersData, setOrdersData] = useState([])
 	const [orderQuantities, setOrderQuantities] = useState({})
 
-	const handleIncreaseAmount = (orderId, dishName) => {
+	const handleIncreaseAmount = (ordersId, dishName) => {
 		setOrderQuantities((prevQuantities) => {
 			const currentQuantity = prevQuantities[dishName] || 0
 			return {
@@ -21,10 +21,9 @@ const Cashier = () => {
 		})
 	}
 
-	const handleDecreaseAmount = (orderId, dishName) => {
+	const handleDecreaseAmount = (ordersId, dishName) => {
 		setOrderQuantities((prevQuantities) => {
 			const currentQuantity = prevQuantities[dishName] || 0
-			// Ensure the quantity doesn't go below 0
 			const newQuantity = Math.max(0, currentQuantity - 1)
 			return {
 				...prevQuantities,
@@ -43,6 +42,17 @@ const Cashier = () => {
 
 	const orders = ordersData ? [...ordersData] : []
 
+	/* const handleOnClickSend = async () => {
+		await putOrder
+	} */
+
+	// const handleInputStaffMessage = () => {
+	// 	const updatedOrders = orders.map(() =>
+	// 		ordersId.name === ordersId.name
+	// 			? { ...cartItem, message: event.target.value }
+	// 			: cartItem
+	// 	)
+	// }
 	return (
 		<section className="cashier_page">
 			<KeepLoggedIn />
@@ -77,34 +87,33 @@ const Cashier = () => {
 											key={dish.name}
 										>
 											<div className="order_amount_container">
-												{" "}
 												<div className="add-delete-button-container">
 													<div
 														onClick={() =>
-															handleDecreaseAmount(
+															handleIncreaseAmount(
 																order.ordersId,
 																dish.name
 															)
 														}
 													>
-														<IoRemoveOutline className="remove-food" />
+														<IoMdAdd className="add-food" />
 													</div>
 												</div>
 												<p className="order_amount">
 													{orderQuantities[
 														dish.name
-													] || dish.amount}{" "}
+													] || dish.amount}
 													st
 												</p>
 												<div
 													onClick={() =>
-														handleIncreaseAmount(
+														handleDecreaseAmount(
 															order.ordersId,
 															dish.name
 														)
 													}
 												>
-													<IoMdAdd className="add-food" />
+													<IoRemoveOutline className="remove-food" />
 												</div>
 											</div>
 											<p className="order_dish">
@@ -116,21 +125,25 @@ const Cashier = () => {
 												</p>
 											</div>
 											<div className="staff_changes">
-												<p>
-													Meddelande från personalen:{" "}
-													{dish.staffmessage}
-												</p>
+												{/* <input
+													type="text"
+													placeholder="Skicka meddelande till kocken"
+													onChange={handleInputStaffMessage()}
+												/> */}
 											</div>
 											<div className="ingredients">
 												<p>
-													Ingredienser:{" "}
+													Ingredienser:
 													{dish.description}
 												</p>
 											</div>
 											<div className="staff_price">
 												<p>
-													Pris:{" "}
-													{dish.price * dish.amount}{" "}
+													Pris:
+													{dish.price *
+														(orderQuantities[
+															dish.name
+														] || dish.amount)}
 													:-
 												</p>
 											</div>
@@ -138,7 +151,9 @@ const Cashier = () => {
 									))}
 							</ul>
 							<div className="send_btn">
-								<button> SKICKA TILL KÖKET </button>
+								{/* <button onClick={handleOnClickSend}>
+									SKICKA TILL KÖKET
+								</button> */}
 							</div>
 						</li>
 					))}
