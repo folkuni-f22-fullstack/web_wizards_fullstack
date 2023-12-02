@@ -46,10 +46,14 @@
 .update-container {
 	display: flex; 
 	flex-direction: row;
-	justify-content: flex-start;
+	justify-content: flex-end;
+	margin: 1em 2em; 
 }
 
 .update-button {
 	width: 4em;
-	padding: 0.5em; 
+}
+
+.change-order-button {
+	padding: 1em; 
 }
