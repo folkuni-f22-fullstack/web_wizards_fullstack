@@ -14,14 +14,13 @@ const FoodMenu = () => {
 		fetchData()
 	}, [])
 
-	console.log("data", data)
 	const allData = data ? [...data] : []
 
 	const dishes = allData.filter((dish) => dish.sk.includes("burger"))
 	const kidsDishes = allData.filter((dish) => dish.sk.includes("kids"))
 	const drinks = allData.filter((dish) => dish.sk.includes("drinks"))
 	const sides = allData.filter((dish) => dish.sk.includes("sides"))
-	// console.log('dishes', dishes);
+	
 	return (
 		<div className="food-menu">
 			<h1>MENY</h1>
