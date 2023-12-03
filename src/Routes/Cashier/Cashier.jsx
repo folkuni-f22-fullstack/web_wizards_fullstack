@@ -114,7 +114,12 @@ const Cashier = () => {
 								order: {order.ordersId}
 							</p>
 							<p className="order_open">
-								{order.orderOpen ? "Order öppen" : "Order låst"}
+								{order.orderContent &&
+								order.orderContent.orderLocked !== undefined
+									? order.orderContent.orderLocked
+										? "Order öppen"
+										: "Order låst"
+									: "Order status unknown"}
 							</p>
 							<ul>
 								{order.orderContent &&
