@@ -9,6 +9,7 @@ import { IoMdAdd } from "react-icons/io"
 import useRemoveFromCart from "../../utils/removeFromCart"
 // import { putOrder } from "../../utils/APIfrontendFunctions/PostOrder"
 import { costumerAtom } from "../../data/atom"
+import { orderDataState } from "../../data/atom"
 
 
 // eventuella states som kan behövas för att rendera om beställningen är öppen eller låst: 
@@ -18,16 +19,18 @@ const Confirmation = () => {
 	const cartItems = useRecoilValue(cartItemState)
 	const removeFromCart = useRemoveFromCart()
 	const [, setCartItems] = useRecoilState(cartItemState)
+	const orderData = useRecoilValue(orderDataState)
 
 	const [data, setData] = useState({})
-
+	console.log('detta ligger i orderData:' , orderData)
 	useEffect(() => {
 		const fetchData = async () => {
 
-			const ordersId = "LR91B9PTdRUCCKqXz-dM4"
-			const orderData = await getOrdersId(ordersId)
-			setData(orderData)
-			console.log('orderid ', orderData)
+			const ordersId = orderData.order.ordersId
+			const ordersIdData = await getOrdersId(ordersId)
+			// setData(orderData)
+			console.log(ordersId)
+			console.log('orderid ', ordersIdData)
 		}
 		fetchData()
 	}, [])
