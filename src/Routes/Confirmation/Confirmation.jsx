@@ -20,29 +20,37 @@ const Confirmation = () => {
 	const removeFromCart = useRemoveFromCart()
 	const [, setCartItems] = useRecoilState(cartItemState)
 	const orderData = useRecoilValue(orderDataState)
+	const [confirmationOrderData, setConfirmationOrderData ] = useState({})
 
-	const [data, setData] = useState({})
+	// const [data, setData] = useState({})
 	console.log('detta ligger i orderData:' , orderData)
 	useEffect(() => {
 		const fetchData = async () => {
 
-			const ordersId = orderData.order.ordersId
-			const ordersIdData = await getOrdersId(ordersId)
+			const ordersId = orderData.orderId
+			const data = await getOrdersId(ordersId)
 			// setData(orderData)
 			console.log(ordersId)
-			console.log('orderid ', ordersIdData)
+			console.log('data:' , data)
+			setConfirmationOrderData(data.order.orderContent)
+			
 		}
 		fetchData()
-	}, [])
+		
+	}, [orderData])
+console.log('cartItem:', confirmationOrderData )
+/* 	const order = confirmationOrderData ? [...confirmationOrderData] : []
+ */
+	// console.log('useState data : ', data);
 
-	console.log('useState data : ', data);
+	// const orderContent = order.orderContent &&
+	// order.orderContent.cartItems &&
+	// order.orderContent.cartItems
+	// console.log('Min ordercontent: ', orderContent)
 
-	const orderContent = data.order && data.order.orderContent
-	console.log('Min ordercontent: ', orderContent)
+	// const orderId = data.order && data.order.ordersId
 
-	const orderId = data.order && data.order.ordersId
-
-	console.log('ordernumret: ', orderId)
+	// console.log('ordernumret: ', orderId)
 	// const handleClickUpdate = () => {
 	// 	setOpenOrder(!openOrder)
 	// }
@@ -82,7 +90,7 @@ const Confirmation = () => {
                 </button>
 			</div>
 			<div className="order_confirmation_info">
-					<h2>Ordernummer: {data.order && data.order.ordersId} </h2>
+					<h2>Ordernummer: {orderData.orderId} </h2>
 				 <div className="open_order_text">
 					<h3>Nu är din order skickad till restaurangen.</h3>
 					
@@ -96,24 +104,24 @@ const Confirmation = () => {
 			
 				<h3 className="head_your_order">Din beställning: </h3>
 
-			<section className="shopping-cart">
-			{orderContent && orderContent.cartItems.map(item => (
-				<li key={item.name} className="card-container order-menu">
+			<section className="shopping-cart"> {
+			confirmationOrderData && confirmationOrderData.cartItems && confirmationOrderData.cartItems.map(dish => (
+				<li key={dish.name} className="card-container order-menu">
 					
 					<div className="image-container">
-						<img src={item.image} />
+						<img src={dish.image} />
 					</div>
 					<div className="name-container">
-						<h3>{item.name}</h3>
+						<h3>{dish.name}</h3>
 					</div>
-					<p className="description-text">{item.description}</p>
+					<p className="description-text">{dish.description}</p>
 					<div className="button-container">
 						<IoRemoveOutline className="remove-food"/>
-						<p>{item.amount}</p>
+						<p>{dish.amount}</p>
 						<IoMdAdd className="add-food" />
 					</div>
-					<p className="food-price">{item.priceTotal} :-</p>
-					<div onClick={() => handleRemoveFromCart(item.name)} className="dumpster">
+					<p className="food-price">{dish.priceTotal} :-</p>
+					<div onClick={() => handleRemoveFromCart(dish.name)} className="dumpster">
 						<IoTrashSharp  className="trashbin"/>
 					</div>
 					<div className="input">

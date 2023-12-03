@@ -8,6 +8,7 @@ import useRemoveFromCart from "../../utils/removeFromCart"
 import  {postOrder} from "../../utils/APIfrontendFunctions/PostOrder"
 import { costumerAtom } from "../../data/atom"
 import { orderDataState } from "../../data/atom.js"
+import  {useNavigate}  from "react-router-dom"
 
 const ShoppingCart = () => {
 	const userInput = useRecoilValue(costumerAtom)
@@ -15,7 +16,8 @@ const ShoppingCart = () => {
 	const removeFromCart = useRemoveFromCart()
 	const [, setCartItems] = useRecoilState(cartItemState)
 	const [orderData, setOrderData ] = useRecoilState(orderDataState)
-	console.log(cartItems)
+	const navigate = useNavigate()
+	// console.log(cartItems)
 	const handleRemoveFromCart = (name) => {
 		removeFromCart(name)
 		console.log("removed")
@@ -38,8 +40,9 @@ const ShoppingCart = () => {
 				cartItems,
 				userInput
 			)
-			setOrderData(responseOrder)
-			console.log(orderData)
+			setOrderData({orderId: responseOrder.orderId})
+			console.log('orderData', orderData)
+			navigate('/confirmation')
 		} catch (error) {
 			console.error("error, order inte skickad", error.message)
 		}
