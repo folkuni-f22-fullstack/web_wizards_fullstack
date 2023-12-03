@@ -83,6 +83,16 @@ const Chef = () => {
 	const orderContent = filteredOrders.flatMap((dish) => dish.orderContent)
 	console.log(orderContent, "orderContent")
 
+	const updateOrders = async () => {
+		try {
+			const updatedData = await getOrders()
+			setOrders(updatedData.items)
+			console.log("Orders updated successfully")
+		} catch (error) {
+			console.error("Error updating orders:", error)
+		}
+	}
+
 	return (
 		<section className="chef_container">
 			<KeepLoggedIn />
@@ -90,7 +100,7 @@ const Chef = () => {
 			<div className="header-button-container">
 				<h1>Beställningar</h1>
 				<div className="staff-button-container">
-					<button className="staff-button">
+					<button className="staff-button" onClick={updateOrders}>
 						<FiRefreshCcw />
 					</button>
 				</div>
