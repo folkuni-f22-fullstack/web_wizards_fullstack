@@ -5,6 +5,7 @@ import { IoRemoveOutline } from "react-icons/io5"
 import { IoMdAdd } from "react-icons/io"
 import { useEffect, useState } from "react"
 import getOrders from "../../utils/APIfrontendFunctions/GetOrders"
+import { putOrder } from "../../utils/APIfrontendFunctions/PutOrder"
 
 const Cashier = () => {
 	const [ordersData, setOrdersData] = useState([])
@@ -58,8 +59,27 @@ const Cashier = () => {
 
 	const orders = ordersData ? [...ordersData] : []
 
-	const handleOnClickSend = async () => {
-		// await putOrder
+	const handleOnClickSend = async (orderId, cartItems) => {
+		if (!Array.isArray(cartItems)) {
+			console.error("Invalid cartItems:", cartItems)
+			return
+		}
+
+		const updatedOrder = {
+			ordersId: orderId,
+			orderContent: {
+				cartItems: cartItems.map((dish) => ({
+					amount: dish.amount,
+					name: dish.name,
+					message: dish.message,
+					staffmessage: dish.staffmessage,
+					description: dish.description,
+				})),
+			},
+			orderLocked: true,
+		}
+
+		await putOrder(updatedOrder, orderId)
 	}
 
 	// const updatedOrders = orders.map((order) => {
@@ -91,6 +111,16 @@ const Cashier = () => {
 	// setOrdersData(updatedOrders)
 	// console.log(updatedOrders)
 
+	const updateOrders = async () => {
+		try {
+			const updatedData = await getOrders()
+			setOrdersData(updatedData.items)
+			console.log("Orders updated successfully")
+		} catch (error) {
+			console.error("Error updating orders:", error)
+		}
+	}
+
 	return (
 		<section className="cashier_page">
 			<KeepLoggedIn />
@@ -98,7 +128,10 @@ const Cashier = () => {
 			<div className="header-button-container">
 				<h1>Beställningar</h1>
 				<div className="staff-button-container">
-					<button className="staff-button">
+					<button
+						className="staff-button"
+						onClick={() => updateOrders()}
+					>
 						<FiRefreshCcw />
 					</button>
 				</div>
@@ -223,7 +256,18 @@ const Cashier = () => {
 									))}
 							</ul>
 							<div className="send_btn">
-								<button onClick={handleOnClickSend}>
+								<button
+									onClick={() =>
+										handleOnClickSend(
+											order.ordersId,
+											order.orderContent.cartItems
+										)
+									}
+									disabled={
+										order.orderContent &&
+										order.orderContent.orderLocked
+									}
+								>
 									SKICKA TILL KÖKET
 								</button>
 							</div>
