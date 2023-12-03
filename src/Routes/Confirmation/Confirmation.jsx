@@ -10,7 +10,6 @@ import useRemoveFromCart from "../../utils/removeFromCart"
 // import { putOrder } from "../../utils/APIfrontendFunctions/PostOrder"
 import { costumerAtom } from "../../data/atom"
 
-// Behöver importera datan från varukorgen så att vi kan mappa ut den.
 
 // eventuella states som kan behövas för att rendera om beställningen är öppen eller låst: 
 
@@ -24,9 +23,11 @@ const Confirmation = () => {
 
 	useEffect(() => {
 		const fetchData = async () => {
-			const ordersId = await getOrdersId()
-			setData(ordersId)
-			console.log('orderid ', ordersId)
+
+			const ordersId = "LR91B9PTdRUCCKqXz-dM4"
+			const orderData = await getOrdersId(ordersId)
+			setData(orderData)
+			console.log('orderid ', orderData)
 		}
 		fetchData()
 	}, [])
@@ -38,12 +39,7 @@ const Confirmation = () => {
 
 	const orderId = data.order && data.order.ordersId
 
-	console.log('kundens orderid: ', orderId)
-
-	// const order = data.order.orderContent
-	// console.log('order', order);
-
-
+	console.log('ordernumret: ', orderId)
 	// const handleClickUpdate = () => {
 	// 	setOpenOrder(!openOrder)
 	// }
@@ -53,20 +49,20 @@ const Confirmation = () => {
 	}
 	// const countPriceTotal = cartItems.reduce((total, cartItem) => total + cartItem.priceTotal, 0)
 
-	const handleOrderChangeSubmit = async (event) => {
-		try {
-			event.preventDefualt 
+	// const handleOrderChangeSubmit = async (event) => {
+	// 	try {
+	// 		event.preventDefualt 
 
-			await setCartItems((prevCartItems) => [...prevCartItems])
+	// 		await setCartItems((prevCartItems) => [...prevCartItems])
 
-			await putOrder(cartItems, userInput, ordersId)
-			console.log("sucess, den ändrade ordern är skickad till restaurangen.")
-			cartItems, 
-			userInput
-		} catch (error) {
-			console.log("error, orderns ändringar är inte skickade.", error.message)
-		}
-	}
+	// 		await putOrder(cartItems, userInput, ordersId)
+	// 		console.log("sucess, den ändrade ordern är skickad till restaurangen.")
+	// 		cartItems, 
+	// 		userInput
+	// 	} catch (error) {
+	// 		console.log("error, orderns ändringar är inte skickade.", error.message)
+	// 	}
+	// }
 
 	const handleInputMessage = (event, item) => {
 		const orderItems = orderContent.cartItems.map((cartItem) => cartItem.name === item?.name ? {...cartItem, message: event.target.value} : cartItem
@@ -135,7 +131,7 @@ const Confirmation = () => {
 			<button
 				type="submit"
 				className="change-order-button"
-				onClick={() => handleOrderChangeSubmit(cartItems)}
+				// onClick={() => handleOrderChangeSubmit(cartItems)}
 			>
 				Ändra order
 			</button>

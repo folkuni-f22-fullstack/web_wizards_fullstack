@@ -1,7 +1,7 @@
-const getOrdersId = async () => {
+const getOrdersId = async (ordersId) => {
 	try {
 		const response = await fetch(
-			"https://omw2d3h4o6.execute-api.eu-north-1.amazonaws.com/webwizards/orders/LR91B9PTdRUCCKqXz-dM4"
+			`https://omw2d3h4o6.execute-api.eu-north-1.amazonaws.com/webwizards/orders/${ordersId}`
 		)
 
 		if (!response.ok) {
