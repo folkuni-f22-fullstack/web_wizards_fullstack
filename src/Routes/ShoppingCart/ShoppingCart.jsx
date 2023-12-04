@@ -43,6 +43,7 @@ const ShoppingCart = () => {
 			)
 			setOrderData({orderId: responseOrder.orderId})
 			console.log('orderData', orderData)
+			localStorage.clear()
 			navigate('/confirmation')
 		} catch (error) {
 			console.error("error, order inte skickad", error.message)
@@ -76,20 +77,16 @@ const ShoppingCart = () => {
 		}
 	}
 
-
 	const countPriceTotal = cartItems.reduce((total, cartItem) => total + cartItem.priceTotal, 0)
 	
 	useEffect(() => {
 		const savedCartItems = localStorage.getItem('cartItems');
 		if (savedCartItems) {
 			setCartItems(JSON.parse(savedCartItems));
-			console.log('savedCartItems',savedCartItems);
-			console.log("cartItems",cartItems);
-		}
+		};
 	}, []);
 	
-	
-
+		
 	return (
 		<>
 			<h1 className="cart-h1">VARUKORG</h1>
