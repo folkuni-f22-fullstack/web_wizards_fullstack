@@ -44,7 +44,12 @@ export const cartItemsAtom = atom ({
 	default: []
 })
 
+// atom för confirmationssidan
 
+export const confirmationLockedState = atom ({
+	key: 'confirmationLockedState',
+	default: false
+})
 
 // atomer för order-formulär
 

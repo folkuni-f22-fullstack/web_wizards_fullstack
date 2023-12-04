@@ -42,3 +42,7 @@
 	color: var(--dark-green-acc);
 	padding: 0em 0 1em 0;
 }
+
+.blur {
+	filter: blur(1.5rem)
+}
