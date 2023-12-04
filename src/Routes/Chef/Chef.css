@@ -10,5 +10,14 @@
 	color: var(--light-brown-acc);
 }
 
-.staff-button {
+.header-button-container {
+	display: grid;
+	grid-template-columns: repeat(8, 1fr);
+	margin-right: 1.5em;
+}
+
+.staff-button-container {
+	grid-column: 8/8;
+	width: 4em;
+	justify-self: flex-end;
 }
