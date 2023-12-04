@@ -46,3 +46,18 @@
 .blur {
 	filter: blur(1.5rem)
 }
+
+.update-container {
+	display: flex; 
+	flex-direction: row;
+	justify-content: flex-end;
+	margin: 1em 2em; 
+}
+
+.update-button {
+	width: 4em;
+}
+
+.change-order-button {
+	padding: 1em; 
+}

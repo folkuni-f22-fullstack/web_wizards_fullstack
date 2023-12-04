@@ -39,7 +39,7 @@ const router = createBrowserRouter([
 			},
 			{
 				path: "/confirmation",
-				element: <Confirmation />,
+				element: <Confirmation/>//(props) => { const orderData = useRecoilValue(orderDataState)// 
 			},
 		]
 	},

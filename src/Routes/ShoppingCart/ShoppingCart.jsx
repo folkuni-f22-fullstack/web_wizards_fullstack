@@ -5,15 +5,19 @@ import { cartItemState } from "../../data/atom.js"
 import { IoMdAdd } from "react-icons/io"
 import { IoRemoveOutline, IoTrashSharp } from "react-icons/io5"
 import useRemoveFromCart from "../../utils/removeFromCart"
-// import { postOrder } from "../../data/PostOrder"
+import  {postOrder} from "../../utils/APIfrontendFunctions/PostOrder"
 import { costumerAtom } from "../../data/atom"
+import { orderDataState } from "../../data/atom.js"
+import  {useNavigate}  from "react-router-dom"
 
 const ShoppingCart = () => {
 	const userInput = useRecoilValue(costumerAtom)
 	const cartItems = useRecoilValue(cartItemState)
 	const removeFromCart = useRemoveFromCart()
 	const [, setCartItems] = useRecoilState(cartItemState)
-	console.log(cartItems)
+	const [orderData, setOrderData ] = useRecoilState(orderDataState)
+	const navigate = useNavigate()
+	// console.log(cartItems)
 	const handleRemoveFromCart = (name) => {
 		removeFromCart(name)
 		console.log("removed")
@@ -29,12 +33,16 @@ const ShoppingCart = () => {
 
 			await setCartItems((prevCartItems) => [...prevCartItems])
 
+			const responseOrder =
 			await postOrder(cartItems, userInput)
 			console.log(
 				"success, order är skickad till restaurang",
 				cartItems,
 				userInput
 			)
+			setOrderData({orderId: responseOrder.orderId})
+			console.log('orderData', orderData)
+			navigate('/confirmation')
 		} catch (error) {
 			console.error("error, order inte skickad", error.message)
 		}
