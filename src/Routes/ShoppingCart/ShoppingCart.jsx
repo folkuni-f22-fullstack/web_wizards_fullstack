@@ -1,6 +1,6 @@
 import CostumerForm from "../../utils/costumerForms/CostumerForm"
 import "./ShoppingCart.css"
-import { useRecoilValue, useRecoilState } from "recoil"
+import { useRecoilValue, useRecoilState} from "recoil"
 import { cartItemState } from "../../data/atom.js"
 import { IoMdAdd } from "react-icons/io"
 import { IoRemoveOutline, IoTrashSharp } from "react-icons/io5"
@@ -10,6 +10,7 @@ import { costumerAtom } from "../../data/atom"
 import { orderDataState } from "../../data/atom.js"
 import  {useNavigate}  from "react-router-dom"
 import increaseAmountInCart from "../../utils/increaseAmountInCart.js"
+import { useEffect } from "react"
 
 
 const ShoppingCart = () => {
@@ -26,6 +27,7 @@ const ShoppingCart = () => {
 		console.log("removed")
 	}
 
+	
 	const handleOrderSubmit = async (event) => {
 		try {
 			event.preventDefault
@@ -77,6 +79,14 @@ const ShoppingCart = () => {
 
 	const countPriceTotal = cartItems.reduce((total, cartItem) => total + cartItem.priceTotal, 0)
 	
+	useEffect(() => {
+		const savedCartItems = localStorage.getItem('cartItems');
+		if (savedCartItems) {
+			setCartItems(JSON.parse(savedCartItems));
+			console.log('savedCartItems',savedCartItems);
+			console.log("cartItems",cartItems);
+		}
+	}, []);
 	
 	
 

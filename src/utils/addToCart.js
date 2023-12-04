@@ -1,5 +1,6 @@
 import { useRecoilState } from "recoil";
 import { cartItemState } from "../data/atom";
+import { useEffect } from "react"
 
 const useCart = () => {
   const [cartItems, setCartItems] = useRecoilState(cartItemState);
@@ -39,6 +40,12 @@ const useCart = () => {
     }
   };
   // console.log(cartItems);
+
+  useEffect(() => {
+		localStorage.setItem('cartItems', JSON.stringify(cartItems));
+	}, [cartItems]);
+
+	
 
   return { cartItems, addToCart };
 };

@@ -5,71 +5,71 @@ const client = new DynamoDBClient({})
 const dynamo = DynamoDBDocumentClient.from(client)
 
 export const handler = async (event) => {
-	const tableName = "orderTable"
-	const requestJSON = JSON.parse(event.body)
+    try {
+        const tableName = "orderTable"
+        const requestJSON = JSON.parse(event.body)
 
-	try {
-		const { Items } = await dynamo.send(
-			new PutCommand({
-				TableName: tableName,
-				Item: {
-					pk: "orders",
-					ordersId: requestJSON.items[0].ordersId,
-					orderContent: [
-						{
-							amount: Number(
-								requestJSON.items[0].orderContent[0].amount
-							),
-							amountTotal: Number(
-								requestJSON.items[0].orderContent[0].amountTotal
-							),
-							description:
-								requestJSON.items[0].orderContent[0]
-									.description,
-							image: requestJSON.items[0].orderContent[0].image,
-							message:
-								requestJSON.items[0].orderContent[0].message,
-							name: requestJSON.items[0].orderContent[0].name,
-							price: Number(
-								requestJSON.items[0].orderContent[0].price
-							),
-							priceTotal: Number(
-								requestJSON.items[0].orderContent[0].priceTotal
-							),
-							StaffMessage: Number(
-								requestJSON.items[0].orderContent[0]
-									.StaffMessage
-							),
-							id: requestJSON.items[0].orderContent[0].id,
-						},
-						{
-							familyname:
-								requestJSON.items[0].orderContent[1].familyname,
-							firstname:
-								requestJSON.items[0].orderContent[1].firstname,
-							id: requestJSON.items[0].orderContent[1].id,
-							phone: Number(
-								requestJSON.items[0].orderContent[1].phone
-							),
-							email: requestJSON.items[0].orderContent[1].email,
-						},
-					],
-				},
-			})
-		)
+        const items = requestJSON.items || []
+        const orderContent = items[0]?.orderContent || []
 
-		return {
-			statusCode: 200,
-			headers: { "Content-Type": "application/json" },
-			body: JSON.stringify({ items: Items }),
-		}
-	} catch (err) {
-		return {
-			statusCode: err.statusCode || 500,
-			headers: { "Content-Type": "application/json" },
-			body: JSON.stringify({
-				message: err.message || "Internal Server Error",
-			}),
-		}
-	}
+        // Validate orderContent fields
+        const sanitizedOrderContent = orderContent.map((item) => {
+            return {
+                amount: Number(item?.amount) || 0,
+                amountTotal: Number(item?.amountTotal) || 0,
+                description: sanitizeText(item?.description),
+                image: sanitizeText(item?.image),
+                message: sanitizeText(item?.message),
+                name: sanitizeText(item?.name),
+                price: Number(item?.price) || 0,
+                priceTotal: Number(item?.priceTotal) || 0,
+                StaffMessage: Number(item?.StaffMessage) || 0,
+                id: sanitizeText(item?.id),
+            }
+        })
+
+        // Validate costumerInfo fields
+        const costumerInfo = orderContent[1] || {}
+        const sanitizedCostumerInfo = {
+            familyname: sanitizeText(costumerInfo?.familyname),
+            firstname: sanitizeText(costumerInfo?.firstname),
+            id: sanitizeText(costumerInfo?.id),
+            phone: Number(costumerInfo?.phone) || 0,
+            email: sanitizeText(costumerInfo?.email),
+        }
+
+        const { Items } = await dynamo.send(
+            new PutCommand({
+                TableName: tableName,
+                Item: {
+                    pk: "orders",
+                    ordersId: sanitizeText(items[0]?.ordersId) || "",
+                    orderContent: sanitizedOrderContent,
+                    costumerInfo: sanitizedCostumerInfo,
+                },
+            })
+        )
+
+        return {
+            statusCode: 200,
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ items: Items }),
+        }
+    } catch (err) {
+        console.error("Error in Lambda function:", err)
+
+        return {
+            statusCode: err.statusCode || 500,
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                message: err.message || "Internal Server Error",
+                errorDetails: err,
+            }),
+        }
+    }
+}
+
+function sanitizeText(text) {
+    const sanitizedText = text ? text.replace(/[^a-zA-Z0-9åäö.\-]/g, "") : ""
+    return sanitizedText
 }
