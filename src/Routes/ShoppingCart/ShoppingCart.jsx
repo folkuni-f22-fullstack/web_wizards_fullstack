@@ -5,7 +5,7 @@ import { cartItemState } from "../../data/atom.js"
 import { IoMdAdd } from "react-icons/io"
 import { IoRemoveOutline, IoTrashSharp } from "react-icons/io5"
 import useRemoveFromCart from "../../utils/removeFromCart"
-import  {postOrder} from "../../utils/APIfrontendFunctions/PostOrder"
+import { postOrder } from "../../utils/APIfrontendFunctions/PostOrder"
 import { costumerAtom } from "../../data/atom"
 import { orderDataState } from "../../data/atom.js"
 import  {useNavigate}  from "react-router-dom"
@@ -15,7 +15,7 @@ import increaseAmountInCart from "../../utils/increaseAmountInCart.js"
 const ShoppingCart = () => {
 	const userInput = useRecoilValue(costumerAtom)
 	const cartItems = useRecoilValue(cartItemState)
-	const [_, setCartItems] = useRecoilState(cartItemState)
+	const [, setCartItems] = useRecoilState(cartItemState)
 
 	const removeFromCart = useRemoveFromCart()
 	const [orderData, setOrderData ] = useRecoilState(orderDataState)
@@ -77,8 +77,6 @@ const ShoppingCart = () => {
 
 	const countPriceTotal = cartItems.reduce((total, cartItem) => total + cartItem.priceTotal, 0)
 	
-	
-	
 
 	return (
 		<>
@@ -109,7 +107,7 @@ const ShoppingCart = () => {
 					</div>
 					<div className="input">
 						<p>Ändra/ta bort i din rätt:</p>
-						<input className="input change"/>
+						<input onChange={(event) => handleInputMessage(event, item)}className="input change"/>
 					</div>
 
 					

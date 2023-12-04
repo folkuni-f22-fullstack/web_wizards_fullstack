@@ -2,20 +2,18 @@ import "./confirmation.css"
 import { FiRefreshCcw } from "react-icons/fi" 
 import { useEffect, useState } from "react"
 import { useRecoilValue, useRecoilState } from 'recoil'
-import { cartItemState } from "../../data/atom"
+import { cartItemState, costumerAtom, orderDataState } from "../../data/atom"
 import getOrdersId from "../../utils/APIfrontendFunctions/GetOrdersId"
 import { IoRemoveOutline, IoTrashSharp } from "react-icons/io5"
 import { IoMdAdd } from "react-icons/io"
 import useRemoveFromCart from "../../utils/removeFromCart"
 import { putOrder } from "../../utils/APIfrontendFunctions/PutOrder"
-import { costumerAtom } from "../../data/atom"
-import { orderDataState } from "../../data/atom"
+
 
 
 // eventuella states som kan behövas för att rendera om beställningen är öppen eller låst: 
-
 const Confirmation = () => {
-	const userInput = useRecoilValue(costumerAtom) /* <--Detta har jag lagt till ifall jag ska ha?*/
+	const userInput = useRecoilState(costumerAtom)
 	const cartItems = useRecoilValue(cartItemState)
 	const removeFromCart = useRemoveFromCart()
 	const [, setCartItems] = useRecoilState(cartItemState)
@@ -39,18 +37,7 @@ const Confirmation = () => {
 		
 	}, [orderData])
 console.log('cartItem:', confirmationOrderData )
-/* 	const order = confirmationOrderData ? [...confirmationOrderData] : []
- */
-	// console.log('useState data : ', data);
 
-	// const orderContent = order.orderContent &&
-	// order.orderContent.cartItems &&
-	// order.orderContent.cartItems
-	// console.log('Min ordercontent: ', orderContent)
-
-	// const orderId = data.order && data.order.ordersId
-
-	// console.log('ordernumret: ', orderId)
 	// const handleClickUpdate = () => {
 	// 	setOpenOrder(!openOrder)
 	// }
@@ -58,25 +45,49 @@ console.log('cartItem:', confirmationOrderData )
 		removeFromCart(name)
 		console.log('removed')
 	}
-	// const countPriceTotal = cartItems.reduce((total, cartItem) => total + cartItem.priceTotal, 0)
+	const countPriceTotal = cartItems.reduce((total, cartItem) => total + cartItem.priceTotal, 0)
 
-	const handleOrderChangeSubmit = async (event) => {
-		try {
-			event.preventDefualt() 
+	// const handleOrderChangeSubmit = async (event) => {
+	// 	try {
+	// 		event.preventDefualt() 
 
-			await setCartItems((prevCartItems) => [...prevCartItems])
+	// 		await setCartItems((prevCartItems) => [...prevCartItems])
 
-			await putOrder(cartItems, ordersId)
-			console.log("sucess, den ändrade ordern är skickad till restaurangen.")
-			cartItems, 
-			userInput
-		} catch (error) {
-			console.log("error, orderns ändringar är inte skickade.", error.message)
-		}
+	// 		await putOrder(cartItems, ordersId)
+	// 		console.log("sucess, den ändrade ordern är skickad till restaurangen.")
+	// 		cartItems		
+	// 	} catch (error) {
+	// 		console.log("error, orderns ändringar är inte skickade.", error.message)
+	// 	}
+	// }
+
+	const changedOrderSubmit = async () => {
+		
+		const changedOrder = {
+		ordersId: orderData.orderId,
+		
+		orderContent: {
+			cartItems: cartItems.map((dish) => ({
+				amount: dish.amount,
+				name: dish.name,
+				image: dish.image,
+				message: dish.message,
+				staffmessage: dish.staffmessage,
+				description: dish.description,
+			})),
+		costumerInfo: userInput,
+		},
+		orderLocked: false,
+		orderReady: false
 	}
 
+	await putOrder(changedOrder, orderData.orderId)
+	console.log('ändrade order:', changedOrder)
+}
+
+
 	const handleInputMessage = (event, item) => {
-		const orderItems = orderContent.cartItems.map((cartItem) => cartItem.name === item?.name ? {...cartItem, message: event.target.value} : cartItem
+		const orderItems = cartItems.map((cartItem) => cartItem.name === item?.name ? {...cartItem, message: event.target.value} : cartItem
 		)
 		setCartItems(orderItems)
 	}
@@ -126,23 +137,23 @@ console.log('cartItem:', confirmationOrderData )
 					</div>
 					<div className="input">
 						<p>Ändra/ta bort i din rätt:</p>
-						<input 
+						<input placeholder={dish.message}
 							onChange={(event) => 
-								handleInputMessage(event, item)}	
+								handleInputMessage(event, dish)}	
 							className="input change"
 						/>
 					</div>
 					
 				</li>))}
-				{/* <div className="sum-order-container">
+				<div className="sum-order-container">
 					<p>Totalt:</p> 
 					<p>{countPriceTotal} :- </p>
-				</div> */}
+				</div>
 			</section>
 			<button
 				type="submit"
 				className="change-order-button"
-				// onClick={() => handleOrderChangeSubmit(cartItems)}
+				onClick={() => changedOrderSubmit()}
 			>
 				Ändra order
 			</button>
