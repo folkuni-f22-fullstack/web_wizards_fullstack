@@ -109,7 +109,7 @@ const ShoppingCart = () => {
 					</div>
 					<div className="input">
 						<p>Ändra/ta bort i din rätt:</p>
-						<input className="input change"/>
+						<input onChange={(event) => handleInputMessage(event, item)} className="input change"/>
 					</div>
 
 					
