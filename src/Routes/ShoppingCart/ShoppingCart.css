@@ -239,8 +239,8 @@
 	}
 
 	.input {
-		grid-area: 6 / 3 / 9 / span 4; 
-		width: 85%;
+		grid-area: 6 / 3 / 9 / span 3; 
+		width: 100%;
 		margin-top: 0.4em; 
 		align-self: center;
 	}
