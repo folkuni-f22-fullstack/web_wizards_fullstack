@@ -7,7 +7,7 @@ import getOrdersId from "../../utils/APIfrontendFunctions/GetOrdersId"
 import { IoRemoveOutline, IoTrashSharp } from "react-icons/io5"
 import { IoMdAdd } from "react-icons/io"
 import useRemoveFromCart from "../../utils/removeFromCart"
-// import { putOrder } from "../../utils/APIfrontendFunctions/PostOrder"
+import { putOrder } from "../../utils/APIfrontendFunctions/PutOrder"
 import { costumerAtom } from "../../data/atom"
 import { orderDataState } from "../../data/atom"
 
@@ -60,20 +60,20 @@ console.log('cartItem:', confirmationOrderData )
 	}
 	// const countPriceTotal = cartItems.reduce((total, cartItem) => total + cartItem.priceTotal, 0)
 
-	// const handleOrderChangeSubmit = async (event) => {
-	// 	try {
-	// 		event.preventDefualt 
+	const handleOrderChangeSubmit = async (event) => {
+		try {
+			event.preventDefualt() 
 
-	// 		await setCartItems((prevCartItems) => [...prevCartItems])
+			await setCartItems((prevCartItems) => [...prevCartItems])
 
-	// 		await putOrder(cartItems, userInput, ordersId)
-	// 		console.log("sucess, den ändrade ordern är skickad till restaurangen.")
-	// 		cartItems, 
-	// 		userInput
-	// 	} catch (error) {
-	// 		console.log("error, orderns ändringar är inte skickade.", error.message)
-	// 	}
-	// }
+			await putOrder(cartItems, ordersId)
+			console.log("sucess, den ändrade ordern är skickad till restaurangen.")
+			cartItems, 
+			userInput
+		} catch (error) {
+			console.log("error, orderns ändringar är inte skickade.", error.message)
+		}
+	}
 
 	const handleInputMessage = (event, item) => {
 		const orderItems = orderContent.cartItems.map((cartItem) => cartItem.name === item?.name ? {...cartItem, message: event.target.value} : cartItem
