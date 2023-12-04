@@ -38,7 +38,7 @@ const useCart = () => {
       console.log("cartinnehåll: ", newCart);
     }
   };
-  console.log(cartItems);
+  // console.log(cartItems);
 
   return { cartItems, addToCart };
 };
