@@ -60,56 +60,34 @@ const Cashier = () => {
 	const orders = ordersData ? [...ordersData] : []
 
 	const handleOnClickSend = async (orderId, cartItems) => {
-		if (!Array.isArray(cartItems)) {
-			console.error("Invalid cartItems:", cartItems)
-			return
-		}
+		console.log("skicka till köket")
+		try {
+			if (!Array.isArray(cartItems)) {
+				console.error("Invalid cartItems:", cartItems)
+				alert("Invalid cart items. Please try again.")
+				return
+			}
 
-		const updatedOrder = {
-			ordersId: orderId,
-			orderContent: {
-				cartItems: cartItems.map((dish) => ({
-					amount: dish.amount,
-					name: dish.name,
-					message: dish.message,
-					staffmessage: dish.staffmessage,
-					description: dish.description,
-				})),
-			},
-			orderLocked: true,
-		}
+			const updatedOrder = {
+				ordersId: orderId,
+				orderContent: {
+					cartItems: cartItems.map((dish) => ({
+						amount: dish.amount,
+						name: dish.name,
+						message: dish.message,
+						staffmessage: dish.staffmessage,
+						description: dish.description,
+					})),
+				},
+				orderLocked: true,
+			}
 
-		await putOrder(updatedOrder, orderId)
+			await putOrder(updatedOrder, orderId)
+		} catch (error) {
+			console.error("Error updating order:", error)
+			alert("Failed to update order. Please try again later.")
+		}
 	}
-
-	// const updatedOrders = orders.map((order) => {
-	// 	if (
-	// 		order &&
-	// 		order.ordersId === ordersId &&
-	// 		order.orderContent &&
-	// 		order.orderContent.cartItems
-	// 	) {
-	// 		const updatedCartItems = order.ordersContent.cartItems.map(
-	// 			(item) => {
-	// 				if (item.name === dishName) {
-	// 					return { ...item, staffMessage: event.target.value }
-	// 				}
-
-	// 				return item
-	// 			}
-	// 		)
-	// 		return {
-	// 			...order,
-	// 			orderContent: {
-	// 				...order.orderContent,
-	// 				cartItems: updatedCartItems,
-	// 			},
-	// 		}
-	// 	}
-	// 	return order
-	// })
-	// setOrdersData(updatedOrders)
-	// console.log(updatedOrders)
 
 	const updateOrders = async () => {
 		try {
@@ -150,8 +128,8 @@ const Cashier = () => {
 								{order.orderContent &&
 								order.orderContent.orderLocked !== undefined
 									? order.orderContent.orderLocked
-										? "Order öppen"
-										: "Order låst"
+										? "Order låst"
+										: "Order öppen"
 									: "Order status unknown"}
 							</p>
 							<ul>

@@ -20,64 +20,8 @@ const Chef = () => {
 		fetchData()
 	}, [])
 
-	// // testvariabel:
-	// const orders = [
-	// 	{
-	// 		ordersId: "1234",
-	// 		orderOpen: false,
-	// 		orderContent: [
-	// 			{
-	// 				name: "Bliss",
-	// 				description: "tomat",
-	// 				price: 79,
-	// 				amount: 1,
-	// 				message: "ingen tomat",
-	// 			},
-	// 			{
-	// 				name: "Halloumi",
-	// 				description: "gurka",
-	// 				price: 79,
-	// 				amount: 2,
-	// 				message: "ingen gurka",
-	// 			},
-	// 		],
-	// 		costumerInfo: {
-	// 			firstname: "my",
-	// 			familyname: "Myson",
-	// 			phone: 123546,
-	// 			email: "abc@abs",
-	// 		},
-	// 	},
-	// 	{
-	// 		ordersId: "5678",
-	// 		orderOpen: true,
-	// 		orderContent: [
-	// 			{
-	// 				name: "Blobb",
-	// 				description: "tomat",
-	// 				price: 79,
-	// 				amount: 1,
-	// 				message: "ingen tomat",
-	// 			},
-	// 			{
-	// 				name: "Orginal",
-	// 				description: "gurka",
-	// 				price: 79,
-	// 				amount: 2,
-	// 				message: "ingen gurka",
-	// 			},
-	// 		],
-	// 		costumerInfo: {
-	// 			firstname: "my",
-	// 			familyname: "Myson",
-	// 			phone: 123546,
-	// 			email: "abc@abs",
-	// 		},
-	// 	},
-	// ]
-
 	const filteredOrders = orders.filter(
-		(order) => order.orderContent && !order.orderContent.orderLocked
+		(order) => order.orderContent && order.orderContent.orderLocked
 	)
 
 	const orderContent = filteredOrders.flatMap((dish) => dish.orderContent)
@@ -122,8 +66,8 @@ const Chef = () => {
 									{order.orderContent &&
 									order.orderContent.orderLocked !== undefined
 										? order.orderContent.orderLocked
-											? "Order öppen"
-											: "Order låst"
+											? "Order låst"
+											: "Order öppen"
 										: "Order status unknown"}
 								</p>
 								<ul>

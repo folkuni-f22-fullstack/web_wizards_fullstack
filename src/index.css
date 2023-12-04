@@ -61,6 +61,12 @@ button {
 	color: var(--text-light);
 	box-shadow: var(--box-shadow);
 	background-color: #039e41;
+	transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+button:active {
+	box-shadow: var(--box-shadow-active);
+	transform: translateY(2px);
 }
 
 input {
@@ -123,5 +129,3 @@ ul {
 		margin: 11.5em auto;
 	}
 }
-
-
