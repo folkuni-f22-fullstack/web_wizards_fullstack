@@ -58,6 +58,11 @@ export const costumerAtom = atom ({
 	}
 })
 
+export const orderDataState = atom ({
+	key: 'orderDataState',
+	default: {}
+})
+
 export const errorMessageAtom = atom({
     key: 'error', 
     default: {
