@@ -1,50 +1,75 @@
-import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
-import {DynamoDBDocumentClient,PutCommand} from "@aws-sdk/lib-dynamodb";
-import {nanoid} from "nanoid";
+import { DynamoDBClient } from "@aws-sdk/client-dynamodb"
+import { DynamoDBDocumentClient, PutCommand } from "@aws-sdk/lib-dynamodb"
 
-const client = new DynamoDBClient({});
-const dynamo = DynamoDBDocumentClient.from(client);
+const client = new DynamoDBClient({})
+const dynamo = DynamoDBDocumentClient.from(client)
 
 export const handler = async (event) => {
-    const tableName = "orderTable";
-
-    const requestBody = JSON.parse(event.body);
+    const tableName = "orderTable"
+    const requestJSON = JSON.parse(event.body)
 
     try {
-
-        if (!requestBody.items || requestBody.items.length === 0) {
-            throw new Error("Invalid request body. 'items' array is missing or empty.");
-        }
-        const ordersId = nanoid();
-
-        const newItem = {
-            pk: "orders",
-            sk: ordersId,
-            ordersId: ordersId,
-            orderContent: requestBody.items[0].orderContent,
-        };
-
-        console.log(newItem, "newItem");
-
-        await dynamo.send(
+        const { Items } = await dynamo.send(
             new PutCommand({
                 TableName: tableName,
-                Item: newItem,
+                Item: {
+                    pk: "orders",
+                    ordersId: requestJSON.items[0].ordersId,
+                    orderContent: [
+                        {
+                            amount: Number(
+                                requestJSON.items[0].orderContent[0].amount
+                            ),
+                            amountTotal: Number(
+                                requestJSON.items[0].orderContent[0].amountTotal
+                            ),
+                            description:
+                                requestJSON.items[0].orderContent[0]
+                                    .description,
+                            image: requestJSON.items[0].orderContent[0].image,
+                            message:
+                                requestJSON.items[0].orderContent[0].message,
+                            name: requestJSON.items[0].orderContent[0].name,
+                            price: Number(
+                                requestJSON.items[0].orderContent[0].price
+                            ),
+                            priceTotal: Number(
+                                requestJSON.items[0].orderContent[0].priceTotal
+                            ),
+                            StaffMessage: Number(
+                                requestJSON.items[0].orderContent[0]
+                                    .StaffMessage
+                            ),
+                            id: requestJSON.items[0].orderContent[0].id,
+                        },
+                        {
+                            familyname:
+                                requestJSON.items[0].orderContent[1].familyname,
+                            firstname:
+                                requestJSON.items[0].orderContent[1].firstname,
+                            id: requestJSON.items[0].orderContent[1].id,
+                            phone: Number(
+                                requestJSON.items[0].orderContent[1].phone
+                            ),
+                            email: requestJSON.items[0].orderContent[1].email,
+                        },
+                    ],
+                },
             })
-        );
-
-        console.log("after PutCommand");
+        )
 
         return {
             statusCode: 200,
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ message: "Data inserted successfully" }),
-        };
+            body: JSON.stringify({ items: Items }),
+        }
     } catch (err) {
         return {
-            statusCode: err.statusCode,
+            statusCode: err.statusCode || 500,
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ message: err.message }),
-        };
+            body: JSON.stringify({
+                message: err.message || "Internal Server Error",
+            }),
+        }
     }
-};
+}
