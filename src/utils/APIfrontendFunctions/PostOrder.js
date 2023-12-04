@@ -14,6 +14,8 @@ export async function postOrder(cartItems, userInput) {
 						cartItems,
 						"costumerInfo": userInput,
 						"orderLocked": false,
+						"orderReady": false
+						
 					} 
 				}
 				]

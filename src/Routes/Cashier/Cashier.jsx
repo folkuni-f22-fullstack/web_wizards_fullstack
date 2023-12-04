@@ -6,15 +6,14 @@ import { IoMdAdd } from "react-icons/io"
 import { useEffect, useState } from "react"
 import getOrders from "../../utils/APIfrontendFunctions/GetOrders"
 import { putOrder } from "../../utils/APIfrontendFunctions/PutOrder"
-import { confirmationLockedState } from "../../data/atom"
-import { useRecoilState } from "recoil"
+
 
 const Cashier = () => {
 	const [ordersData, setOrdersData] = useState([])
 	const [orderQuantities, setOrderQuantities] = useState({})
 	const [staffMessage, setStaffMessage] = useState({})
 	const [dishDescriptions, setDishDescriptions] = useState({})
-	const [confirmationLocked, setConfirmationLocked] = useRecoilState(confirmationLockedState)
+	
 
 	const handleIncreaseAmount = (ordersId, dishName) => {
 		setOrderQuantities((prevQuantities) => {
@@ -80,9 +79,9 @@ const Cashier = () => {
 				})),
 			},
 			orderLocked: true,
+			
 		}
-		setConfirmationLocked(true)
-		console.log('confirmation:', confirmationLocked)
+
 		await putOrder(updatedOrder, orderId)
 	}
 
@@ -154,8 +153,8 @@ const Cashier = () => {
 								{order.orderContent &&
 								order.orderContent.orderLocked !== undefined
 									? order.orderContent.orderLocked
-										? "Order öppen"
-										: "Order låst"
+										? "Order låst"
+										: "Order öppen"
 									: "Order status unknown"}
 							</p>
 							<ul>
