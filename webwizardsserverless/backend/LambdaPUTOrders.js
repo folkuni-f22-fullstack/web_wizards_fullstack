@@ -5,57 +5,49 @@ const client = new DynamoDBClient({})
 const dynamo = DynamoDBDocumentClient.from(client)
 
 export const handler = async (event) => {
+	const tableName = "orderTable"
+	const requestJSON = JSON.parse(event.body)
+
 	try {
-		const tableName = "orderTable"
-		const requestJSON = JSON.parse(event.body)
-
-		const items = requestJSON.items || []
-		const orderContent = items[0]?.orderContent || []
-
-		// Validate ordersId
-		const ordersId = items[0]?.ordersId
-		const sanitizedOrdersId = sanitizeText(ordersId)
-		if (!sanitizedOrdersId) {
-			throw new Error("Invalid ordersId")
-		}
-
-		console.log("sanitizedOrdersId:", sanitizedOrdersId)
-		console.log("ordersId:", ordersId)
-
-		// Validate orderContent fields
-		const sanitizedOrderContent = orderContent.map((item) => {
-			return {
-				amount: Number(item?.amount) || 0,
-				amountTotal: Number(item?.amountTotal) || 0,
-				description: sanitizeText(item?.description),
-				image: sanitizeText(item?.image),
-				message: sanitizeText(item?.message),
-				name: sanitizeText(item?.name),
-				price: Number(item?.price) || 0,
-				priceTotal: Number(item?.priceTotal) || 0,
-				StaffMessage: Number(item?.StaffMessage) || 0,
-				id: sanitizeText(item?.id),
-			}
-		})
-
-		// Validate costumerInfo fields
-		const costumerInfo = orderContent[1] || {}
-		const sanitizedCostumerInfo = {
-			familyname: sanitizeText(costumerInfo?.familyname),
-			firstname: sanitizeText(costumerInfo?.firstname),
-			id: sanitizeText(costumerInfo?.id),
-			phone: Number(costumerInfo?.phone) || 0,
-			email: sanitizeText(costumerInfo?.email),
-		}
-
 		const { Items } = await dynamo.send(
 			new PutCommand({
 				TableName: tableName,
 				Item: {
 					pk: "orders",
-					ordersId: ordersId,
-					orderContent: sanitizedOrderContent,
-					costumerInfo: sanitizedCostumerInfo,
+					ordersId: requestJSON.items[0].ordersId,
+					orderLocked: false,
+					orderReady: false,
+					orderContent: {
+						cartItems: [
+							{
+								name: requestJSON.items[0].orderContent[0].name,
+								description:
+									requestJSON.items[0].orderContent[0]
+										.description,
+								amount: Number(
+									requestJSON.items[0].orderContent[0].amount
+								),
+								id: requestJSON.items[0].orderContent[0].id,
+								message:
+									requestJSON.items[0].orderContent[0]
+										.message,
+								price: Number(
+									requestJSON.items[0].orderContent[0].price
+								),
+							},
+						],
+					},
+					costumerInfo: {
+						familyname:
+							requestJSON.items[0].orderContent[1].familyname,
+						firstname:
+							requestJSON.items[0].orderContent[1].firstname,
+						id: requestJSON.items[0].orderContent[1].id,
+						phone: Number(
+							requestJSON.items[0].orderContent[1].phone
+						),
+						email: requestJSON.items[0].orderContent[1].email,
+					},
 				},
 			})
 		)
@@ -66,20 +58,12 @@ export const handler = async (event) => {
 			body: JSON.stringify({ items: Items }),
 		}
 	} catch (err) {
-		console.error("Error in Lambda function:", err)
-
 		return {
 			statusCode: err.statusCode || 500,
 			headers: { "Content-Type": "application/json" },
 			body: JSON.stringify({
 				message: err.message || "Internal Server Error",
-				errorDetails: err,
 			}),
 		}
 	}
-}
-
-function sanitizeText(text) {
-	const sanitizedText = text ? text.replace(/[^a-zA-Z0-9åäö.\-]/g, "") : ""
-	return sanitizedText
 }

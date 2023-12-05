@@ -75,7 +75,7 @@ const Cashier = () => {
 						amount: dish.amount,
 						name: dish.name,
 						message: dish.message,
-						staffmessage: dish.staffmessage,
+						staffMessage: dish.staffMessage,
 						description: dish.description,
 					})),
 				},
