@@ -15,7 +15,7 @@ import increaseAmountInCart from "../../utils/increaseAmountInCart.js"
 const ShoppingCart = () => {
 	const userInput = useRecoilValue(costumerAtom)
 	const cartItems = useRecoilValue(cartItemState)
-	const [_, setCartItems] = useRecoilState(cartItemState)
+	const [, setCartItems] = useRecoilState(cartItemState)
 
 	const removeFromCart = useRemoveFromCart()
 	const [orderData, setOrderData ] = useRecoilState(orderDataState)
