@@ -7,6 +7,7 @@ import ChefTab from "../utils/Tabs/ChefTab"
 import { isLoggedInAtom } from "../data/atom"
 import { useRecoilState } from "recoil"
 import LogOut from "../utils/login/Logout"
+import ScrollToTop from "../utils/scrollToTop.js"
 
 const Root = () => {
 	const [isLoggedIn, setIsLoggedIn] = useRecoilState(isLoggedInAtom)
@@ -17,6 +18,7 @@ const Root = () => {
 	return (
 		<>
 			<Header />
+			<ScrollToTop />
 			{isLoggedIn ? <LogOut /> : null}
 			{isLoggedIn ? <CashierTab /> : null}
 			{isLoggedIn ? <ChefTab /> : null}
