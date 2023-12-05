@@ -5,7 +5,7 @@ import { cartItemState } from "../../data/atom.js"
 import { IoMdAdd } from "react-icons/io"
 import { IoRemoveOutline, IoTrashSharp } from "react-icons/io5"
 import  useRemoveFromCart from "../../utils/removeFromCart"
-import { postOrder } from "../../data/PostOrder"
+import { postOrder } from "../../utils/APIfrontendFunctions/PostOrder"
 import { costumerAtom } from "../../data/atom"
 
 
