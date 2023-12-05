@@ -1,75 +1,127 @@
-import { DynamoDBClient } from "@aws-sdk/client-dynamodb"
+/* import { DynamoDBClient } from "@aws-sdk/client-dynamodb"
 import { DynamoDBDocumentClient, PutCommand } from "@aws-sdk/lib-dynamodb"
 
 const client = new DynamoDBClient({})
 const dynamo = DynamoDBDocumentClient.from(client)
 
 export const handler = async (event) => {
-    try {
-        const tableName = "orderTable"
-        const requestJSON = JSON.parse(event.body)
+	const tableName = "orderTable"
+	const requestJSON = JSON.parse(event.body)
 
-        const items = requestJSON.items || []
-        const orderContent = items[0]?.orderContent || []
+	try {
+		const { Items } = await dynamo.send(
+			new PutCommand({
+				TableName: tableName,
+				Item: {
+					pk: "orders",
+                    sk: requestJSON.sk,
+					ordersId: requestJSON.items[0].ordersId,
+					orderLocked: false,
+					orderReady: false,
+					orderContent: {
+						cartItems: [
+							{
+                                amount: Number(
+                                    requestJSON.items[0].orderContent[0].amount
+                                ),                              
+                                amountTotal: Number(
+                                    requestJSON.items[0].orderContent[0].amountTotal
+                                ),
+                                description: requestJSON.items[0].orderContent[0].description,
+                                image: requestJSON.items[0].orderContent[0].image,
+                                message: requestJSON.items[0].orderContent[0].message,
 
-        // Validate orderContent fields
-        const sanitizedOrderContent = orderContent.map((item) => {
-            return {
-                amount: Number(item?.amount) || 0,
-                amountTotal: Number(item?.amountTotal) || 0,
-                description: sanitizeText(item?.description),
-                image: sanitizeText(item?.image),
-                message: sanitizeText(item?.message),
-                name: sanitizeText(item?.name),
-                price: Number(item?.price) || 0,
-                priceTotal: Number(item?.priceTotal) || 0,
-                StaffMessage: Number(item?.StaffMessage) || 0,
-                id: sanitizeText(item?.id),
-            }
-        })
+								name: requestJSON.items[0].orderContent[0].name,
+								price: Number(
+									requestJSON.items[0].orderContent[0].price
+								),
+                                priceTotal: Number(
+									requestJSON.items[0].orderContent[0].priceTotal
+								),
+                                staffMessage: requestJSON.items[0].orderContent[0].staffMessage,
 
-        // Validate costumerInfo fields
-        const costumerInfo = orderContent[1] || {}
-        const sanitizedCostumerInfo = {
-            familyname: sanitizeText(costumerInfo?.familyname),
-            firstname: sanitizeText(costumerInfo?.firstname),
-            id: sanitizeText(costumerInfo?.id),
-            phone: Number(costumerInfo?.phone) || 0,
-            email: sanitizeText(costumerInfo?.email),
-        }
+							},
+						],
+					},
+					costumerInfo: {
+						familyName:
+							requestJSON.items[0].orderContent[1].familyname,
+						firstName:
+							requestJSON.items[0].orderContent[1].firstname,
+						phone: (
+							requestJSON.items[0].orderContent[1].phone
+						),
+						email: requestJSON.items[0].orderContent[1].email,
+					},
+				},
+			})
+		)
 
-        const { Items } = await dynamo.send(
-            new PutCommand({
-                TableName: tableName,
-                Item: {
-                    pk: "orders",
-                    ordersId: sanitizeText(items[0]?.ordersId) || "",
-                    orderContent: sanitizedOrderContent,
-                    costumerInfo: sanitizedCostumerInfo,
-                },
-            })
-        )
+		return {
+			statusCode: 200,
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify({ items: Items }),
+		}
+	} catch (err) {
+		return {
+			statusCode: err.statusCode || 500,
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify({
+				message: err.message || "Internal Server Error",
+			}),
+		}
+	}
+} */
 
-        return {
-            statusCode: 200,
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ items: Items }),
-        }
-    } catch (err) {
-        console.error("Error in Lambda function:", err)
+import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
+import { DynamoDBDocumentClient, UpdateCommand } from "@aws-sdk/lib-dynamodb";
 
-        return {
-            statusCode: err.statusCode || 500,
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-                message: err.message || "Internal Server Error",
-                errorDetails: err,
-            }),
-        }
-    }
-}
+const client = new DynamoDBClient({});
+const dynamo = DynamoDBDocumentClient.from(client);
 
-function sanitizeText(text) {
-    const sanitizedText = text ? text.replace(/[^a-zA-Z0-9åäö.\-]/g, "") : ""
-    return sanitizedText
-}
+export const handler = async (event) => {
+  const tableName = "orderTable";
+  const requestBody = JSON.parse(event.body);
+console.log("requestBody", requestBody);
+  try {
+    if (!requestBody.items || requestBody.items.length === 0 || !requestBody.items[0].ordersId) {
+        throw new Error("Invalid request body. 'ordersId' is missing or 'items' array is empty.");
+      }
+
+    const updateParams = {
+      TableName: tableName,
+      Key: {
+        pk: "orders",
+        ordersId: requestBody.items[0].ordersId,
+      },
+      UpdateExpression: "SET orderContent = :orderContent, orderLocked = :orderLocked, orderReady = :orderReady, costumerInfo = :costumerInfo",
+      ExpressionAttributeValues: {
+        ":orderContent": requestBody.items[0].orderContent,
+        ":orderLocked": requestBody.items[0].orderLocked,
+        ":orderReady": requestBody.items[0].orderReady,
+        ":costumerInfo": requestBody.items[0].costumerInfo
+      },
+      ReturnValues: "ALL_NEW", // Optional, returns updated item
+    };
+
+    console.log("Updating item with parameters:", updateParams);
+
+    const updatedItem = await dynamo.send(new UpdateCommand(updateParams));
+
+    console.log("Updated item:", updatedItem);
+
+    return {
+      statusCode: 200,
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ message: "Data updated successfully" }),
+    };
+  } catch (err) {
+    console.error("Error updating item:", err);
+
+    return {
+      statusCode: err.statusCode || 500,
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ message: err.message }),
+    };
+  }
+};

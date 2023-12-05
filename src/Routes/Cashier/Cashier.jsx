@@ -12,6 +12,10 @@ const Cashier = () => {
 	const [orderQuantities, setOrderQuantities] = useState({})
 	const [staffMessage, setStaffMessage] = useState({})
 	const [dishDescriptions, setDishDescriptions] = useState({})
+	
+	const orders = ordersData ? [...ordersData] : []
+	console.log("orders", orders);
+
 
 	const handleIncreaseAmount = (ordersId, dishName) => {
 		setOrderQuantities((prevQuantities) => {
@@ -57,7 +61,6 @@ const Cashier = () => {
 		fetchData()
 	}, [])
 
-	const orders = ordersData ? [...ordersData] : []
 
 	const handleOnClickSend = async (orderId, cartItems) => {
 		if (!Array.isArray(cartItems)) {
@@ -65,19 +68,33 @@ const Cashier = () => {
 			return
 		}
 
+		// Hitta den aktuella ordern baserat på orderId
+		const currentOrder = orders.find((order) => order.ordersId === orderId);
+
 		const updatedOrder = {
+			items: [{
+			pk: "orders",
 			ordersId: orderId,
 			orderContent: {
 				cartItems: cartItems.map((dish) => ({
 					amount: dish.amount,
 					name: dish.name,
 					message: dish.message,
-					staffmessage: dish.staffmessage,
+					staffMessage: dish.staffMessage,
 					description: dish.description,
 				})),
 			},
+			costumerInfo:{
+				email: currentOrder.costumerInfo.email,
+				familyName: currentOrder.costumerInfo.familyname,
+				firstName: currentOrder.costumerInfo.firstname,
+				phone: currentOrder.costumerInfo.phone
+			},
 			orderLocked: true,
-		}
+			orderReady: false,
+		}]
+	}
+		console.log("updatedOrder", updatedOrder);
 
 		await putOrder(updatedOrder, orderId)
 	}
@@ -147,11 +164,11 @@ const Cashier = () => {
 								order: {order.ordersId}
 							</p>
 							<p className="order_open">
-								{order.orderContent &&
-								order.orderContent.orderLocked !== undefined
-									? order.orderContent.orderLocked
-										? "Order öppen"
-										: "Order låst"
+								{order &&
+								order.orderLocked !== undefined
+									? order.orderLocked
+										? " Order låst"
+										: "Order öppen"
 									: "Order status unknown"}
 							</p>
 							<ul>
