@@ -214,7 +214,7 @@ const Cashier = () => {
 													}
 												/>
 
-												<p>
+												<p className="dish_description">
 													{dishDescriptions[
 														`${order.ordersId}-${dish.name}`
 													] || dish.description}
