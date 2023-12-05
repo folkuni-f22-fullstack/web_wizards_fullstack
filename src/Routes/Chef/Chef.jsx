@@ -11,7 +11,8 @@ const Chef = () => {
 		const fetchData = async () => {
 			try {
 				const menuData = await getOrders()
-				setOrders(menuData.items)
+				console.log("Menu Data:", menuData)
+				setOrders(menuData.items || [])
 			} catch (error) {
 				console.error("Error fetching orders:", error)
 			}
@@ -20,17 +21,11 @@ const Chef = () => {
 		fetchData()
 	}, [])
 
-	const filteredOrders = orders.filter(
-		(order) => order.orderContent && order.orderContent.orderLocked
-	)
-
-	const orderContent = filteredOrders.flatMap((dish) => dish.orderContent)
-	console.log(orderContent, "orderContent")
-
 	const updateOrders = async () => {
 		try {
 			const updatedData = await getOrders()
-			setOrders(updatedData.items)
+			console.log("Updated Data:", updatedData)
+			setOrders(updatedData.items || [])
 			console.log("Orders updated successfully")
 		} catch (error) {
 			console.error("Error updating orders:", error)
@@ -49,74 +44,95 @@ const Chef = () => {
 					</button>
 				</div>
 			</div>
-
 			<div className="costumer_order_container">
 				<ul>
-					{filteredOrders.map((order) => {
-						console.log(order.orderLocked)
-						return (
-							<li
-								className="costumer_order_card"
-								key={order.ordersId}
-							>
-								<p className="order_number">
-									order: {order.ordersId}
-								</p>
-								<p className="order_open">
-									{order.orderContent &&
-									order.orderContent.orderLocked !== undefined
-										? order.orderContent.orderLocked
-											? "Order låst"
-											: "Order öppen"
-										: "Order status unknown"}
-								</p>
-								<ul>
-									{order.orderContent &&
-										order.orderContent.cartItems &&
-										order.orderContent.cartItems.map(
-											(dish) => (
-												<li
-													className="card-container order-card-dish "
-													key={dish.name}
-												>
-													<p className="order_amount">
-														{dish.amount} st
-													</p>
-													<p className="order_dish">
-														{dish.name}
-													</p>
-													<div className="changes">
-														<p>
-															Meddelande:{" "}
-															{dish.message}
-														</p>
-													</div>
-													<div className="staff_changes">
-														<p>
-															Meddelande från
-															personalen:{" "}
-															{dish.staffmessage}
-														</p>
-													</div>
-													<div className="ingredients">
-														<p>
-															Ingredienser:{" "}
-															{dish.description}
-														</p>
-													</div>
-												</li>
-											)
-										)}
-								</ul>
-								<div className="send_btn">
-									<button> ORDER KLAR </button>
-								</div>
-							</li>
-						)
-					})}
+					{orders.length > 0 ? (
+						orders.map((order) => {
+							console.log("Order:", order)
+							if (
+								order.orderLocked !== undefined &&
+								order.orderLocked
+							) {
+								return (
+									<li
+										className="costumer_order_card"
+										key={order.ordersId}
+									>
+										<p className="order_number">
+											order: {order.ordersId}
+										</p>
+										<p className="order_open">
+											{order.orderLocked !== undefined
+												? order.orderLocked
+													? "Order låst"
+													: "Order öppen"
+												: "Order status unknown"}
+										</p>
+										{order.orderContent &&
+											order.orderContent.cartItems && (
+												<ul>
+													{order.orderContent.cartItems.map(
+														(dish, index) => (
+															<li
+																className="card-container order-card-dish"
+																key={index}
+															>
+																<p className="order_amount">
+																	{
+																		dish.amount
+																	}{" "}
+																	st
+																</p>
+																<p className="order_dish">
+																	{dish.name}
+																</p>
+																<div className="changes">
+																	<p>
+																		Meddelande:{" "}
+																		{
+																			dish.message
+																		}
+																	</p>
+																</div>
+																<div className="staff_changes">
+																	<p>
+																		Meddelande
+																		från
+																		personalen:{" "}
+																		{
+																			dish.staffMessage
+																		}
+																	</p>
+																</div>
+																<div className="ingredients">
+																	<p>
+																		Ingredienser:{" "}
+																		{
+																			dish.description
+																		}
+																	</p>
+																</div>
+															</li>
+														)
+													)}
+												</ul>
+											)}
+										<div className="send_btn">
+											<button>ORDER KLAR</button>
+										</div>
+									</li>
+								)
+							} else {
+								return null // Skip rendering if the order is not locked
+							}
+						})
+					) : (
+						<p>No locked orders available</p>
+					)}
 				</ul>
 			</div>
 		</section>
 	)
 }
+
 export default Chef

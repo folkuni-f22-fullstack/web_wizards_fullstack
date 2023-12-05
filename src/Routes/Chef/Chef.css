@@ -21,3 +21,7 @@
 	width: 4em;
 	justify-self: flex-end;
 }
+
+.staff_changes {
+	color: red;
+}
