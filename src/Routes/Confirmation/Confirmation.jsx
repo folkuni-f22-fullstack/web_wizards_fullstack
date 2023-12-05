@@ -10,17 +10,16 @@ import useRemoveFromCart from "../../utils/removeFromCart"
 import { costumerAtom } from "../../data/atom"
 import { orderDataState } from "../../data/atom"
 import deleteOrder from "../../utils/APIfrontendFunctions/DeleteOrders"
-import getOrders from "../../utils/APIfrontendFunctions/getOrders"
 import { putOrder } from "../../utils/APIfrontendFunctions/PutOrder"
 
 const Confirmation = () => {
-	const [orders, setOrders] = useState([])
 	const userInput = useRecoilValue(costumerAtom)
 	const cartItems = useRecoilValue(cartItemState)
 	const removeFromCart = useRemoveFromCart()
 	const [, setCartItems] = useRecoilState(cartItemState)
 	const orderData = useRecoilValue(orderDataState)
 	const [orderItems, setOrderItems] = useState([])
+	const [ hideState, setHideState ] = useState(false)
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -38,6 +37,10 @@ const Confirmation = () => {
 
 	const handleRemoveFromCart = (name) => {
 		removeFromCart(name)
+		const updatedOrderItems = orderItems.map((item) =>
+        item.name === name ? { ...item, hidden: true } : item)
+		setOrderItems(updatedOrderItems);
+		
 		console.log("removed")
 	}
 
@@ -61,10 +64,10 @@ const Confirmation = () => {
 		}
 	}
 
-	const updateOrders = async () => {
+	const updateOrder = async () => {
 		try {
-			const updatedData = await getOrders()
-			setOrders(updatedData.items)
+			const ordersId = orderData.orderId
+			await getOrdersId(ordersId)
 			console.log("Orders updated successfully")
 		} catch (error) {
 			console.error("Error updating orders:", error)
@@ -129,7 +132,7 @@ const Confirmation = () => {
 		<section className="confirmation_container">
 			<h1 className="head_confirmation">Bekräftelse</h1>
 			<div className="update-container">
-				<button className="staff-button" onClick={updateOrders}>
+				<button className="staff-button" onClick={() => updateOrder()}>
 					<FiRefreshCcw />
 				</button>
 			</div>
@@ -146,15 +149,17 @@ const Confirmation = () => {
 
 			<section className="shopping-cart">
 				{orderItems.map((dish) => (
-					<li key={dish.name} className="card-container order-menu">
+					<li key={dish.name} 
+					className={ !dish.hidden ? 
+					"card-container order-menu confirmation_order_container" : "hidden" }>
 						<div className="image-container">
 							<img src={dish.image} alt={dish.name} />
 						</div>
 						<div className="name-container">
-							<h3>{dish.name}</h3>
+							<h4>{dish.name}</h4>
 						</div>
-						<p className="description-text">{dish.description}</p>
-						<div className="button-container">
+						<p className="description-text description-text-confirmation">{dish.description}</p>
+						<div className="button-container button-container-confirmation">
 							<IoRemoveOutline
 								className="remove-food"
 								onClick={() =>
@@ -176,8 +181,8 @@ const Confirmation = () => {
 						>
 							<IoTrashSharp className="trashbin" />
 						</div>
-						<div className="input">
-							<p>Ändra/ta bort i din rätt:</p>
+						<div className="input confirmation-input">
+							<p className="change_text">Ändra/ta bort i din rätt:</p>
 							<input
 								onChange={(event) =>
 									handleInputMessage(event, dish)
