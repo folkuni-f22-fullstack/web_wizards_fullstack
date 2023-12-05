@@ -71,17 +71,22 @@ const Cashier = () => {
 		// Hitta den aktuella ordern baserat på orderId
 		const currentOrder = orders.find((order) => order.ordersId === orderId);
 
+// TODO uppdatera så alla attribut finns med!!!!
+
 		const updatedOrder = {
 			items: [{
 			pk: "orders",
 			ordersId: orderId,
 			orderContent: {
 				cartItems: cartItems.map((dish) => ({
-					amount: dish.amount,
+					amount: orderQuantities[dish.name] || dish.amount,
 					name: dish.name,
+					image:dish.image,
 					message: dish.message,
-					staffMessage: dish.staffMessage,
-					description: dish.description,
+					staffMessage: staffMessage[`${orderId}-${dish.name}`] || dish.staffMessage,
+					description: dishDescriptions[`${orderId}-${dish.name}`] || dish.description,
+					price: dish.price,
+					priceTotal:dish.price* orderQuantities[dish.name] || dish.amount,
 				})),
 			},
 			costumerInfo:{
@@ -99,35 +104,7 @@ const Cashier = () => {
 		await putOrder(updatedOrder, orderId)
 	}
 
-	// const updatedOrders = orders.map((order) => {
-	// 	if (
-	// 		order &&
-	// 		order.ordersId === ordersId &&
-	// 		order.orderContent &&
-	// 		order.orderContent.cartItems
-	// 	) {
-	// 		const updatedCartItems = order.ordersContent.cartItems.map(
-	// 			(item) => {
-	// 				if (item.name === dishName) {
-	// 					return { ...item, staffMessage: event.target.value }
-	// 				}
-
-	// 				return item
-	// 			}
-	// 		)
-	// 		return {
-	// 			...order,
-	// 			orderContent: {
-	// 				...order.orderContent,
-	// 				cartItems: updatedCartItems,
-	// 			},
-	// 		}
-	// 	}
-	// 	return order
-	// })
-	// setOrdersData(updatedOrders)
-	// console.log(updatedOrders)
-
+	
 	const updateOrders = async () => {
 		try {
 			const updatedData = await getOrders()
@@ -167,7 +144,7 @@ const Cashier = () => {
 								{order &&
 								order.orderLocked !== undefined
 									? order.orderLocked
-										? " Order låst"
+									? " Order låst"
 										: "Order öppen"
 									: "Order status unknown"}
 							</p>
@@ -297,3 +274,32 @@ const Cashier = () => {
 }
 
 export default Cashier
+
+	// const updatedOrders = orders.map((order) => {
+	// 	if (
+	// 		order &&
+	// 		order.ordersId === ordersId &&
+	// 		order.orderContent &&
+	// 		order.orderContent.cartItems
+	// 	) {
+	// 		const updatedCartItems = order.ordersContent.cartItems.map(
+	// 			(item) => {
+	// 				if (item.name === dishName) {
+	// 					return { ...item, staffMessage: event.target.value }
+	// 				}
+
+	// 				return item
+	// 			}
+	// 		)
+	// 		return {
+	// 			...order,
+	// 			orderContent: {
+	// 				...order.orderContent,
+	// 				cartItems: updatedCartItems,
+	// 			},
+	// 		}
+	// 	}
+	// 	return order
+	// })
+	// setOrdersData(updatedOrders)
+	// console.log(updatedOrders)
