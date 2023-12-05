@@ -1,7 +1,7 @@
 export async function deleteOrder(orderId) {
 	try {
 		const response = await fetch(
-			`https://omw2d3h4o6.execute-api.eu-north-1.amazonaws.com/webwizards/orders/// ${orderId}`,
+			`https://omw2d3h4o6.execute-api.eu-north-1.amazonaws.com/webwizards/orders/${orderId}`,
 			{
 				method: "DELETE",
 				headers: {
@@ -19,3 +19,5 @@ export async function deleteOrder(orderId) {
 		console.error("Error when deleting order:", error)
 	}
 }
+
+export default deleteOrder

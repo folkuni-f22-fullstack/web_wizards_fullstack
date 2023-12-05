@@ -1,7 +1,22 @@
+// const validCharLetter = "abcdefghijklmnopqrstuvwxyzåäö "
+
+
+// function isValidName(firstName) {
+//     for(let i = 0; i < firstName.length; i++) {
+//         let character = firstName.charAt(i).toLowerCase()
+//         if(!validCharLetter.includes(character)) {
+//             return [false, "Vänligen använd bara endast bokstäver."]
+//         }
+//     }
+//     if (firstName.length < 2 ) {
+//         return [false, "Namnet behöver vara minst 2 bokstäver. "]
+//     }
+//     return [true, ""]
+// }
 
 //function for firstname-input
 function isValidName(firstName) {
-    const nonLetter = /^[a-zA-Z\s]*$/; 
+    const nonLetter = /^[\p{L}üÜåäöÅÄÖ\s]*$/u; 
     if(!nonLetter.test(firstName)) {
         return [false, 'Namnet får endast innehålla bokstäver']; 
     }
@@ -31,7 +46,7 @@ function isValidPhoneNumber(fullPhoneNumber)  {
 }
 
 function isValidEmail(email) {
-    const emailPattern = /^\w+@\w+\.\w+$/; 
+    const emailPattern =  /^[\w.-]+@\w+[\w.-]+.\w+[\w.-]*$/; 
     if(emailPattern.test(email)) {
         return [true, '']
     } else {

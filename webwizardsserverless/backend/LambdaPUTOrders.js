@@ -15,45 +15,39 @@ export const handler = async (event) => {
 				Item: {
 					pk: "orders",
 					ordersId: requestJSON.items[0].ordersId,
-					orderContent: [
-						{
-							amount: Number(
-								requestJSON.items[0].orderContent[0].amount
-							),
-							amountTotal: Number(
-								requestJSON.items[0].orderContent[0].amountTotal
-							),
-							description:
-								requestJSON.items[0].orderContent[0]
-									.description,
-							image: requestJSON.items[0].orderContent[0].image,
-							message:
-								requestJSON.items[0].orderContent[0].message,
-							name: requestJSON.items[0].orderContent[0].name,
-							price: Number(
-								requestJSON.items[0].orderContent[0].price
-							),
-							priceTotal: Number(
-								requestJSON.items[0].orderContent[0].priceTotal
-							),
-							StaffMessage: Number(
-								requestJSON.items[0].orderContent[0]
-									.StaffMessage
-							),
-							id: requestJSON.items[0].orderContent[0].id,
-						},
-						{
-							familyname:
-								requestJSON.items[0].orderContent[1].familyname,
-							firstname:
-								requestJSON.items[0].orderContent[1].firstname,
-							id: requestJSON.items[0].orderContent[1].id,
-							phone: Number(
-								requestJSON.items[0].orderContent[1].phone
-							),
-							email: requestJSON.items[0].orderContent[1].email,
-						},
-					],
+					orderLocked: false,
+					orderReady: false,
+					orderContent: {
+						cartItems: [
+							{
+								name: requestJSON.items[0].orderContent[0].name,
+								description:
+									requestJSON.items[0].orderContent[0]
+										.description,
+								amount: Number(
+									requestJSON.items[0].orderContent[0].amount
+								),
+								id: requestJSON.items[0].orderContent[0].id,
+								message:
+									requestJSON.items[0].orderContent[0]
+										.message,
+								price: Number(
+									requestJSON.items[0].orderContent[0].price
+								),
+							},
+						],
+					},
+					costumerInfo: {
+						familyname:
+							requestJSON.items[0].orderContent[1].familyname,
+						firstname:
+							requestJSON.items[0].orderContent[1].firstname,
+						id: requestJSON.items[0].orderContent[1].id,
+						phone: Number(
+							requestJSON.items[0].orderContent[1].phone
+						),
+						email: requestJSON.items[0].orderContent[1].email,
+					},
 				},
 			})
 		)
