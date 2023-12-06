@@ -105,7 +105,7 @@ console.log('cartItem:', confirmationOrderData )
 				<h3 className="head_your_order">Din beställning: </h3>
 
 			<section className="shopping-cart"> {
-			confirmationOrderData && confirmationOrderData.cartItems && confirmationOrderData.cartItems.map(dish => (
+			confirmationOrderData.orderContent && confirmationOrderData.orderContent.cartItems && confirmationOrderData.orderContent.cartItems.map(dish => (
 				<li key={dish.name} className="card-container order-menu">
 					
 					<div className="image-container">

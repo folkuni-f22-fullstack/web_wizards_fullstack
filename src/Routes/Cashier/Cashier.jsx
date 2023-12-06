@@ -14,7 +14,6 @@ const Cashier = () => {
 	const [dishDescriptions, setDishDescriptions] = useState({})
 	
 	const orders = ordersData ? [...ordersData] : []
-	console.log("orders", orders);
 
 
 	const handleIncreaseAmount = (ordersId, dishName) => {
@@ -70,8 +69,6 @@ const Cashier = () => {
 
 		// Hitta den aktuella ordern baserat på orderId
 		const currentOrder = orders.find((order) => order.ordersId === orderId);
-
-// TODO uppdatera så alla attribut finns med!!!!
 
 		const updatedOrder = {
 			items: [{

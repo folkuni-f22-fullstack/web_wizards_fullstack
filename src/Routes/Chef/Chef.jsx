@@ -122,8 +122,8 @@ const Chef = () => {
 									{order &&
 									order.orderLocked !== undefined
 										? order.orderLocked
-											? "Order öppen"
-											: "Order låst"
+											? "Order låst"
+											: "Order öppen"
 										: "Order status unknown"}
 								</p>
 								<ul>
