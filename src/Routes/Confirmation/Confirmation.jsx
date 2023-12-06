@@ -68,9 +68,9 @@ const Confirmation = () => {
 		try {
 			const ordersId = orderData.orderId
 			const data = await getOrdersId(ordersId)
-			setConfirmationOrderData(data.order.orderContent)
+			setConfirmationOrderData(data.order)
 			
-			console.log("Orders updated successfully")
+			console.log("Orders updated successfully" , confirmationOrderData)
 		} catch (error) {
 			console.error("Error updating orders:", error)
 		}
@@ -161,7 +161,7 @@ const Confirmation = () => {
 
 			<h3 className="head_your_order">Din beställning: </h3>
 
-			<section className={confirmationOrderData && !confirmationOrderData.orderLocked ? "shopping-cart"  : "blur"}> 
+			<section className={confirmationOrderData && !confirmationOrderData.orderLocked ? "shopping-cart" : "blur"}> 
 				{cartItems.map(dish => ( 
 					<li key={dish.name} 
 					className= 
@@ -213,8 +213,8 @@ const Confirmation = () => {
 			</section>
 			<button
 				type="submit"
-				className="change-order-button"
-				onClick={() => changedOrderSubmit(cartItems)}
+				className={confirmationOrderData && !confirmationOrderData.orderLocked ? "change-order-button" : "grey"}
+				onClick={confirmationOrderData && !confirmationOrderData.orderLocked ? () => changedOrderSubmit(cartItems) : ""}
 			>
 				Ändra order
 			</button>
