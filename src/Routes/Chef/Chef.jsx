@@ -1,18 +1,20 @@
 import "./Chef.css"
 import KeepLoggedIn from "../../utils/login/KeepLoggedIn"
 import getOrders from "../../utils/APIfrontendFunctions/getOrders"
+import { putOrder } from "../../utils/APIfrontendFunctions/PutOrder"
 import { FiRefreshCcw } from "react-icons/fi"
 import { useState, useEffect } from "react"
 
 const Chef = () => {
-	const [orders, setOrders] = useState([])
+	const [ordersData, setOrdersData] = useState([])
+	const orders = ordersData ? [...ordersData] : []
 
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
 				const menuData = await getOrders()
 				console.log("Menu Data:", menuData)
-				setOrders(menuData.items || [])
+				setOrdersData(menuData.items)
 			} catch (error) {
 				console.error("Error fetching orders:", error)
 			}
@@ -25,11 +27,56 @@ const Chef = () => {
 		try {
 			const updatedData = await getOrders()
 			console.log("Updated Data:", updatedData)
-			setOrders(updatedData.items || [])
+			setOrdersData(updatedData.items)
 			console.log("Orders updated successfully")
 		} catch (error) {
 			console.error("Error updating orders:", error)
 		}
+	}
+
+	console.log(orders, "ORDERS!!!!!!!!!")
+
+	const handleOnClickSend = async (orderId, cartItems) => {
+		if (!Array.isArray(cartItems)) {
+			console.error("Invalid cartItems:", cartItems)
+			return
+		}
+
+		// Hitta den aktuella ordern baserat på orderId
+		const currentOrder = orders.find((order) => order.ordersId === orderId)
+		console.log(currentOrder, "current order")
+		console.log(currentOrder.costumerInfo, "costumerinfo")
+		const updatedOrder = {
+			items: [
+				{
+					pk: "orders",
+					ordersId: orderId,
+					orderContent: {
+						cartItems: cartItems.map((dish) => ({
+							amount: dish.amount,
+							name: dish.name,
+							image: dish.image,
+							message: dish.message,
+							staffMessage: dish.staffMessage,
+							description: dish.description,
+							price: dish.price,
+							priceTotal: dish.priceTotal,
+						})),
+					},
+					costumerInfo: {
+						email: currentOrder.costumerInfo.email,
+						familyName: currentOrder.costumerInfo.familyName,
+						firstName: currentOrder.costumerInfo.firstName,
+						phone: currentOrder.costumerInfo.phone,
+					},
+					orderLocked: true,
+					orderReady: true,
+				},
+			],
+		}
+		console.log("updatedOrder", updatedOrder)
+
+		await putOrder(updatedOrder, orderId)
 	}
 
 	return (
@@ -133,7 +180,21 @@ const Chef = () => {
 												</ul>
 											)}
 										<div className="send_btn">
-											<button>ORDER KLAR</button>
+											<button
+												onClick={() =>
+													handleOnClickSend(
+														order.ordersId,
+														order.orderContent
+															.cartItems,
+														order.orderContent
+															.costumerInfo,
+														order.orderLocked,
+														order.orderReady
+													)
+												}
+											>
+												ORDER KLAR
+											</button>
 										</div>
 									</li>
 								)
