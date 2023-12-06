@@ -63,9 +63,9 @@ const Chef = () => {
 									order: {order.ordersId}
 								</p>
 								<p className="order_open">
-									{order &&
-									order.orderLocked !== undefined
-										? order.orderLocked
+									{order.orderContent &&
+									order.orderContent.orderLocked !== undefined
+										? order.orderContent.orderLocked
 											? "Order låst"
 											: "Order öppen"
 										: "Order status unknown"}
@@ -95,7 +95,7 @@ const Chef = () => {
 														<p>
 															Meddelande från
 															personalen:{" "}
-															{dish.staffMessage}
+															{dish.staffmessage}
 														</p>
 													</div>
 													<div className="ingredients">

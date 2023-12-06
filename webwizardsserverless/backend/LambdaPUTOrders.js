@@ -1,8 +1,8 @@
 import { DynamoDBClient } from "@aws-sdk/client-dynamodb"
 import { DynamoDBDocumentClient, PutCommand } from "@aws-sdk/lib-dynamodb"
 
-const client = new DynamoDBClient({})
-const dynamo = DynamoDBDocumentClient.from(client)
+const client = new DynamoDBClient({});
+const dynamo = DynamoDBDocumentClient.from(client);
 
 export const handler = async (event) => {
 	const tableName = "orderTable"
@@ -20,30 +20,34 @@ export const handler = async (event) => {
 					orderContent: {
 						cartItems: [
 							{
+                                amount: Number(
+                                    requestJSON.items[0].orderContent[0].amount
+                                ),                              
+                                amountTotal: Number(
+                                    requestJSON.items[0].orderContent[0].amountTotal
+                                ),
+                                description: requestJSON.items[0].orderContent[0].description,
+                                image: requestJSON.items[0].orderContent[0].image,
+                                message: requestJSON.items[0].orderContent[0].message,
+
 								name: requestJSON.items[0].orderContent[0].name,
-								description:
-									requestJSON.items[0].orderContent[0]
-										.description,
-								amount: Number(
-									requestJSON.items[0].orderContent[0].amount
-								),
-								id: requestJSON.items[0].orderContent[0].id,
-								message:
-									requestJSON.items[0].orderContent[0]
-										.message,
 								price: Number(
 									requestJSON.items[0].orderContent[0].price
 								),
+                                priceTotal: Number(
+									requestJSON.items[0].orderContent[0].priceTotal
+								),
+                                staffMessage: requestJSON.items[0].orderContent[0].staffMessage,
+
 							},
 						],
 					},
 					costumerInfo: {
-						familyname:
+						familyName:
 							requestJSON.items[0].orderContent[1].familyname,
-						firstname:
+						firstName:
 							requestJSON.items[0].orderContent[1].firstname,
-						id: requestJSON.items[0].orderContent[1].id,
-						phone: Number(
+						phone: (
 							requestJSON.items[0].orderContent[1].phone
 						),
 						email: requestJSON.items[0].orderContent[1].email,
@@ -52,18 +56,18 @@ export const handler = async (event) => {
 			})
 		)
 
-		return {
-			statusCode: 200,
-			headers: { "Content-Type": "application/json" },
-			body: JSON.stringify({ items: Items }),
-		}
-	} catch (err) {
-		return {
-			statusCode: err.statusCode || 500,
-			headers: { "Content-Type": "application/json" },
-			body: JSON.stringify({
-				message: err.message || "Internal Server Error",
-			}),
-		}
-	}
-}
+    return {
+      statusCode: 200,
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ message: "Data updated successfully" }),
+    };
+  } catch (err) {
+    console.error("Error updating item:", err);
+
+    return {
+      statusCode: err.statusCode || 500,
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ message: err.message }),
+    };
+  }
+};

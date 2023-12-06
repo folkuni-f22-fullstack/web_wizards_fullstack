@@ -21,7 +21,7 @@ export const handler = async (event) => {
         const newItem = {
             pk: "orders",
             ordersId: ordersId,
-            orderContent: requestBody.items[0].orderContent,
+            orderContent: requestBody.items[0],
         }
 
         console.log(newItem, "newItem")

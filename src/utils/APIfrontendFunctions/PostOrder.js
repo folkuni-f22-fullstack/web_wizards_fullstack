@@ -12,9 +12,10 @@ export async function postOrder(cartItems, userInput) {
 				"items": [ {
 					"orderContent": {
 						cartItems,
-						"costumerInfo": userInput,
-						"orderLocked": false,
-					} 
+					}, 
+					"costumerInfo": userInput,
+					"orderLocked": false,
+					"orderReady": false
 				}
 				]
 			}),
