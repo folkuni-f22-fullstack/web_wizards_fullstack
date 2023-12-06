@@ -14,6 +14,9 @@ const Root = () => {
 	const location = useLocation()
 
 	const isFoodMenuPage = location.pathname === "/menu"
+	const isShoppingCart = location.pathname === "/shoppingcart"
+	const isConfirmation = location.pathname === "/confirmation"
+	const isLogin = location.pathname === "/login"
 
 	return (
 		<>
@@ -23,7 +26,13 @@ const Root = () => {
 			{isLoggedIn ? <CashierTab /> : null}
 			{isLoggedIn ? <ChefTab /> : null}
 			<main>
-				{!isLoggedIn && !isFoodMenuPage ? <Floater /> : null}
+				{!isLoggedIn &&
+				!isFoodMenuPage &&
+				!isShoppingCart &&
+				isConfirmation &&
+				isLogin ? (
+					<Floater />
+				) : null}
 				<Outlet />
 			</main>
 			{!isLoggedIn ? <Footer /> : null}

@@ -22,6 +22,10 @@
 	justify-self: flex-end;
 }
 
+.order_ready {
+	color: var(--dark-green-acc);
+}
+
 .costumer_order_card > ul {
 	grid-column: 2/7;
 	grid-row-start: 1;
@@ -68,24 +72,32 @@
 	grid-column: 2/6;
 	grid-row-start: 2;
 	padding: 0.2em 0;
-	color: red;
+	color: rgb(140, 0, 0);
 }
 
 .staff_changes {
-	grid-column: 2/6;
+	grid-column: 2/7;
 	grid-row-start: 3;
 }
 
+.staff_changes input {
+	width: 100%;
+}
+
 .ingredients {
-	grid-column: 2/6;
+	grid-column: 2/7;
 	grid-row-start: 4;
 	padding: 0.4em 0;
+}
+
+.ingredients input {
+	width: 100%;
 }
 
 .dish_description {
 	padding: 0.4em 0 0 0;
 	font-weight: 900;
-	color: red;
+	color: rgb(140, 0, 0);
 }
 
 .staff_price {
