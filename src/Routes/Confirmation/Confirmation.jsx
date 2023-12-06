@@ -12,6 +12,7 @@ import { orderDataState } from "../../data/atom"
 import deleteOrder from "../../utils/APIfrontendFunctions/DeleteOrders"
 import getOrders from "../../utils/APIfrontendFunctions/getOrders"
 import { putOrder } from "../../utils/APIfrontendFunctions/PutOrder"
+import { NavLink } from "react-router-dom"
 
 const Confirmation = () => {
 	const [orders, setOrders] = useState([])
@@ -199,13 +200,15 @@ const Confirmation = () => {
 			>
 				Ändra order
 			</button>
-			<button
-				type="submit"
-				className="delete-order-button"
-				onClick={handleDeleteOrder}
-			>
-				Ångra order
-			</button>
+			<NavLink to="/">
+				<button
+					type="submit"
+					className="delete-order-button"
+					onClick={handleDeleteOrder}
+				>
+					Ångra order
+				</button>
+			</NavLink>
 		</section>
 	)
 }

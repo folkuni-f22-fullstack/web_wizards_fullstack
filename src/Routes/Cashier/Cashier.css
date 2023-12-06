@@ -72,14 +72,22 @@
 }
 
 .staff_changes {
-	grid-column: 2/6;
+	grid-column: 2/7;
 	grid-row-start: 3;
 }
 
+.staff_changes input {
+	width: 100%;
+}
+
 .ingredients {
-	grid-column: 2/6;
+	grid-column: 2/7;
 	grid-row-start: 4;
 	padding: 0.4em 0;
+}
+
+.ingredients input {
+	width: 100%;
 }
 
 .dish_description {
