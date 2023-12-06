@@ -125,9 +125,10 @@ const Confirmation = () => {
 
 	const changedOrderSubmit = async () => {
 		const updatedOrder = {
-			ordersId: orderData.orderId,
-
-			orderContent: {
+			items: [{
+				pk: "orders",
+				ordersId: orderData.orderId,
+				orderContent: {
 				cartItems: cartItems.map((dish) => ({
 					amount: dish.amount,
 					name: dish.name,
@@ -138,11 +139,14 @@ const Confirmation = () => {
 					price: dish.price,
 					priceTotal: dish.priceTotal
 				})),
-				costumerInfo: userInput,
-			},
-			orderLocked: false,
-			orderReady: false,
-		}
+				},
+				costumerInfo: userInput ,	
+				orderLocked: false,
+				orderReady: false,
+		}]
+	}
+			
+		
 		setHideState(true)
 		await putOrder(updatedOrder, orderData.orderId)
 		console.log("ändrade order:", updatedOrder)
