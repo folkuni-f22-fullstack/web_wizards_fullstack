@@ -11,6 +11,13 @@
 	margin: 1em;
 }
 
+.blur {
+	filter: blur(0.5rem)
+}
+.grey {
+	background-color: grey;
+}
+
 .order_confirmation_info {
 	border: 1px solid var(--dark-green-acc);
 	box-shadow: var(--box-shadow);
