@@ -39,29 +39,13 @@ const Confirmation = () => {
 	console.log('confirmationsOrderData:', confirmationOrderData )
 	console.log('orderItems:', orderItems )
 
-	// const handleRemoveFromCart = (name) => {
-	// 	removeFromCart(name)
-	// 	const updatedOrderItems = cartItems.map((item) =>
-    //     item.name === name ? { ...item, hidden: true } : item)
-	// 	setCartItems(updatedOrderItems);
-		
-	// 	console.log("removed")
-	// }
 
 	const handleRemoveFromCart = (name) => {
 		removeFromCart(name)
 		console.log("removed")
 	}
 
-	// const handleInputMessage = (event, item) => {
-	// 	const updatedOrderItems = orderItems.orderContent && orderItems.orderContent.cartItems && orderItems.orderContent.cartItems.map((cartItem) =>
-	// 		cartItem.name === item?.name
-	// 			? { ...cartItem, message: event.target.value }
-	// 			: cartItem
-	// 	)
-	// 	setOrderItems(updatedOrderItems)
-	// }
-
+	
 	const handleInputMessage = (event, item) => {
         const orderItems = cartItems.map((cartItem) => cartItem.name === item?.name ? {...cartItem, message: event.target.value} : cartItem
         )

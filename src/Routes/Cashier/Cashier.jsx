@@ -14,8 +14,16 @@ const Cashier = () => {
 	const [dishDescriptions, setDishDescriptions] = useState({})
 	
 	const orders = ordersData ? [...ordersData] : []
-
-
+	
+	
+		useEffect(() => {
+			const fetchData = async () => {
+				const data = await getOrders()
+				setOrdersData(data.items)
+			}
+			fetchData()
+		}, [])
+	
 	const handleIncreaseAmount = (ordersId, dishName) => {
 		setOrderQuantities((prevQuantities) => {
 			const currentQuantity = prevQuantities[dishName] || 0
@@ -52,14 +60,6 @@ const Cashier = () => {
 		console.log("staffMessage:", message)
 	}
 
-	useEffect(() => {
-		const fetchData = async () => {
-			const data = await getOrders()
-			setOrdersData(data.items)
-		}
-		fetchData()
-	}, [])
-
 
 	const handleOnClickSend = async (orderId, cartItems) => {
 		if (!Array.isArray(cartItems)) {
@@ -88,8 +88,8 @@ const Cashier = () => {
 			},
 			costumerInfo:{
 				email: currentOrder.costumerInfo.email,
-				familyName: currentOrder.costumerInfo.familyname,
-				firstName: currentOrder.costumerInfo.firstname,
+				familyName: currentOrder.costumerInfo.familyName,
+				firstName: currentOrder.costumerInfo.firstName,
 				phone: currentOrder.costumerInfo.phone
 			},
 			orderLocked: true,

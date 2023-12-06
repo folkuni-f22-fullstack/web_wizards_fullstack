@@ -28,9 +28,13 @@ console.log("requestBody", requestBody);
       },
       ReturnValues: "ALL_NEW", // Optional, returns updated item
     };
-
+	Object.keys(updateParams.ExpressionAttributeValues).forEach(key => {
+		if (updateParams.ExpressionAttributeValues[key] === undefined) {
+		  delete updateParams.ExpressionAttributeValues[key];
+		}
+	  });
     console.log("Updating item with parameters:", updateParams);
-
+	console.log("costumerInfo value:", requestBody.items[0].costumerInfo);
     const updatedItem = await dynamo.send(new UpdateCommand(updateParams));
 
     console.log("Updated item:", updatedItem);
