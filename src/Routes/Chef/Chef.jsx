@@ -61,13 +61,28 @@ const Chef = () => {
 										<p className="order_number">
 											order: {order.ordersId}
 										</p>
-										<p className="order_open">
-											{order.orderLocked !== undefined
-												? order.orderLocked
-													? "Order låst"
-													: "Order öppen"
-												: "Order status unknown"}
-										</p>
+										<div className="order_status_container">
+											<p className="order_open">
+												{order.orderContent &&
+												order.orderLocked !== undefined
+													? order.orderLocked
+														? "Order låst "
+														: "Order öppen"
+													: "Order status unknown"}
+											</p>
+											{console.log(
+												"Order Ready:",
+												order.orderContent.orderReady
+											)}
+											<p className="order_ready">
+												{order.orderContent &&
+												order.orderReady !== undefined
+													? order.orderReady
+														? "Order klar"
+														: null
+													: null}
+											</p>
+										</div>
 										{order.orderContent &&
 											order.orderContent.cartItems && (
 												<ul>
