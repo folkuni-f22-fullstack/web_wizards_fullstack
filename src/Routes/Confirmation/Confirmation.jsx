@@ -39,28 +39,11 @@ const Confirmation = () => {
 	console.log('confirmationsOrderData:', confirmationOrderData )
 	console.log('orderItems:', orderItems )
 
-	// const handleRemoveFromCart = (name) => {
-	// 	removeFromCart(name)
-	// 	const updatedOrderItems = cartItems.map((item) =>
-    //     item.name === name ? { ...item, hidden: true } : item)
-	// 	setCartItems(updatedOrderItems);
-		
-	// 	console.log("removed")
-	// }
 
 	const handleRemoveFromCart = (name) => {
 		removeFromCart(name)
 		console.log("removed")
 	}
-
-	// const handleInputMessage = (event, item) => {
-	// 	const updatedOrderItems = orderItems.orderContent && orderItems.orderContent.cartItems && orderItems.orderContent.cartItems.map((cartItem) =>
-	// 		cartItem.name === item?.name
-	// 			? { ...cartItem, message: event.target.value }
-	// 			: cartItem
-	// 	)
-	// 	setOrderItems(updatedOrderItems)
-	// }
 
 	const handleInputMessage = (event, item) => {
         const orderItems = cartItems.map((cartItem) => cartItem.name === item?.name ? {...cartItem, message: event.target.value} : cartItem
@@ -83,12 +66,14 @@ const Confirmation = () => {
 	const updateOrder = async () => {
 		try {
 			const ordersId = orderData.orderId
-			await getOrdersId(ordersId)
+			const data = await getOrdersId(ordersId)
+			setConfirmationOrderData(data.order.orderContent)
 			
 			console.log("Orders updated successfully")
 		} catch (error) {
 			console.error("Error updating orders:", error)
 		}
+		console.log('Är den låst eller inte?' , confirmationOrderData.orderLocked)
 	}
 
 	const handleDecreaseQuantity = (name) => {
@@ -145,6 +130,7 @@ const Confirmation = () => {
 		setHideState(true)
 		await putOrder(updatedOrder, orderData.orderId)
 		console.log("ändrade order:", updatedOrder)
+		
 	}
 
 	return (
