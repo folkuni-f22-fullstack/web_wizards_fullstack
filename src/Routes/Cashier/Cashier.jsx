@@ -2,6 +2,7 @@ import "./cashier.css"
 import KeepLoggedIn from "../../utils/login/KeepLoggedIn"
 import { FiRefreshCcw } from "react-icons/fi"
 import { IoRemoveOutline } from "react-icons/io5"
+import { IoCheckmark } from "react-icons/io5"
 import { IoMdAdd } from "react-icons/io"
 import { useEffect, useState } from "react"
 import getOrders from "../../utils/APIfrontendFunctions/GetOrders"
@@ -124,13 +125,26 @@ const Cashier = () => {
 							<p className="order_number">
 								order: {order.ordersId}
 							</p>
+							{console.log("Order Content:", order.orderContent)}
 							<p className="order_open">
 								{order.orderContent &&
-								order.orderContent.orderLocked !== undefined
-									? order.orderContent.orderLocked
-										? "Order låst"
+								order.orderLocked !== undefined
+									? order.orderLocked
+										? "Order låst "
 										: "Order öppen"
 									: "Order status unknown"}
+							</p>
+							{console.log(
+								"Order Ready:",
+								order.orderContent.orderReady
+							)}
+							<p className="order_ready">
+								{order.orderContent &&
+								order.orderReady !== undefined
+									? order.orderReady
+										? "Order klar"
+										: null
+									: null}
 							</p>
 							<ul>
 								{order.orderContent &&
