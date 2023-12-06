@@ -18,9 +18,9 @@ const Confirmation = () => {
 	const userInput = useRecoilValue(costumerAtom)
 	const cartItems = useRecoilValue(cartItemState)
 	const removeFromCart = useRemoveFromCart()
-	const [, setCartItems] = useRecoilState(cartItemState)
 	const orderData = useRecoilValue(orderDataState)
 	const [orderItems, setOrderItems] = useState([])
+	const [confirmationOrderData, setConfirmationOrderData ] =useState()
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -145,7 +145,7 @@ const Confirmation = () => {
 			<h3 className="head_your_order">Din beställning: </h3>
 
 			<section className="shopping-cart">
-				{orderItems.map((dish) => (
+				{confirmationOrderData.orderContent && confirmationOrderData.orderContent.cartItems && confirmationOrderData.orderContent.cartItems.map((dish) => (
 					<li key={dish.name} className="card-container order-menu">
 						<div className="image-container">
 							<img src={dish.image} alt={dish.name} />
