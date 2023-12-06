@@ -22,6 +22,10 @@
 	justify-self: flex-end;
 }
 
+.order_ready {
+	color: var(--dark-green-acc);
+}
+
 .costumer_order_card > ul {
 	grid-column: 2/7;
 	grid-row-start: 1;
