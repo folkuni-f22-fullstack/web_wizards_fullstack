@@ -1,6 +1,6 @@
 import CostumerForm from "../../utils/costumerForms/CostumerForm"
 import "./ShoppingCart.css"
-import { useRecoilValue, useRecoilState } from "recoil"
+import { useRecoilValue, useRecoilState} from "recoil"
 import { cartItemState } from "../../data/atom.js"
 import { IoMdAdd } from "react-icons/io"
 import { IoRemoveOutline, IoTrashSharp } from "react-icons/io5"
@@ -10,22 +10,37 @@ import { costumerAtom } from "../../data/atom"
 import { orderDataState } from "../../data/atom.js"
 import  {useNavigate}  from "react-router-dom"
 import increaseAmountInCart from "../../utils/increaseAmountInCart.js"
+import { useEffect } from "react"
 
 
 const ShoppingCart = () => {
 	const userInput = useRecoilValue(costumerAtom)
 	const cartItems = useRecoilValue(cartItemState)
 	const [, setCartItems] = useRecoilState(cartItemState)
-
 	const removeFromCart = useRemoveFromCart()
 	const [orderData, setOrderData ] = useRecoilState(orderDataState)
 	const navigate = useNavigate()
+
+	useEffect(() => {
+		const savedCartItems = localStorage.getItem('cartItems');
+		if (savedCartItems) {
+			setCartItems(JSON.parse(savedCartItems));
+		};
+	}, []);
+	
+	useEffect(() => {
+		// Här sparar vi cartItems till localStorage varje gång cartItems ändras.
+		localStorage.setItem('cartItems', JSON.stringify(cartItems));
+	}, [cartItems])
+
+
 	// console.log(cartItems)
 	const handleRemoveFromCart = (name) => {
 		removeFromCart(name)
 		console.log("removed")
 	}
 
+	
 	const handleOrderSubmit = async (event) => {
 		try {
 			event.preventDefault
@@ -41,6 +56,7 @@ const ShoppingCart = () => {
 			)
 			setOrderData({orderId: responseOrder.orderId})
 			console.log('orderData', orderData)
+			localStorage.clear()
 			navigate('/confirmation')
 		} catch (error) {
 			console.error("error, order inte skickad", error.message)
@@ -74,12 +90,9 @@ const ShoppingCart = () => {
 		}
 	}
 
-
 	const countPriceTotal = cartItems.reduce((total, cartItem) => total + cartItem.priceTotal, 0)
 	
-	
-	
-
+		
 	return (
 		<>
 			<h1 className="cart-h1">VARUKORG</h1>
