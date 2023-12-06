@@ -14,6 +14,8 @@ const Cashier = () => {
 	const [staffMessage, setStaffMessage] = useState({})
 	const [dishDescriptions, setDishDescriptions] = useState({})
 
+	const orders = ordersData ? [...ordersData] : []
+
 	const handleIncreaseAmount = (ordersId, dishName) => {
 		setOrderQuantities((prevQuantities) => {
 			const currentQuantity = prevQuantities[dishName] || 0
@@ -58,36 +60,52 @@ const Cashier = () => {
 		fetchData()
 	}, [])
 
-	const orders = ordersData ? [...ordersData] : []
-
 	const handleOnClickSend = async (orderId, cartItems) => {
-		console.log("skicka till köket")
-		try {
-			if (!Array.isArray(cartItems)) {
-				console.error("Invalid cartItems:", cartItems)
-				alert("Invalid cart items. Please try again.")
-				return
-			}
-
-			const updatedOrder = {
-				ordersId: orderId,
-				orderContent: {
-					cartItems: cartItems.map((dish) => ({
-						amount: dish.amount,
-						name: dish.name,
-						message: dish.message,
-						staffMessage: dish.staffMessage,
-						description: dish.description,
-					})),
-				},
-				orderLocked: true,
-			}
-
-			await putOrder(updatedOrder, orderId)
-		} catch (error) {
-			console.error("Error updating order:", error)
-			alert("Failed to update order. Please try again later.")
+		if (!Array.isArray(cartItems)) {
+			console.error("Invalid cartItems:", cartItems)
+			return
 		}
+
+		// Hitta den aktuella ordern baserat på orderId
+		const currentOrder = orders.find((order) => order.ordersId === orderId)
+
+		const updatedOrder = {
+			items: [
+				{
+					pk: "orders",
+					ordersId: orderId,
+					orderContent: {
+						cartItems: cartItems.map((dish) => ({
+							amount: orderQuantities[dish.name] || dish.amount,
+							name: dish.name,
+							image: dish.image,
+							message: dish.message,
+							staffMessage:
+								staffMessage[`${orderId}-${dish.name}`] ||
+								dish.staffMessage,
+							description:
+								dishDescriptions[`${orderId}-${dish.name}`] ||
+								dish.description,
+							price: dish.price,
+							priceTotal:
+								dish.price * orderQuantities[dish.name] ||
+								dish.amount,
+						})),
+					},
+					costumerInfo: {
+						email: currentOrder.costumerInfo.email,
+						familyName: currentOrder.costumerInfo.familyname,
+						firstName: currentOrder.costumerInfo.firstname,
+						phone: currentOrder.costumerInfo.phone,
+					},
+					orderLocked: true,
+					orderReady: false,
+				},
+			],
+		}
+		console.log("updatedOrder", updatedOrder)
+
+		await putOrder(updatedOrder, orderId)
 	}
 
 	const updateOrders = async () => {
@@ -275,3 +293,32 @@ const Cashier = () => {
 }
 
 export default Cashier
+
+// const updatedOrders = orders.map((order) => {
+// 	if (
+// 		order &&
+// 		order.ordersId === ordersId &&
+// 		order.orderContent &&
+// 		order.orderContent.cartItems
+// 	) {
+// 		const updatedCartItems = order.ordersContent.cartItems.map(
+// 			(item) => {
+// 				if (item.name === dishName) {
+// 					return { ...item, staffMessage: event.target.value }
+// 				}
+
+// 				return item
+// 			}
+// 		)
+// 		return {
+// 			...order,
+// 			orderContent: {
+// 				...order.orderContent,
+// 				cartItems: updatedCartItems,
+// 			},
+// 		}
+// 	}
+// 	return order
+// })
+// setOrdersData(updatedOrders)
+// console.log(updatedOrders)

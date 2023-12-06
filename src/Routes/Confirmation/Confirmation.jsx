@@ -10,25 +10,26 @@ import useRemoveFromCart from "../../utils/removeFromCart"
 import { costumerAtom } from "../../data/atom"
 import { orderDataState } from "../../data/atom"
 import deleteOrder from "../../utils/APIfrontendFunctions/DeleteOrders"
-import getOrders from "../../utils/APIfrontendFunctions/getOrders"
 import { putOrder } from "../../utils/APIfrontendFunctions/PutOrder"
 import { NavLink } from "react-router-dom"
 
 const Confirmation = () => {
-	const [orders, setOrders] = useState([])
 	const userInput = useRecoilValue(costumerAtom)
 	const cartItems = useRecoilValue(cartItemState)
 	const removeFromCart = useRemoveFromCart()
 	const [, setCartItems] = useRecoilState(cartItemState)
 	const orderData = useRecoilValue(orderDataState)
-	const [orderItems, setOrderItems] = useState([])
+	const [orderItems, setOrderItems] = useState({})
+	const [confirmationOrderData, setConfirmationOrderData ] = useState({})
+	const [hideState, setHideState] = useState(false)
 
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
 				const ordersId = orderData.orderId
 				const data = await getOrdersId(ordersId)
-				setOrderItems(data.order.orderContent.cartItems || [])
+				setConfirmationOrderData(data.order.orderContent)
+				setOrderItems(data.order.orderContent || [])
 			} catch (error) {
 				console.error("Error fetching order data", error)
 			}
@@ -36,20 +37,38 @@ const Confirmation = () => {
 
 		fetchData()
 	}, [orderData])
+	console.log('confirmationsOrderData:', confirmationOrderData )
+	console.log('orderItems:', orderItems )
+
+	// const handleRemoveFromCart = (name) => {
+	// 	removeFromCart(name)
+	// 	const updatedOrderItems = cartItems.map((item) =>
+    //     item.name === name ? { ...item, hidden: true } : item)
+	// 	setCartItems(updatedOrderItems);
+		
+	// 	console.log("removed")
+	// }
 
 	const handleRemoveFromCart = (name) => {
 		removeFromCart(name)
 		console.log("removed")
 	}
 
+	// const handleInputMessage = (event, item) => {
+	// 	const updatedOrderItems = orderItems.orderContent && orderItems.orderContent.cartItems && orderItems.orderContent.cartItems.map((cartItem) =>
+	// 		cartItem.name === item?.name
+	// 			? { ...cartItem, message: event.target.value }
+	// 			: cartItem
+	// 	)
+	// 	setOrderItems(updatedOrderItems)
+	// }
+
 	const handleInputMessage = (event, item) => {
-		const updatedOrderItems = orderItems.map((cartItem) =>
-			cartItem.name === item?.name
-				? { ...cartItem, message: event.target.value }
-				: cartItem
-		)
-		setOrderItems(updatedOrderItems)
-	}
+        const orderItems = cartItems.map((cartItem) => cartItem.name === item?.name ? {...cartItem, message: event.target.value} : cartItem
+        )
+        setCartItems(orderItems)
+    }
+
 
 	const handleDeleteOrder = async () => {
 		try {
@@ -62,49 +81,50 @@ const Confirmation = () => {
 		}
 	}
 
-	const updateOrders = async () => {
+	const updateOrder = async () => {
 		try {
-			const updatedData = await getOrders()
-			setOrders(updatedData.items)
+			const ordersId = orderData.orderId
+			await getOrdersId(ordersId)
+			
 			console.log("Orders updated successfully")
 		} catch (error) {
 			console.error("Error updating orders:", error)
 		}
 	}
 
-	const handleIncreaseQuantity = (name) => {
-		const updatedOrderItems = orderItems.map((item) =>
-			item.name === name
-				? {
-						...item,
-						amount: item.amount + 1,
-						priceTotal: item.price * (item.amount + 1),
-				  }
-				: item
-		)
-		setOrderItems(updatedOrderItems)
-	}
-
 	const handleDecreaseQuantity = (name) => {
-		const updatedOrderItems = orderItems.map((item) =>
+		const updatedOrderItems = cartItems.map((item) =>
 			item.name === name && item.amount > 1
 				? {
 						...item,
 						amount: item.amount - 1,
 						priceTotal: item.price * (item.amount - 1),
-				  }
+				}
 				: item
 		)
-		setOrderItems(updatedOrderItems)
+		setCartItems(updatedOrderItems)
 	}
 
-	const countUpdatedPriceTotal = orderItems.reduce(
+	const handleIncreaseQuantity = (name) => {
+		const updatedOrderItems = cartItems.map((item) =>
+			item.name === name
+				? {
+						...item,
+						amount: item.amount + 1,
+						priceTotal: item.price * (item.amount + 1),
+				}
+				: item
+		)
+		setCartItems(updatedOrderItems)
+	}
+
+	const countUpdatedPriceTotal = cartItems.reduce(
 		(total, item) => total + item.priceTotal,
 		0
 	)
 
 	const changedOrderSubmit = async () => {
-		const changedOrder = {
+		const updatedOrder = {
 			ordersId: orderData.orderId,
 
 			orderContent: {
@@ -115,47 +135,55 @@ const Confirmation = () => {
 					message: dish.message,
 					staffmessage: dish.staffmessage,
 					description: dish.description,
+					price: dish.price,
+					priceTotal: dish.priceTotal
 				})),
 				costumerInfo: userInput,
 			},
 			orderLocked: false,
 			orderReady: false,
 		}
-
-		await putOrder(changedOrder, orderData.orderId)
-		console.log("ändrade order:", changedOrder)
+		setHideState(true)
+		await putOrder(updatedOrder, orderData.orderId)
+		console.log("ändrade order:", updatedOrder)
 	}
 
 	return (
 		<section className="confirmation_container">
 			<h1 className="head_confirmation">Bekräftelse</h1>
 			<div className="update-container">
-				<button className="staff-button" onClick={updateOrders}>
+				<button className="staff-button" onClick={() => updateOrder()}>
 					<FiRefreshCcw />
 				</button>
 			</div>
 			<div className="order_confirmation_info">
 				<h2>Ordernummer: {orderData.orderId} </h2>
+				{confirmationOrderData && !confirmationOrderData.orderLocked ?
 				<div className="open_order_text">
 					<h3>Nu är din order skickad till restaurangen.</h3>
-					<p> Vill du ändra något i din beställning? </p>
-					<p>Passa på nu innan beställningen blir låst.</p>
-				</div>
-			</div>
+					<p className={!hideState ? "" : "hidden"}> Vill du ändra något i din beställning? </p>
+					<p className={!hideState ? "" : "hidden"}>Passa på nu innan beställningen blir låst.</p>
+				</div> :
+				<div className="locked_order_text">
+				<h3>Nu är din beställning låst och maten tillagas</h3>
+				</div> }
+			</div> 
 
 			<h3 className="head_your_order">Din beställning: </h3>
 
-			<section className="shopping-cart">
-				{orderItems.map((dish) => (
-					<li key={dish.name} className="card-container order-menu">
+			<section className={confirmationOrderData && !confirmationOrderData.orderLocked ? "shopping-cart"  : "blur"}> 
+				{cartItems.map(dish => ( 
+					<li key={dish.name} 
+					className= 
+					"card-container order-menu confirmation_order_container">
 						<div className="image-container">
 							<img src={dish.image} alt={dish.name} />
 						</div>
 						<div className="name-container">
-							<h3>{dish.name}</h3>
+							<h4>{dish.name}</h4>
 						</div>
-						<p className="description-text">{dish.description}</p>
-						<div className="button-container">
+						<p className="description-text description-text-confirmation">{dish.description}</p>
+						<div className={!hideState ? "button-container button-container-confirmation" : "hidden"}>
 							<IoRemoveOutline
 								className="remove-food"
 								onClick={() =>
@@ -173,17 +201,17 @@ const Confirmation = () => {
 						<p className="food-price">{dish.priceTotal} :-</p>
 						<div
 							onClick={() => handleRemoveFromCart(dish.name)}
-							className="dumpster"
+							className={!hideState ? "dumpster" : "hidden"}
 						>
 							<IoTrashSharp className="trashbin" />
 						</div>
-						<div className="input">
-							<p>Ändra/ta bort i din rätt:</p>
+						<div className="input confirmation-input">
+							<p className={!hideState ? "change_text" : "hidden"}>Ändra/ta bort i din rätt:</p>
 							<input
 								onChange={(event) =>
 									handleInputMessage(event, dish)
 								}
-								className="input change"
+								className={!hideState ? "input change" : "hidden"}
 							/>
 						</div>
 					</li>
