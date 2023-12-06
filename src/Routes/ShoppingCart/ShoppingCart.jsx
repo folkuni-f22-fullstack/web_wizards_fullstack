@@ -59,7 +59,6 @@ const ShoppingCart = () => {
 			)
 			setOrderData({orderId: responseOrder.orderId})
 			console.log('orderData', orderData)
-			// localStorage.clear()
 			navigate('/confirmation')
 		} catch (error) {
 			console.error("error, order inte skickad", error.message)
