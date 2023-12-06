@@ -17,8 +17,7 @@
 	--opacity: 70%;
 	--outer-radius: 0.4em;
 	--inner-radius: 0.25em;
-	--box-shadow: 0 0.1em 0.3em  rgb(168, 168, 168);
-	                  
+	--box-shadow: 0 0.1em 0.3em rgb(168, 168, 168);
 }
 
 * {
@@ -28,7 +27,7 @@
 	font-family: var(--bodytext-font-family);
 }
 html {
-    overflow-y: scroll;
+	overflow-y: scroll;
 }
 
 body {
@@ -57,11 +56,17 @@ main {
 
 button {
 	border-radius: var(--inner-radius);
-	border:none;
-	padding:0.5em 1em;
-	color:var(--text-light);
+	border: none;
+	padding: 0.5em 1em;
+	color: var(--text-light);
 	box-shadow: var(--box-shadow);
-	background-color: #039E41;
+	background-color: #039e41;
+	transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+button:active {
+	box-shadow: var(--box-shadow-active);
+	transform: translateY(2px);
 }
 
 input {
@@ -79,30 +84,30 @@ h5 {
 	font-family: var(--heading-font-family);
 }
 
-a{
+a {
 	color: var(--light-green-acc);
 }
 
-a:hover{
+a:hover {
 	color: var(--light-brown-acc);
 }
 
-input{
+input {
 	border-radius: var(--inner-radius);
 }
 
-ul{
+ul {
 	list-style: none;
 }
 
-.card-container{
+.card-container {
 	max-width: 85%;
 	border-radius: var(--outer-radius);
 	border: 1px solid var(--dark-green-acc);
 	padding: 0.7em;
 	display: grid;
-	grid-template-columns:repeat(8, 1fr);
-	box-shadow: 0 0.1em 0.3em  rgb(168, 168, 168);
+	grid-template-columns: repeat(8, 1fr);
+	box-shadow: 0 0.1em 0.3em rgb(168, 168, 168);
 }
 
 .hidden {
@@ -110,13 +115,11 @@ ul{
 }
 
 /* tablet */
-@media screen and (min-width: 768px) and (max-width:991px){
- 
+@media screen and (min-width: 768px) and (max-width: 991px) {
 }
 
 /* desktop */
-@media screen and (min-width:992px) and (max-width:1023px){
-
+@media screen and (min-width: 992px) and (max-width: 1023px) {
 }
 
 /* large desktop */
@@ -125,8 +128,4 @@ ul{
 		max-width: 1024px;
 		margin: 11.5em auto;
 	}
-	
 }
-
-
-

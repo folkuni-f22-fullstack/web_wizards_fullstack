@@ -1,0 +1,27 @@
+.send_btn button {
+	font-size: 1em;
+}
+
+.chef_container {
+	margin-top: 2em;
+}
+.chef_container h1 {
+	margin-bottom: 0.5em;
+	color: var(--light-brown-acc);
+}
+
+.header-button-container {
+	display: grid;
+	grid-template-columns: repeat(8, 1fr);
+	margin-right: 1.5em;
+}
+
+.staff-button-container {
+	grid-column: 8/8;
+	width: 4em;
+	justify-self: flex-end;
+}
+
+.staff_changes {
+	color: rgb(140, 0, 0);
+}
