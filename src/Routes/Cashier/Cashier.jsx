@@ -12,7 +12,7 @@ const Cashier = () => {
 	const [orderQuantities, setOrderQuantities] = useState({})
 	const [staffMessage, setStaffMessage] = useState({})
 	const [dishDescriptions, setDishDescriptions] = useState({})
-	
+
 	const orders = ordersData ? [...ordersData] : []
 	
 	
@@ -68,40 +68,47 @@ const Cashier = () => {
 		}
 
 		// Hitta den aktuella ordern baserat på orderId
-		const currentOrder = orders.find((order) => order.ordersId === orderId);
+		const currentOrder = orders.find((order) => order.ordersId === orderId)
 
 		const updatedOrder = {
-			items: [{
-			pk: "orders",
-			ordersId: orderId,
-			orderContent: {
-				cartItems: cartItems.map((dish) => ({
-					amount: orderQuantities[dish.name] || dish.amount,
-					name: dish.name,
-					image:dish.image,
-					message: dish.message,
-					staffMessage: staffMessage[`${orderId}-${dish.name}`] || dish.staffMessage,
-					description: dishDescriptions[`${orderId}-${dish.name}`] || dish.description,
-					price: dish.price,
-					priceTotal:dish.price* orderQuantities[dish.name] || dish.amount,
-				})),
-			},
-			costumerInfo:{
-				email: currentOrder.costumerInfo.email,
-				familyName: currentOrder.costumerInfo.familyName,
-				firstName: currentOrder.costumerInfo.firstName,
-				phone: currentOrder.costumerInfo.phone
-			},
-			orderLocked: true,
-			orderReady: false,
-		}]
-	}
-		console.log("updatedOrder", updatedOrder);
+			items: [
+				{
+					pk: "orders",
+					ordersId: orderId,
+					orderContent: {
+						cartItems: cartItems.map((dish) => ({
+							amount: orderQuantities[dish.name] || dish.amount,
+							name: dish.name,
+							image: dish.image,
+							message: dish.message,
+							staffMessage:
+								staffMessage[`${orderId}-${dish.name}`] ||
+								dish.staffMessage,
+							description:
+								dishDescriptions[`${orderId}-${dish.name}`] ||
+								dish.description,
+							price: dish.price,
+							priceTotal:
+								dish.price * orderQuantities[dish.name] ||
+								dish.amount,
+						})),
+					},
+					costumerInfo: {
+						email: currentOrder.costumerInfo.email,
+						familyName: currentOrder.costumerInfo.familyName,
+						firstName: currentOrder.costumerInfo.firstName,
+						phone: currentOrder.costumerInfo.phone,
+					},
+					orderLocked: true,
+					orderReady: false,
+				},
+			],
+		}
+		console.log("updatedOrder", updatedOrder)
 
 		await putOrder(updatedOrder, orderId)
 	}
 
-	
 	const updateOrders = async () => {
 		try {
 			const updatedData = await getOrders()
@@ -137,14 +144,30 @@ const Cashier = () => {
 							<p className="order_number">
 								order: {order.ordersId}
 							</p>
-							<p className="order_open">
-								{order &&
-								order.orderLocked !== undefined
-									? order.orderLocked
-									? " Order låst"
-										: "Order öppen"
-									: "Order status unknown"}
-							</p>
+							{console.log("Order Content:", order.orderContent)}
+							<div className="order_status_container">
+								<p className="order_open">
+									{order.orderContent &&
+									order.orderLocked !== undefined
+										? order.orderLocked
+											? "Order låst "
+											: "Order öppen"
+										: "Order status unknown"}
+								</p>
+								{console.log(
+									"Order Ready:",
+									order.orderContent.orderReady
+								)}
+								<p className="order_ready">
+									{order.orderContent &&
+									order.orderReady !== undefined
+										? order.orderReady
+											? "Order klar"
+											: null
+										: null}
+								</p>
+							</div>
+
 							<ul>
 								{order.orderContent &&
 									order.orderContent.cartItems &&
@@ -271,32 +294,3 @@ const Cashier = () => {
 }
 
 export default Cashier
-
-	// const updatedOrders = orders.map((order) => {
-	// 	if (
-	// 		order &&
-	// 		order.ordersId === ordersId &&
-	// 		order.orderContent &&
-	// 		order.orderContent.cartItems
-	// 	) {
-	// 		const updatedCartItems = order.ordersContent.cartItems.map(
-	// 			(item) => {
-	// 				if (item.name === dishName) {
-	// 					return { ...item, staffMessage: event.target.value }
-	// 				}
-
-	// 				return item
-	// 			}
-	// 		)
-	// 		return {
-	// 			...order,
-	// 			orderContent: {
-	// 				...order.orderContent,
-	// 				cartItems: updatedCartItems,
-	// 			},
-	// 		}
-	// 	}
-	// 	return order
-	// })
-	// setOrdersData(updatedOrders)
-	// console.log(updatedOrders)

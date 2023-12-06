@@ -11,6 +11,7 @@ import { costumerAtom } from "../../data/atom"
 import { orderDataState } from "../../data/atom"
 import deleteOrder from "../../utils/APIfrontendFunctions/DeleteOrders"
 import { putOrder } from "../../utils/APIfrontendFunctions/PutOrder"
+import { NavLink } from "react-router-dom"
 
 const Confirmation = () => {
 	const userInput = useRecoilValue(costumerAtom)
@@ -83,12 +84,14 @@ const Confirmation = () => {
 	const updateOrder = async () => {
 		try {
 			const ordersId = orderData.orderId
-			await getOrdersId(ordersId)
+			const data = await getOrdersId(ordersId)
+			setConfirmationOrderData(data.order)
 			
-			console.log("Orders updated successfully")
+			console.log("Orders updated successfully" , confirmationOrderData)
 		} catch (error) {
 			console.error("Error updating orders:", error)
 		}
+		console.log('Är den låst eller inte?' , confirmationOrderData.orderLocked)
 	}
 
 	const handleDecreaseQuantity = (name) => {
@@ -124,9 +127,10 @@ const Confirmation = () => {
 
 	const changedOrderSubmit = async () => {
 		const updatedOrder = {
-			ordersId: orderData.orderId,
-
-			orderContent: {
+			items: [{
+				pk: "orders",
+				ordersId: orderData.orderId,
+				orderContent: {
 				cartItems: cartItems.map((dish) => ({
 					amount: dish.amount,
 					name: dish.name,
@@ -137,14 +141,18 @@ const Confirmation = () => {
 					price: dish.price,
 					priceTotal: dish.priceTotal
 				})),
-				costumerInfo: userInput,
-			},
-			orderLocked: false,
-			orderReady: false,
-		}
+				},
+				costumerInfo: userInput ,	
+				orderLocked: false,
+				orderReady: false,
+		}]
+	}
+			
+		
 		setHideState(true)
 		await putOrder(updatedOrder, orderData.orderId)
 		console.log("ändrade order:", updatedOrder)
+		
 	}
 
 	return (
@@ -170,7 +178,7 @@ const Confirmation = () => {
 
 			<h3 className="head_your_order">Din beställning: </h3>
 
-			<section className={confirmationOrderData && !confirmationOrderData.orderLocked ? "shopping-cart"  : "blur"}> 
+			<section className={confirmationOrderData && !confirmationOrderData.orderLocked ? "shopping-cart" : "blur"}> 
 				{cartItems.map(dish => ( 
 					<li key={dish.name} 
 					className= 
@@ -222,18 +230,20 @@ const Confirmation = () => {
 			</section>
 			<button
 				type="submit"
-				className="change-order-button"
-				onClick={() => changedOrderSubmit(cartItems)}
+				className={confirmationOrderData && !confirmationOrderData.orderLocked ? "change-order-button" : "grey"}
+				onClick={confirmationOrderData && !confirmationOrderData.orderLocked ? () => changedOrderSubmit(cartItems) : ""}
 			>
 				Ändra order
 			</button>
-			<button
-				type="submit"
-				className="delete-order-button"
-				onClick={handleDeleteOrder}
-			>
-				Ångra order
-			</button>
+			<NavLink to="/">
+				<button
+					type="submit"
+					className="delete-order-button"
+					onClick={handleDeleteOrder}
+				>
+					Ångra order
+				</button>
+			</NavLink>
 		</section>
 	)
 }

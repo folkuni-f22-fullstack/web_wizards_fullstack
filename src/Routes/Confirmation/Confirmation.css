@@ -11,6 +11,13 @@
 	margin: 1em;
 }
 
+.blur {
+	filter: blur(0.5rem)
+}
+.grey {
+	background-color: grey;
+}
+
 .order_confirmation_info {
 	border: 1px solid var(--dark-green-acc);
 	box-shadow: var(--box-shadow);
@@ -25,12 +32,12 @@
 	margin: 1em 0.5em 0em 0.5em;
 }
 
-.confirmation_container p {
+.order_confirmation_info p {
 	font-size: clamp(16px, 5vw, 24px);
 	padding: 0.5em;
 }
 
-.confirmation_container h2 {
+.order_confirmation_info h2 {
 	font-size: clamp(32px, 5vw, 36px);
 	padding: 0.5em 0 1em 0;
 }
@@ -41,17 +48,34 @@
 	padding: 0em 0 1em 0;
 }
 
+.confirmation_order_container .description-text-confirmation {
+	margin-top: 1.5em;
+	/* padding: 2.5em 0em 2.5em 0em; */
+	font-size: 16px;
+}
+
+.name-container h4 {
+	font-size: clamp(22px, 5vw, 28px);
+}
+.confirmation_order_container .food-price {
+	padding: 0em;
+	font-size: 16px;
+	
+}
+
 .update-container {
 	display: flex;
 	flex-direction: row;
-	justify-content: flex-end;
+	justify-content: space-between;
 	margin: 1em 2em;
+	
 }
 
 .update-button {
 	width: 4em;
 }
 
-.change-order-button .delete-order-button {
+.change-order-button, .delete-order-button {
 	padding: 1em;
+	margin: 0.5em;
 }
