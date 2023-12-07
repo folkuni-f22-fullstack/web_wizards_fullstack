@@ -1,3 +1,4 @@
+import { TroubleshootTwoTone } from "@mui/icons-material";
 import { atom } from "recoil";
 
 // atom för header
@@ -112,7 +113,7 @@ export const isValidEmailAtom = atom({
 
 export const activeTabState = atom ({
 	key: 'activeTabState',
-	default: false
+	default: true
 })
 export const activeChefTabState = atom ({
 	key: 'activeChefTabState',
