@@ -74,6 +74,7 @@ const Confirmation = () => {
 			const ordersId = orderData.orderId
 			await deleteOrder(ordersId)
 			localStorage.clear()
+			setCartItems([])
 			console.log(ordersId)
 			console.log("Order deleted successfully")
 		} catch (error) {

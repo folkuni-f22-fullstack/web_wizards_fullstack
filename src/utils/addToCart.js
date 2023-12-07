@@ -42,7 +42,7 @@ const useCart = () => {
   // console.log(cartItems);
 
   useEffect(() => {
-		localStorage.setItem('cartItems', JSON.stringify(cartItems));
+		localStorage.setItem('cartItems', JSON.stringify(cartItems))
 	}, [cartItems]);
   
 

@@ -10,7 +10,7 @@ import { costumerAtom } from "../../data/atom"
 import { orderDataState } from "../../data/atom.js"
 import  {useNavigate}  from "react-router-dom"
 import increaseAmountInCart from "../../utils/increaseAmountInCart.js"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 
 
 const ShoppingCart = () => {
@@ -20,7 +20,11 @@ const ShoppingCart = () => {
 	const removeFromCart = useRemoveFromCart()
 	const [orderData, setOrderData ] = useRecoilState(orderDataState)
 	const navigate = useNavigate()
+	const [formIsDirty, setFormIsDirty] = useState(false)
 	
+	console.log(cartItems);
+	const visibleFormError = formIsDirty ?  'Kontrollera att alla fält är korrekt ifyllda.' : ''
+
 	useEffect(() => {
 		const savedCartItems = localStorage.getItem('cartItems');
 		if (savedCartItems) {
@@ -45,8 +49,20 @@ const ShoppingCart = () => {
 
 	
 	const handleOrderSubmit = async (event) => {
+
+		event.preventDefault
+
+		if (userInput.firstName.trim().length === 0 ||
+		userInput.familyName.trim().length === 0 ||
+			userInput.phone.trim().length === 0 ||
+			userInput.email.trim().length === 0 ){
+				setFormIsDirty(true)
+				console.log('Något formfält är tomt');
+				return
+		}
+
 		try {
-			event.preventDefault
+			
 
 			await setCartItems((prevCartItems) => [...prevCartItems])
 
@@ -95,6 +111,16 @@ const ShoppingCart = () => {
 
 	const countPriceTotal = cartItems.reduce((total, cartItem) => total + cartItem.priceTotal, 0)
 
+	const handleDeleteOrder = async () => {
+		try {
+			localStorage.clear()
+			setCartItems([])
+			console.log("Order deleted successfully")
+		} catch (error) {
+			console.error("Failed to delete order", error.message)
+		}
+	}
+
 		
 	return (
 		<>
@@ -134,8 +160,17 @@ const ShoppingCart = () => {
 					<p>Totalt:</p>
 					<p>{countPriceTotal} :- </p>
 				</div>
+			<button
+					className="delete-order-button delete-button-cart"
+					onClick={handleDeleteOrder}
+				>
+					Ångra order
+				</button>
 			</section>
 			<CostumerForm />
+			<div className="form-error" >
+				{formIsDirty ? visibleFormError : ''}
+				</div>	
 			<button
 				type="submit"
 				className="order-submit-button"
