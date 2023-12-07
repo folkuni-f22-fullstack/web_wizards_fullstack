@@ -1,4 +1,3 @@
-import { TroubleshootTwoTone } from "@mui/icons-material";
 import { atom } from "recoil";
 
 // atom för header
