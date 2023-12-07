@@ -2,7 +2,6 @@ import "./cashier.css"
 import KeepLoggedIn from "../../utils/login/KeepLoggedIn"
 import { FiRefreshCcw } from "react-icons/fi"
 import { IoRemoveOutline } from "react-icons/io5"
-import { IoCheckmark } from "react-icons/io5"
 import { IoMdAdd } from "react-icons/io"
 import { useEffect, useState } from "react"
 import getOrders from "../../utils/APIfrontendFunctions/GetOrders"
@@ -15,7 +14,16 @@ const Cashier = () => {
 	const [dishDescriptions, setDishDescriptions] = useState({})
 
 	const orders = ordersData ? [...ordersData] : []
-
+	
+	
+		useEffect(() => {
+			const fetchData = async () => {
+				const data = await getOrders()
+				setOrdersData(data.items)
+			}
+			fetchData()
+		}, [])
+	
 	const handleIncreaseAmount = (ordersId, dishName) => {
 		setOrderQuantities((prevQuantities) => {
 			const currentQuantity = prevQuantities[dishName] || 0
@@ -52,13 +60,6 @@ const Cashier = () => {
 		console.log("staffMessage:", message)
 	}
 
-	useEffect(() => {
-		const fetchData = async () => {
-			const data = await getOrders()
-			setOrdersData(data.items)
-		}
-		fetchData()
-	}, [])
 
 	const handleOnClickSend = async (orderId, cartItems) => {
 		if (!Array.isArray(cartItems)) {
@@ -94,8 +95,8 @@ const Cashier = () => {
 					},
 					costumerInfo: {
 						email: currentOrder.costumerInfo.email,
-						familyName: currentOrder.costumerInfo.familyname,
-						firstName: currentOrder.costumerInfo.firstname,
+						familyName: currentOrder.costumerInfo.familyName,
+						firstName: currentOrder.costumerInfo.firstName,
 						phone: currentOrder.costumerInfo.phone,
 					},
 					orderLocked: true,
@@ -293,32 +294,3 @@ const Cashier = () => {
 }
 
 export default Cashier
-
-// const updatedOrders = orders.map((order) => {
-// 	if (
-// 		order &&
-// 		order.ordersId === ordersId &&
-// 		order.orderContent &&
-// 		order.orderContent.cartItems
-// 	) {
-// 		const updatedCartItems = order.ordersContent.cartItems.map(
-// 			(item) => {
-// 				if (item.name === dishName) {
-// 					return { ...item, staffMessage: event.target.value }
-// 				}
-
-// 				return item
-// 			}
-// 		)
-// 		return {
-// 			...order,
-// 			orderContent: {
-// 				...order.orderContent,
-// 				cartItems: updatedCartItems,
-// 			},
-// 		}
-// 	}
-// 	return order
-// })
-// setOrdersData(updatedOrders)
-// console.log(updatedOrders)

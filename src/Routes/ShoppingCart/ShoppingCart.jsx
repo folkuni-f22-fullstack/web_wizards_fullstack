@@ -20,19 +20,22 @@ const ShoppingCart = () => {
 	const removeFromCart = useRemoveFromCart()
 	const [orderData, setOrderData ] = useRecoilState(orderDataState)
 	const navigate = useNavigate()
-
+	
 	useEffect(() => {
 		const savedCartItems = localStorage.getItem('cartItems');
 		if (savedCartItems) {
 			setCartItems(JSON.parse(savedCartItems));
-		};
+		} 
 	}, []);
 	
+	
 	useEffect(() => {
-		// Här sparar vi cartItems till localStorage varje gång cartItems ändras.
-		localStorage.setItem('cartItems', JSON.stringify(cartItems));
+		console.log('i useEffecten: ', cartItems);
+		if (cartItems.length > 0) { 
+			localStorage.setItem('cartItems', JSON.stringify(cartItems));
+		}
 	}, [cartItems])
-
+	
 
 	// console.log(cartItems)
 	const handleRemoveFromCart = (name) => {
@@ -56,7 +59,6 @@ const ShoppingCart = () => {
 			)
 			setOrderData({orderId: responseOrder.orderId})
 			console.log('orderData', orderData)
-			localStorage.clear()
 			navigate('/confirmation')
 		} catch (error) {
 			console.error("error, order inte skickad", error.message)
@@ -75,6 +77,7 @@ const ShoppingCart = () => {
 
 	const handleIncreaseAmount = (name) => {
 		const newCart = increaseAmountInCart(name, cartItems, true)
+		console.log('handleIncrease CartItems:', cartItems);
 		setCartItems(newCart); 
 		console.log('increased')
 	}
@@ -91,7 +94,7 @@ const ShoppingCart = () => {
 	}
 
 	const countPriceTotal = cartItems.reduce((total, cartItem) => total + cartItem.priceTotal, 0)
-	
+
 		
 	return (
 		<>

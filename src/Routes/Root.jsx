@@ -29,8 +29,8 @@ const Root = () => {
 				{!isLoggedIn &&
 				!isFoodMenuPage &&
 				!isShoppingCart &&
-				isConfirmation &&
-				isLogin ? (
+				!isConfirmation &&
+				!isLogin ? (
 					<Floater />
 				) : null}
 				<Outlet />

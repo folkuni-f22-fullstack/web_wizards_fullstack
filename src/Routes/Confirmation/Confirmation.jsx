@@ -40,12 +40,28 @@ const Confirmation = () => {
 	console.log('confirmationsOrderData:', confirmationOrderData )
 	console.log('orderItems:', orderItems )
 
+	useEffect(() => {
+		const savedCartItems = localStorage.getItem('cartItems');
+		if (savedCartItems) {
+			setCartItems(JSON.parse(savedCartItems));
+		} 
+	}, []);
+	
+	
+	useEffect(() => {
+		console.log('i useEffecten: ', cartItems);
+		if (cartItems.length > 0) { 
+			localStorage.setItem('cartItems', JSON.stringify(cartItems));
+		}
+	}, [cartItems])
+
 
 	const handleRemoveFromCart = (name) => {
 		removeFromCart(name)
 		console.log("removed")
 	}
 
+	
 	const handleInputMessage = (event, item) => {
         const orderItems = cartItems.map((cartItem) => cartItem.name === item?.name ? {...cartItem, message: event.target.value} : cartItem
         )
@@ -57,6 +73,7 @@ const Confirmation = () => {
 		try {
 			const ordersId = orderData.orderId
 			await deleteOrder(ordersId)
+			localStorage.clear()
 			console.log(ordersId)
 			console.log("Order deleted successfully")
 		} catch (error) {

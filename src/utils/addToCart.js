@@ -44,8 +44,8 @@ const useCart = () => {
   useEffect(() => {
 		localStorage.setItem('cartItems', JSON.stringify(cartItems));
 	}, [cartItems]);
+  
 
-	
 
   return { cartItems, addToCart };
 };
