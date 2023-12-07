@@ -176,7 +176,7 @@ const Confirmation = () => {
 				<h3>Nu är din beställning låst och maten tillagas</h3>
 				</div> :
 				<div className="order_ready_text">
-					<p> Nu är din order redo för upphämtning</p>
+					<h3> Nu är din order redo för upphämtning</h3>
 				</div> )) : null
 				}
 			</div> 
@@ -243,7 +243,7 @@ const Confirmation = () => {
 			<NavLink to="/">
 				<button
 					type="submit"
-					className="delete-order-button"
+					className={confirmationOrderData && !confirmationOrderData.orderLocked ? "delete-order-button" : "grey"}
 					onClick={handleDeleteOrder}
 				>
 					Ångra order
