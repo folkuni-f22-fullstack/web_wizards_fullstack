@@ -76,7 +76,7 @@ const Chef = () => {
 		}
 		console.log("updatedOrder", updatedOrder)
 
-		await putOrder(updatedOrder, orderId)
+		await putOrder(updatedOrder, orderId, true)
 	}
 
 	return (
