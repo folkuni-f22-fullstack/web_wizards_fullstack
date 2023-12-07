@@ -9,6 +9,8 @@ const useRemoveFromCart = () => {
 	
 	const updatedCart = cartItems.filter(item => item.name !== name)
 	setCartItems(updatedCart)
+
+	
 	console.log('removeFromCart funktionen körs och tar bort en vara')
 }
 return RemoveFromCart
