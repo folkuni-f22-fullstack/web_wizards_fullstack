@@ -1,4 +1,4 @@
-export async function putOrder(updatedOrder, orderId) {
+export async function putOrder(updatedOrder, orderId, orderReady) {
 	try {
 		const response = await fetch(
 			`https://omw2d3h4o6.execute-api.eu-north-1.amazonaws.com/webwizards/orders/${orderId}`,
@@ -7,7 +7,15 @@ export async function putOrder(updatedOrder, orderId) {
 				headers: {
 					"Content-Type": "application/json",
 				},
-				body: JSON.stringify(updatedOrder),
+				body: JSON.stringify({
+					...updatedOrder,
+					items: [
+						{
+							...updatedOrder.items[0],
+							orderReady: orderReady,
+						},
+					],
+				}),
 			}
 		)
 

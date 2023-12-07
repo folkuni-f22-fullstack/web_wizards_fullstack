@@ -3,6 +3,9 @@ import KeepLoggedIn from "../../utils/login/KeepLoggedIn"
 import getOrders from "../../utils/APIfrontendFunctions/getOrders"
 import { putOrder } from "../../utils/APIfrontendFunctions/PutOrder"
 import { FiRefreshCcw } from "react-icons/fi"
+import { IoCheckmark } from "react-icons/io5"
+import { FaLock } from "react-icons/fa"
+import { FaLockOpen } from "react-icons/fa"
 import { useState, useEffect } from "react"
 
 const Chef = () => {
@@ -76,7 +79,7 @@ const Chef = () => {
 		}
 		console.log("updatedOrder", updatedOrder)
 
-		await putOrder(updatedOrder, orderId)
+		await putOrder(updatedOrder, orderId, true)
 	}
 
 	return (
@@ -111,11 +114,22 @@ const Chef = () => {
 										<div className="order_status_container">
 											<p className="order_open">
 												{order.orderContent &&
-												order.orderLocked !== undefined
-													? order.orderLocked
-														? "Order låst "
-														: "Order öppen"
-													: "Order status unknown"}
+												order.orderLocked !==
+													undefined ? (
+													order.orderLocked ? (
+														<>
+															Order låst{" "}
+															<FaLock />
+														</>
+													) : (
+														<>
+															Order öppen{" "}
+															<FaLockOpen />
+														</>
+													)
+												) : (
+													"Order status unknown"
+												)}
 											</p>
 											{console.log(
 												"Order Ready:",
@@ -123,11 +137,15 @@ const Chef = () => {
 											)}
 											<p className="order_ready">
 												{order.orderContent &&
-												order.orderReady !== undefined
-													? order.orderReady
-														? "Order klar"
-														: null
-													: null}
+												order.orderReady !==
+													undefined ? (
+													order.orderReady ? (
+														<>
+															Order klar{" "}
+															<IoCheckmark />
+														</>
+													) : null
+												) : null}
 											</p>
 										</div>
 										{order.orderContent &&

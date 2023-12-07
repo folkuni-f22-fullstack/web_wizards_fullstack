@@ -12,7 +12,7 @@
 }
 
 .blur {
-	filter: blur(0.5rem)
+	filter: blur(0.5rem);
 }
 .grey {
 	background-color: grey;
@@ -60,22 +60,21 @@
 .confirmation_order_container .food-price {
 	padding: 0em;
 	font-size: 16px;
-	
 }
 
 .update-container {
 	display: flex;
-	flex-direction: row;
+	flex-direction: row-reverse;
 	justify-content: space-between;
 	margin: 1em 2em;
-	
 }
 
 .update-button {
 	width: 4em;
 }
 
-.change-order-button, .delete-order-button {
+.change-order-button,
+.delete-order-button {
 	padding: 1em;
 	margin: 0.5em;
 }

@@ -74,6 +74,7 @@ const Confirmation = () => {
 			const ordersId = orderData.orderId
 			await deleteOrder(ordersId)
 			localStorage.clear()
+			setCartItems([])
 			console.log(ordersId)
 			console.log("Order deleted successfully")
 		} catch (error) {
@@ -165,15 +166,20 @@ const Confirmation = () => {
 			</div>
 			<div className="order_confirmation_info">
 				<h2>Ordernummer: {orderData.orderId} </h2>
-				{confirmationOrderData && !confirmationOrderData.orderLocked ?
+				{confirmationOrderData ? (!confirmationOrderData.orderLocked  ?
 				<div className="open_order_text">
 					<h3>Nu är din order skickad till restaurangen.</h3>
 					<p className={!hideState ? "" : "hidden"}> Vill du ändra något i din beställning? </p>
 					<p className={!hideState ? "" : "hidden"}>Passa på nu innan beställningen blir låst.</p>
 				</div> :
+				(!confirmationOrderData.orderReady ?
 				<div className="locked_order_text">
 				<h3>Nu är din beställning låst och maten tillagas</h3>
-				</div> }
+				</div> :
+				<div className="order_ready_text">
+					<h3> Nu är din order redo för upphämtning</h3>
+				</div> )) : null
+				}
 			</div> 
 
 			<h3 className="head_your_order">Din beställning: </h3>
@@ -238,7 +244,7 @@ const Confirmation = () => {
 			<NavLink to="/">
 				<button
 					type="submit"
-					className="delete-order-button"
+					className={confirmationOrderData && !confirmationOrderData.orderLocked ? "delete-order-button" : "grey"}
 					onClick={handleDeleteOrder}
 				>
 					Ångra order

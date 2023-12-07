@@ -3,6 +3,9 @@ import KeepLoggedIn from "../../utils/login/KeepLoggedIn"
 import { FiRefreshCcw } from "react-icons/fi"
 import { IoRemoveOutline } from "react-icons/io5"
 import { IoMdAdd } from "react-icons/io"
+import { IoCheckmark } from "react-icons/io5"
+import { FaLock } from "react-icons/fa"
+import { FaLockOpen } from "react-icons/fa"
 import { useEffect, useState } from "react"
 import getOrders from "../../utils/APIfrontendFunctions/GetOrders"
 import { putOrder } from "../../utils/APIfrontendFunctions/PutOrder"
@@ -14,16 +17,15 @@ const Cashier = () => {
 	const [dishDescriptions, setDishDescriptions] = useState({})
 
 	const orders = ordersData ? [...ordersData] : []
-	
-	
-		useEffect(() => {
-			const fetchData = async () => {
-				const data = await getOrders()
-				setOrdersData(data.items)
-			}
-			fetchData()
-		}, [])
-	
+
+	useEffect(() => {
+		const fetchData = async () => {
+			const data = await getOrders()
+			setOrdersData(data.items)
+		}
+		fetchData()
+	}, [])
+
 	const handleIncreaseAmount = (ordersId, dishName) => {
 		setOrderQuantities((prevQuantities) => {
 			const currentQuantity = prevQuantities[dishName] || 0
@@ -59,7 +61,6 @@ const Cashier = () => {
 		}))
 		console.log("staffMessage:", message)
 	}
-
 
 	const handleOnClickSend = async (orderId, cartItems) => {
 		if (!Array.isArray(cartItems)) {
@@ -148,11 +149,19 @@ const Cashier = () => {
 							<div className="order_status_container">
 								<p className="order_open">
 									{order.orderContent &&
-									order.orderLocked !== undefined
-										? order.orderLocked
-											? "Order låst "
-											: "Order öppen"
-										: "Order status unknown"}
+									order.orderLocked !== undefined ? (
+										order.orderLocked ? (
+											<>
+												Order låst <FaLock />
+											</>
+										) : (
+											<>
+												Order öppen <FaLockOpen />
+											</>
+										)
+									) : (
+										"Order status unknown"
+									)}
 								</p>
 								{console.log(
 									"Order Ready:",
@@ -160,11 +169,13 @@ const Cashier = () => {
 								)}
 								<p className="order_ready">
 									{order.orderContent &&
-									order.orderReady !== undefined
-										? order.orderReady
-											? "Order klar"
-											: null
-										: null}
+									order.orderReady !== undefined ? (
+										order.orderReady ? (
+											<>
+												Order klar <IoCheckmark />
+											</>
+										) : null
+									) : null}
 								</p>
 							</div>
 

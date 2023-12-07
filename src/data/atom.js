@@ -1,5 +1,18 @@
 import { atom } from "recoil";
 
+// atom för header
+
+export const transitionChangeState = atom ({
+    key: 'transitionChangeState',
+    default: false
+})
+
+export const menuIsOpenState = atom ({
+    key: 'menuIsOpenState',
+    default: false
+})
+
+
 
 // atomer för personal-inloggning
 
@@ -99,7 +112,7 @@ export const isValidEmailAtom = atom({
 
 export const activeTabState = atom ({
 	key: 'activeTabState',
-	default: false
+	default: true
 })
 export const activeChefTabState = atom ({
 	key: 'activeChefTabState',
