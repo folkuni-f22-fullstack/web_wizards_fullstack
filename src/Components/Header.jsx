@@ -7,8 +7,7 @@ import logo from "/src/Assets/Logo.svg"
 import Navmeny from "./Navmeny"
 import { NavLink } from "react-router-dom"
 import { AnimatePresence, motion } from "framer-motion"
-import { transitionChangeState } from "../utils/transitionChangeState"
-
+import { transitionChangeState } from "../data/atom"
 import { isLoggedInAtom } from "../data/atom"
 import { useRecoilState, useRecoilValue } from "recoil"
 
