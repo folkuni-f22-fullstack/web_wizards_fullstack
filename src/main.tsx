@@ -1,7 +1,7 @@
 import React from "react"
 import ReactDOM from "react-dom/client"
 import { RouterProvider } from "react-router-dom"
-import router from "./Routes/routeconfig.jsx"
+import router from "./Routes/routeconfig.js"
 import { RecoilRoot } from "recoil"
 // import Floater from "../src/Components/Floater.jsx"
 import "./index.css"
