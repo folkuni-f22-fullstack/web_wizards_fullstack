@@ -4,7 +4,7 @@ import './navmeny.css'
 import { NavLink } from 'react-router-dom'
 import miniburger from '../Assets/miniburger.svg'
 import {RxCross1} from 'react-icons/rx'
-import { transitionChangeState } from "../utils/transitionChangeState"
+import { transitionChangeState } from "../data/atom"
 import {useRecoilState} from 'recoil'
 import { motion, easeInOut } from 'framer-motion'
 
