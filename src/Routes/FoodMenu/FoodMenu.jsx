@@ -1,10 +1,11 @@
 import "./FoodMenu.css"
-import FoodCard from "../../utils/FoodCard"
+import FoodCard from "../../Components/FoodCard.jsx"
 import { useState, useEffect } from "react"
 import getMenu from "../../utils/APIfrontendFunctions/GetMenu.js"
 
 const FoodMenu = () => {
 	const [data, setData] = useState([])
+	
 
 	useEffect(() => {
 		const fetchData = async () => {

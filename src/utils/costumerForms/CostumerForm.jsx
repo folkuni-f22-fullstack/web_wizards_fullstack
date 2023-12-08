@@ -16,7 +16,7 @@ const CostumerForm = () => {
 			...prevUserInput,
 			[name]: value,
 		}))
-		console.log(event.target.value)
+		// console.log(event.target.value)
 	}
 
 	return(

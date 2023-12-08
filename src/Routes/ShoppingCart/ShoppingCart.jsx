@@ -22,7 +22,7 @@ const ShoppingCart = () => {
 	const navigate = useNavigate()
 	const [formIsDirty, setFormIsDirty] = useState(false)
 	
-	console.log(cartItems);
+	// console.log(cartItems);
 	const visibleFormError = formIsDirty ?  'Kontrollera att alla fält är korrekt ifyllda.' : ''
 
 	useEffect(() => {
@@ -34,7 +34,7 @@ const ShoppingCart = () => {
 	
 	
 	useEffect(() => {
-		console.log('i useEffecten: ', cartItems);
+		// console.log('i useEffecten: ', cartItems);
 		if (cartItems.length > 0) { 
 			localStorage.setItem('cartItems', JSON.stringify(cartItems));
 		}
@@ -44,7 +44,7 @@ const ShoppingCart = () => {
 	// console.log(cartItems)
 	const handleRemoveFromCart = (name) => {
 		removeFromCart(name)
-		console.log("removed")
+		// console.log("removed")
 	}
 
 	
@@ -57,7 +57,7 @@ const ShoppingCart = () => {
 			userInput.phone.trim().length === 0 ||
 			userInput.email.trim().length === 0 ){
 				setFormIsDirty(true)
-				console.log('Något formfält är tomt');
+				// console.log('Något formfält är tomt');
 				return
 		}
 
@@ -68,13 +68,13 @@ const ShoppingCart = () => {
 
 			const responseOrder =
 			await postOrder(cartItems, userInput)
-			console.log(
-				"success, order är skickad till restaurang",
-				cartItems,
-				userInput
-			)
+			// console.log(
+			// 	"success, order är skickad till restaurang",
+			// 	cartItems,
+			// 	userInput
+			// )
 			setOrderData({orderId: responseOrder.orderId})
-			console.log('orderData', orderData)
+			// console.log('orderData', orderData)
 			navigate('/confirmation')
 		} catch (error) {
 			console.error("error, order inte skickad", error.message)
@@ -93,9 +93,9 @@ const ShoppingCart = () => {
 
 	const handleIncreaseAmount = (name) => {
 		const newCart = increaseAmountInCart(name, cartItems, true)
-		console.log('handleIncrease CartItems:', cartItems);
+		// console.log('handleIncrease CartItems:', cartItems);
 		setCartItems(newCart); 
-		console.log('increased')
+		// console.log('increased')
 	}
 
 	const handleDecreaseAmount = (name) => {
@@ -103,9 +103,9 @@ const ShoppingCart = () => {
 		if(dish.amount > 1 ) {
 			const newCart = increaseAmountInCart(name, cartItems, false)
 			setCartItems(newCart); 
-			console.log('decreased')
+			// console.log('decreased')
 		} else {
-			console.log('Cannot decrease amount further')
+			// console.log('Cannot decrease amount further')
 		}
 	}
 
@@ -115,7 +115,7 @@ const ShoppingCart = () => {
 		try {
 			localStorage.clear()
 			setCartItems([])
-			console.log("Order deleted successfully")
+			// console.log("Order deleted successfully")
 		} catch (error) {
 			console.error("Failed to delete order", error.message)
 		}

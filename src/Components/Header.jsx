@@ -92,11 +92,7 @@ const Header = () => {
 
 			{isMenuOpen && (
 				<style>
-					{`
-    body {
-        overflow: hidden;
-    }
-    `}
+					{` body {overflow: hidden;}`}
 				</style>
 			)}
 		</>

@@ -7,6 +7,7 @@ import ShoppingCart from "./ShoppingCart/ShoppingCart.jsx"
 import Confirmation from "./Confirmation/Confirmation.jsx"
 import Cashier from "./Cashier/Cashier.jsx";
 import Chef from "./Chef/Chef.jsx"
+import ErrorPage from "./ErrorPage.jsx";
 
 const router = createBrowserRouter([
 	{
@@ -41,8 +42,9 @@ const router = createBrowserRouter([
 				path: "/confirmation",
 				element: <Confirmation/>
 			},
-		]
-	},
+		],
+		errorElement: <ErrorPage/>
+	}
 ])
 
 export default router

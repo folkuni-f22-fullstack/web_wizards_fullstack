@@ -1,6 +1,6 @@
 import "./Chef.css"
 import KeepLoggedIn from "../../utils/login/KeepLoggedIn"
-import getOrders from "../../utils/APIfrontendFunctions/getOrders"
+import getOrders from "../../utils/APIfrontendFunctions/GetOrders"
 import { putOrder } from "../../utils/APIfrontendFunctions/PutOrder"
 import { FiRefreshCcw } from "react-icons/fi"
 import { IoCheckmark } from "react-icons/io5"
@@ -16,7 +16,7 @@ const Chef = () => {
 		const fetchData = async () => {
 			try {
 				const menuData = await getOrders()
-				console.log("Menu Data:", menuData)
+				// console.log("Menu Data:", menuData)
 				setOrdersData(menuData.items)
 			} catch (error) {
 				console.error("Error fetching orders:", error)
@@ -29,15 +29,15 @@ const Chef = () => {
 	const updateOrders = async () => {
 		try {
 			const updatedData = await getOrders()
-			console.log("Updated Data:", updatedData)
+			// console.log("Updated Data:", updatedData)
 			setOrdersData(updatedData.items)
-			console.log("Orders updated successfully")
+			// console.log("Orders updated successfully")
 		} catch (error) {
 			console.error("Error updating orders:", error)
 		}
 	}
 
-	console.log(orders, "ORDERS!!!!!!!!!")
+	// console.log(orders, "ORDERS!!!!!!!!!")
 
 	const handleOnClickSend = async (orderId, cartItems) => {
 		if (!Array.isArray(cartItems)) {
@@ -47,8 +47,8 @@ const Chef = () => {
 
 		// Hitta den aktuella ordern baserat på orderId
 		const currentOrder = orders.find((order) => order.ordersId === orderId)
-		console.log(currentOrder, "current order")
-		console.log(currentOrder.costumerInfo, "costumerinfo")
+		// console.log(currentOrder, "current order")
+		// console.log(currentOrder.costumerInfo, "costumerinfo")
 		const updatedOrder = {
 			items: [
 				{
@@ -77,7 +77,7 @@ const Chef = () => {
 				},
 			],
 		}
-		console.log("updatedOrder", updatedOrder)
+		// console.log("updatedOrder", updatedOrder)
 
 		await putOrder(updatedOrder, orderId, true)
 	}
@@ -98,7 +98,7 @@ const Chef = () => {
 				<ul>
 					{orders.length > 0 ? (
 						orders.map((order) => {
-							console.log("Order:", order)
+							// console.log("Order:", order)
 							if (
 								order.orderLocked !== undefined &&
 								order.orderLocked
@@ -131,10 +131,10 @@ const Chef = () => {
 													"Order status unknown"
 												)}
 											</p>
-											{console.log(
+											{/* {console.log(
 												"Order Ready:",
 												order.orderContent.orderReady
-											)}
+											)} */}
 											<p className="order_ready">
 												{order.orderContent &&
 												order.orderReady !==

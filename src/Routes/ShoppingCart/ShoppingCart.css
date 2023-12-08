@@ -32,7 +32,6 @@
 	font-size: 1.7em;
 	grid-area: 6 / 8 / 9/ 8; 
 	align-self: center;
-	/* margin-bottom: 0.5em;  */
 }
 
 .added {
@@ -132,8 +131,6 @@
 .delete-order-button.delete-button-cart{
 	margin-top:2em;	
 	margin-left: 54%;
-	
-
 }
 
 @media screen and (min-width: 550px) {
@@ -187,9 +184,6 @@
 	.delete-order-button.delete-button-cart{
 		margin-top:2em;
 		margin-left: 73%; 
-	
-		
-	
 	}
 }
 
@@ -204,7 +198,6 @@
 		grid-area: 8 / 8 / 9 ;
 		align-self: center;
 		justify-self: center;
-
 	}
 
 	.button-container {
@@ -217,7 +210,6 @@
 		grid-area: 8 / 7 / 9;
 		align-self: center;
 		justify-self: center;
-
 	}
 
 	.input {
@@ -235,7 +227,6 @@
 	.delete-order-button.delete-button-cart{
 		margin-top:2em;
 		margin-left: 76%; 
-	
 	}
 }
 
@@ -251,7 +242,6 @@
 		grid-area: 8 / 8 / 9 ;
 		align-self: center;
 		justify-self: center;
-
 	}
 
 	.button-container {
@@ -264,7 +254,6 @@
 		grid-area: 8 / 7 / 9;
 		align-self: center;
 		justify-self: center;
-
 	}
 
 	.input {
@@ -282,6 +271,5 @@
 	.delete-order-button.delete-button-cart{
 		margin-top:2em;
 		margin-left: 76%; 
-	
 	}
 }

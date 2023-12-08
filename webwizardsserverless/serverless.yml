@@ -129,20 +129,3 @@ resources:
             KeyType: HASH
           - AttributeName: "ordersId"
             KeyType: RANGE
-        # GlobalSecondaryIndexes:
-        #   - IndexName: ordersIndex
-        #     KeySchema:
-        #       - AttributeName: "ordersId"
-        #         KeyType: HASH
-        #     Projection:
-        #       ProjectionType: "ALL"
-
-#     WebWizardsBucketBackend:
-#       Type: AWS::S3::Bucket
-#       Properties:
-#         BucketName: web-wizards-bucket-backend
-    
-#     WebWizardsBucketWebpage:
-#       Type: AWS::S3::Bucket
-#       Properties:
-#         BucketName: web-wizards-bucket-webpage

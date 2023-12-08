@@ -13,7 +13,6 @@ export const menuIsOpenState = atom ({
 })
 
 
-
 // atomer för personal-inloggning
 
 export const uNameAtom = atom ({
@@ -52,11 +51,6 @@ export const cartItemState = atom ({
 	key: 'cartItemState',
 	default: []
 })
-export const cartItemsAtom = atom ({
-	key: 'cartItemsAtom',
-	default: []
-})
-
 
 
 // atomer för order-formulär
@@ -118,3 +112,5 @@ export const activeChefTabState = atom ({
 	key: 'activeChefTabState',
 	default: false
 })
+
+

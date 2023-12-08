@@ -10,8 +10,7 @@ const setErrorClass = () => {
 
 	const errorClass= formIsDirty ? 'dirty' : ''
 	return(
-		errorClass)
-	
+		errorClass)	
 }
 
 

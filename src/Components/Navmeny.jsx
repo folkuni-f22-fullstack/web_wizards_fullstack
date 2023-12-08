@@ -21,13 +21,13 @@ const Navmeny = ({ isMenuOpen, handleCloseMenu }) => {
 		const changeStyle = () => {
 			setStyle(true)
 			setStyle2(true)
-			console.log('Du klickade' + style)
+			// console.log('Du klickade' + style)
 			if (style) {
 				setStyle(false)
 				setStyle2(true)
 			}
 		}
-	console.log('Is menu open', isMenuOpen)
+	// console.log('Is menu open', isMenuOpen)
 	
 
 	const [transitionChange, setTransitionChange ] = useRecoilState(transitionChangeState)

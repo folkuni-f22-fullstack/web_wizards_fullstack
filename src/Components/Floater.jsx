@@ -6,7 +6,7 @@ import { IoFastFoodOutline } from "react-icons/io5"
 IoFastFoodOutline
 
 const handleFabClick = () => {
-	console.log("FAB Clicked!")
+	// console.log("FAB Clicked!")
 }
 const Floater = () => {
 	return (

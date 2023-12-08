@@ -29,7 +29,6 @@
 
 .hero-img-container img {
   width: 100%;
- 
 }
 
 .text_padding {
@@ -83,7 +82,6 @@
 .tomatoes_img img {
  width: 300px;
  padding: 1em;
-  
 }
 
 
@@ -92,7 +90,6 @@
 @media screen and (min-width: 992px) {
 
   .order_here_container {
-    /* border: solid 2px green; */
     position: absolute;
     top: -12em;
     left: 0em;
@@ -150,7 +147,6 @@
     grid-row: 6;
     justify-self: center;
     width: 400px;
-    
   }
 
   .tomatoes_img img {

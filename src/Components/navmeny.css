@@ -45,7 +45,6 @@
 .cross-nav {
 	color: var(--text-light);
 	font-size: 3em;
-	/* margin-right: 0.3em;  */
 	transition: transform 0.3s ease-in-out;
 }
 .cross-nav:hover {
@@ -74,7 +73,6 @@
 }
 
 .links-nav-meny li {
-	/* margin-top: 1em;  */
 	padding: 2em;
 }
 
@@ -86,12 +84,10 @@
 
 .nav-desktop {
 	display: none;
-	/* color: lime; */
 }
 
 .nav-mobile {
-	display: block;
-	/* color: hotpink; */
+	display: bl
 }
 
 .large-info {
@@ -134,11 +130,9 @@
 
 	.nav-meny-container li {
 		font-size: 1.5em;
-		/* padding: 1em;  */
 	}
 
 	.links-nav-meny {
-	/* 	margin-top: 0.5em; */
 	margin-bottom: 12em;
 	}
 	
@@ -151,8 +145,6 @@
 	.links-nav-meny li a {
 		font-size: 2em;
 	}
-
-
 
 	.nav-desktop {
 		display: block;

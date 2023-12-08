@@ -2,8 +2,10 @@ import { useRecoilState } from "recoil";
 import { cartItemState } from "../data/atom";
 import { useEffect } from "react"
 
+
 const useCart = () => {
   const [cartItems, setCartItems] = useRecoilState(cartItemState);
+ 
 
   const addToCart = (dish,) => {
     let cartItem = {
@@ -12,8 +14,8 @@ const useCart = () => {
       image: dish.image,
       name: dish.name,
       description: dish.description,
-		message: '',
-		staffMessage: '',
+		  message: '',
+		  staffMessage: '',
       price: dish.price,
       priceTotal: dish.price,
     };
@@ -25,8 +27,7 @@ const useCart = () => {
         if (dish.name === cartItem.name) {
           return {
             ...dish,
-            priceTotal: (dish.price* dish.amount)+dish.price ,
-			amount:dish.amount+1
+            priceTotal: (dish.price* dish.amount)+dish.price, amount:dish.amount+1
           };
         } else {
           return dish;
@@ -36,7 +37,7 @@ const useCart = () => {
     } else {
       const newCart = [...cartItems, cartItem];
       setCartItems(newCart);
-      console.log("cartinnehåll: ", newCart);
+      // console.log("cartinnehåll: ", newCart);
     }
   };
   // console.log(cartItems);
@@ -45,8 +46,6 @@ const useCart = () => {
 		localStorage.setItem('cartItems', JSON.stringify(cartItems))
 	}, [cartItems]);
   
-
-
   return { cartItems, addToCart };
 };
 

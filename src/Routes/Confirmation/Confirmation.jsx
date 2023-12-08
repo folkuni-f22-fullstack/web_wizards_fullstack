@@ -19,26 +19,8 @@ const Confirmation = () => {
 	const removeFromCart = useRemoveFromCart()
 	const [, setCartItems] = useRecoilState(cartItemState)
 	const orderData = useRecoilValue(orderDataState)
-	const [orderItems, setOrderItems] = useState({})
 	const [confirmationOrderData, setConfirmationOrderData ] = useState({})
 	const [hideState, setHideState] = useState(false)
-
-	useEffect(() => {
-		const fetchData = async () => {
-			try {
-				const ordersId = orderData.orderId
-				const data = await getOrdersId(ordersId)
-				setConfirmationOrderData(data.order.orderContent)
-				setOrderItems(data.order.orderContent || [])
-			} catch (error) {
-				console.error("Error fetching order data", error)
-			}
-		}
-
-		fetchData()
-	}, [orderData])
-	console.log('confirmationsOrderData:', confirmationOrderData )
-	console.log('orderItems:', orderItems )
 
 	useEffect(() => {
 		const savedCartItems = localStorage.getItem('cartItems');
@@ -49,7 +31,7 @@ const Confirmation = () => {
 	
 	
 	useEffect(() => {
-		console.log('i useEffecten: ', cartItems);
+		// console.log('i useEffecten: ', cartItems);
 		if (cartItems.length > 0) { 
 			localStorage.setItem('cartItems', JSON.stringify(cartItems));
 		}
@@ -58,7 +40,7 @@ const Confirmation = () => {
 
 	const handleRemoveFromCart = (name) => {
 		removeFromCart(name)
-		console.log("removed")
+		// console.log("removed")
 	}
 
 	
@@ -75,8 +57,8 @@ const Confirmation = () => {
 			await deleteOrder(ordersId)
 			localStorage.clear()
 			setCartItems([])
-			console.log(ordersId)
-			console.log("Order deleted successfully")
+			// console.log(ordersId)
+			// console.log("Order deleted successfully")
 		} catch (error) {
 			console.error("Failed to delete order", error.message)
 		}
@@ -88,11 +70,11 @@ const Confirmation = () => {
 			const data = await getOrdersId(ordersId)
 			setConfirmationOrderData(data.order)
 			
-			console.log("Orders updated successfully" , confirmationOrderData)
+			// console.log("Orders updated successfully" , confirmationOrderData)
 		} catch (error) {
 			console.error("Error updating orders:", error)
 		}
-		console.log('Är den låst eller inte?' , confirmationOrderData.orderLocked)
+		// console.log('Är den låst eller inte?' , confirmationOrderData.orderLocked)
 	}
 
 	const handleDecreaseQuantity = (name) => {
@@ -143,7 +125,7 @@ const Confirmation = () => {
 					priceTotal: dish.priceTotal
 				})),
 				},
-				costumerInfo: userInput ,	
+				costumerInfo: userInput,	
 				orderLocked: false,
 				orderReady: false,
 		}]
@@ -152,7 +134,7 @@ const Confirmation = () => {
 		
 		setHideState(true)
 		await putOrder(updatedOrder, orderData.orderId)
-		console.log("ändrade order:", updatedOrder)
+		// console.log("ändrade order:", updatedOrder)
 		
 	}
 
@@ -237,7 +219,6 @@ const Confirmation = () => {
 			<button
 				type="submit"
 				className={confirmationOrderData && !confirmationOrderData.orderLocked ? "change-order-button" : "grey"}
-				onClick={confirmationOrderData && !confirmationOrderData.orderLocked ? () => changedOrderSubmit(cartItems) : ""}
 			>
 				Ändra order
 			</button>

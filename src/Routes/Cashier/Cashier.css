@@ -32,9 +32,6 @@
 }
 
 .card-container.order-card-dish {
-	/* display: flex;
-	align-items: center;
-	justify-content: space-around; */
 	margin-bottom: 1em;
 	border-radius: var(--inner-radius);
 	display: grid;
@@ -103,7 +100,6 @@
 .staff_price {
 	grid-column: 2;
 	grid-row-start: 5;
-	/* margin-top: 0.2em; */
 	color: var(--dark-green-acc);
 }
 

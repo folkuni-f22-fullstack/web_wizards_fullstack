@@ -114,6 +114,18 @@ ul {
 	display: none;
 }
 
+.error-page{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+	font-size: 20px;
+	height: 50%;
+	width: 100%;
+
+}
+
 /* tablet */
 @media screen and (min-width: 768px) and (max-width: 991px) {
 }

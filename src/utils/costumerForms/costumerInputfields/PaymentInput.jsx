@@ -4,7 +4,6 @@ const PaymentInput = () => {
 
 const [selectedPayment, setSelectedPayment] = useState('Card')
 
-
 	const onPaymentChange = () => {
 		setSelectedPayment(event.target.value)
 	}

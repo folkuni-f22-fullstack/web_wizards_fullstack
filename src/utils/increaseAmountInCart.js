@@ -17,7 +17,7 @@ const increaseAmountInCart = (name, cartItems, increase = true) => {
 		})
 		return newCart; 
 	} else {
-		console.log(`Item with name ${name} not found in cartItems `)
+		// console.log(`Item with name ${name} not found in cartItems `)
 		return cartItems; 
 	}
 }

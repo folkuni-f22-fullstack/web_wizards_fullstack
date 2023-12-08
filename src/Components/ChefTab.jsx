@@ -1,8 +1,8 @@
 
 import { NavLink } from "react-router-dom";
 import { useRecoilState } from "recoil";
-import { activeChefTabState } from "../../data/atom";
-import { activeTabState } from "../../data/atom";
+import { activeChefTabState } from "../data/atom";
+import { activeTabState } from "../data/atom";
 import { LuChefHat } from "react-icons/lu";
 import './tabs.css'
 
@@ -19,10 +19,7 @@ const ChefTab = () => {
 			setActiveChefTab(false)}
 		}
 		
-
-
-
-	return(
+	return (
 		<div className={activeChefTab ? 'active-chef-tab' : 'chef-tab-container'}>
 			<NavLink 
 				to='/Chef'

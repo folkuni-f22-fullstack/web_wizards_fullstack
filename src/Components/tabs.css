@@ -1,6 +1,5 @@
 .cashier-tab-container {
 	display: flex;
-	/* justify-content: center; */
 	width: 3em;
 	position:fixed;
 	top: 30%;
@@ -10,13 +9,11 @@
 	border-radius: 0 var(--outer-radius) var(--outer-radius) 0;
 	background-color: var(--bg-dark);
 	transition: left 0.5s ease-in;
-
 }
 
 .active-tab {
 	left: 0%;
 	display: flex;
-	/* justify-content: center; */
 	width: 3em;
 	position:fixed;
 	top: 30%;
@@ -29,7 +26,6 @@
 
 .chef-tab-container {
 	display: flex;
-	/* justify-content: center; */
 	width: 3em;
 	position:fixed;
 	top: 40%;
@@ -43,7 +39,6 @@
 
 .active-chef-tab {
 	display: flex;
-	/* justify-content: center; */
 	width: 3em;
 	position: fixed;
 	top: 40%;

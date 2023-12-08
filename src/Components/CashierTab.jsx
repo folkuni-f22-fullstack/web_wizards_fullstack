@@ -2,8 +2,8 @@ import { NavLink } from "react-router-dom";
 import { FaCashRegister } from "react-icons/fa6";
 import './tabs.css'
 import { useRecoilState } from "recoil";
-import { activeTabState } from "../../data/atom";
-import { activeChefTabState } from "../../data/atom";
+import { activeTabState } from "../data/atom";
+import { activeChefTabState } from "../data/atom";
 
 const CashierTab = () => {
 	const [activeTab, setActiveTab] = useRecoilState(activeTabState)

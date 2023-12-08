@@ -59,12 +59,12 @@ const Cashier = () => {
 			...prevMessages,
 			[`${orderId}-${dishName}`]: message,
 		}))
-		console.log("staffMessage:", message)
+		// console.log("staffMessage:", message)
 	}
 
 	const handleOnClickSend = async (orderId, cartItems) => {
 		if (!Array.isArray(cartItems)) {
-			console.error("Invalid cartItems:", cartItems)
+			// console.error("Invalid cartItems:", cartItems)
 			return
 		}
 
@@ -105,7 +105,7 @@ const Cashier = () => {
 				},
 			],
 		}
-		console.log("updatedOrder", updatedOrder)
+		// console.log("updatedOrder", updatedOrder)
 
 		await putOrder(updatedOrder, orderId)
 	}
@@ -114,9 +114,9 @@ const Cashier = () => {
 		try {
 			const updatedData = await getOrders()
 			setOrdersData(updatedData.items)
-			console.log("Orders updated successfully")
+			// console.log("Orders updated successfully")
 		} catch (error) {
-			console.error("Error updating orders:", error)
+			// console.error("Error updating orders:", error)
 		}
 	}
 
@@ -145,7 +145,7 @@ const Cashier = () => {
 							<p className="order_number">
 								order: {order.ordersId}
 							</p>
-							{console.log("Order Content:", order.orderContent)}
+							{/* {console.log("Order Content:", order.orderContent)} */}
 							<div className="order_status_container">
 								<p className="order_open">
 									{order.orderContent &&
@@ -163,10 +163,10 @@ const Cashier = () => {
 										"Order status unknown"
 									)}
 								</p>
-								{console.log(
+								{/* {console.log(
 									"Order Ready:",
 									order.orderContent.orderReady
-								)}
+								)} */}
 								<p className="order_ready">
 									{order.orderContent &&
 									order.orderReady !== undefined ? (
