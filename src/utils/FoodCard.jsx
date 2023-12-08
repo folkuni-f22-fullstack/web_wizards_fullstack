@@ -15,8 +15,10 @@ const FoodCard = (props) => {
 			</div>
 			<h3>{dish.name}</h3>
 			<p className='description'>{dish.description}</p>
+			{/* <div className='added'><p>Tillagd i varukorgen!</p></div> */}
 			<p className='price'>{dish.price} :-</p>
-			<button onClick={() => addToCart(dish)}><BiCartAdd/></button>
+			<button
+			 onClick={() => addToCart(dish)}><BiCartAdd/></button>
 		</li >
 	)
 }

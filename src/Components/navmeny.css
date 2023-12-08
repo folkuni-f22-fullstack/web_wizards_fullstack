@@ -39,7 +39,7 @@
 	padding: 1.5em;
 	display: flex;
 	flex-direction: row;
-	justify-content: space-between;
+	justify-content: space-between;	
 }
 
 .cross-nav {
@@ -64,6 +64,7 @@
 .nav-meny-container {
 	width: 100%;
 	background-color: var(--dark-brown-acc);
+	
 }
 
 .links-nav-meny {
@@ -118,10 +119,17 @@
 	.icon-container {
 		padding: 2em 1.5em;
 		margin: 2em 0em 1em 0em;
+		position: absolute;
+		right: .2em;
+		top: -2em;
 	}
 
 	.nav-meny-container {
 		width: 100%;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		position:relative;
 	}
 
 	.nav-meny-container li {
@@ -130,8 +138,10 @@
 	}
 
 	.links-nav-meny {
-		margin-top: 0.5em;
+	/* 	margin-top: 0.5em; */
+	margin-bottom: 12em;
 	}
+	
 	.links-nav-meny li {
 		padding: 0.8em;
 		display: flex;
@@ -141,6 +151,8 @@
 	.links-nav-meny li a {
 		font-size: 2em;
 	}
+
+
 
 	.nav-desktop {
 		display: block;

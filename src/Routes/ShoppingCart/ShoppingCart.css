@@ -4,7 +4,7 @@
 	justify-content: center;
 	align-items: center;
 	margin: 1em; 
-	width: 100%; 
+	width: 90%; 
 	box-shadow: var(--box-shadow);
 	border: 1px solid var(--dark-green-acc);
 	padding: 2em 0;
@@ -33,6 +33,12 @@
 	grid-area: 6 / 8 / 9/ 8; 
 	align-self: center;
 	/* margin-bottom: 0.5em;  */
+}
+
+.added {
+	background-color: var(--light-green-acc);
+	padding: 1em;
+	border-radius: 4px;
 }
 
 .image-container {
@@ -124,9 +130,10 @@
 }
 
 .delete-order-button.delete-button-cart{
-	align-self: flex-end;
-	margin-top:2em;
-	margin-right: 2em;
+	margin-top:2em;	
+	margin-left: 54%;
+	
+
 }
 
 @media screen and (min-width: 550px) {
@@ -176,6 +183,14 @@
 		margin-left: 50%; 
 		width: 35%; 
 	}	
+
+	.delete-order-button.delete-button-cart{
+		margin-top:2em;
+		margin-left: 73%; 
+	
+		
+	
+	}
 }
 
 /* desktop */
@@ -215,6 +230,12 @@
 	.shopping-cart .sum-order-container {
 		margin-left: 50%; 
 		width: 35%; 
+	}
+
+	.delete-order-button.delete-button-cart{
+		margin-top:2em;
+		margin-left: 76%; 
+	
 	}
 }
 
@@ -257,4 +278,10 @@
 		margin-left: 50%; 
 		width: 35%; 
 	}	
+
+	.delete-order-button.delete-button-cart{
+		margin-top:2em;
+		margin-left: 76%; 
+	
+	}
 }

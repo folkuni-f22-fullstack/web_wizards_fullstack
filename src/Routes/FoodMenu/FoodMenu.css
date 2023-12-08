@@ -21,7 +21,7 @@
 
 .food-menu .menu-card{
 	grid-template-rows: repeat(8, 1fr);
-	height: 10em;
+	height: 12.5em;
 	margin: 0.35em 0;
 	text-align: left;
 	background-color: var(--menu-card-color);
@@ -64,8 +64,9 @@ color: var(--dark-green-acc);
 	grid-area: 7 / 7 / 9 / span 9;
 	font-size: 20px;
 	max-width: fit-content;
-	max-height: fit-content;
+	max-height: 1.5em;
 	justify-self: flex-end;
+	align-self: flex-end;
 	display: flex;
 	align-items: center;
 	justify-content: center;

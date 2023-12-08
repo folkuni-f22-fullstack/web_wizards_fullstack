@@ -184,7 +184,7 @@ const Confirmation = () => {
 
 			<h3 className="head_your_order">Din beställning: </h3>
 
-			<section className={confirmationOrderData && !confirmationOrderData.orderLocked ? "shopping-cart" : "blur"}> 
+			<section className={confirmationOrderData && !confirmationOrderData.orderLocked ? "shopping-cart order-container-confirmation" : "blur"}> 
 				{cartItems.map(dish => ( 
 					<li key={dish.name} 
 					className= 
