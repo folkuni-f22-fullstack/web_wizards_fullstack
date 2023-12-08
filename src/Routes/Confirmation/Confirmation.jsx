@@ -219,6 +219,7 @@ const Confirmation = () => {
 			<button
 				type="submit"
 				className={confirmationOrderData && !confirmationOrderData.orderLocked ? "change-order-button" : "grey"}
+				onClick={() => changedOrderSubmit(cartItems)}
 			>
 				Ändra order
 			</button>
